@@ -3,7 +3,7 @@
 import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
 
-export class DatabasConnection {
+export class DatabaseConnection {
   /**
    * @param {string} connString
    */

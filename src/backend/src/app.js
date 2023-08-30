@@ -1,12 +1,12 @@
 // @ts-check
 
 import express from "express";
-import { DatabasConnection } from "./infrastructure/database/connection.js";
+import { DatabaseConnection } from "./infrastructure/database/connection.js";
 import { mainRoutes } from "./routes.js";
 export class App {
   /**
    *
-   * @param {DatabasConnection} db
+   * @param {DatabaseConnection} db
    */
   constructor(db) {
     this.db = db;

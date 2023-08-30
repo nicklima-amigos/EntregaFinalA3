@@ -2,11 +2,11 @@
 
 import "./dto/createGameDto.js";
 import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
-import { DatabasConnection } from "../../infrastructure/database/connection.js";
+import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 export class GamesRepository {
   /**
    * @constructor
-   * @param {DatabasConnection} db
+   * @param {DatabaseConnection} db
    */
   constructor(db) {
     this.db = db;

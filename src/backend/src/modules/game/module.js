@@ -1,6 +1,6 @@
 // @ts-check
 
-import { DatabasConnection } from "../../infrastructure/database/connection.js";
+import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { GamesController } from "./controller.js";
 import { GamesRepository } from "./repository.js";
 import { gamesRoutes } from "./routes.js";
@@ -8,7 +8,7 @@ import { GamesService } from "./service.js";
 
 /**
  *
- * @param {DatabasConnection} db
+ * @param {DatabaseConnection} db
  */
 export const gamesModule = (db) => {
   const repository = new GamesRepository(db);

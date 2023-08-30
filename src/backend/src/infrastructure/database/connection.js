@@ -37,6 +37,7 @@ export class DatabasConnection {
   /**
    * @param {string} queryString
    * @param {any[]} params
+   * @returns {Promise<any[]>}
    */
   async query(queryString, params = []) {
     return new Promise((resolve, reject) => {

@@ -49,7 +49,6 @@ export class DatabaseConnector {
         this.db.run(q, (err) => {
           if (err) {
             console.error(err.message);
-            return;
           }
         });
       }
@@ -57,5 +56,3 @@ export class DatabaseConnector {
     console.log('tables created');
   }
 }
-
-export default new DatabaseConnector('./backend.db');

@@ -1,14 +1,22 @@
 // @ts-check
 
-import { GamesService } from "./service.js";
+import { GamesService } from './service.js';
 
 export class GamesController {
-  constructor() {}
+  /**
+   *
+   * @param {GamesService} service
+   */
+  constructor(service) {
+    this.service = service;
+  }
+
+  /**
+   * @type {import('express').RequestHandler}
+   */
   create(req, res) {
-    const ok = req.body;
-    const gamesService = new GamesService();
-    const result = gamesService.create(ok);
+    const gameDto = req.body;
+    const result = this.service.create(gameDto);
     res.status(201).json(result);
-    return;
   }
 }

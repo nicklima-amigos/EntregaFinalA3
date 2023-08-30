@@ -1,14 +1,20 @@
-import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
-import DatabaseConnector from "../../infrastructure/database/connector.js";
-export class GamesRepository {
-  constructor() {}
+// @ts-check
 
+import { createGameQuery } from '../../infrastructure/database/queries/games/create.js';
+import { DatabaseConnector } from '../../infrastructure/database/connector.js';
+export class GamesRepository {
   /**
-   *
-   * @param {CreateGameDto} createGameDto
+   * @constructor
+   * @param {DatabaseConnector} db
+   */
+  constructor(db) {
+    this.db = db;
+  }
+  /**
+   * @param createGameDto
    */
   create({ title, genre, price, developed_by, release_date }) {
-    DatabaseConnector.exec(
+    this.db.exec(
       createGameQuery,
       [title, genre, price, developed_by, release_date],
       (err) => {

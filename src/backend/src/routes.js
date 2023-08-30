@@ -1,9 +1,8 @@
 // @ts-check
 
 import { Router } from 'express';
-import { gamesRoutes } from './modules/game/routes.js';
-import { gamesModule } from './modules/game/module.js';
 import { DatabaseConnector } from './infrastructure/database/connector.js';
+import { gamesModule } from './modules/game/module.js';
 
 /**
  *

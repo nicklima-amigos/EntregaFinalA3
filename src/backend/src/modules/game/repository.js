@@ -1,6 +1,5 @@
-import databaseConnector from '../../infrastructure/database/connector.js';
-import { createGameQuery } from '../../infrastructure/database/queries/games/create.js';
-
+import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
+import DatabaseConnector from "../../infrastructure/database/connector.js";
 export class GamesRepository {
   constructor() {}
 
@@ -8,8 +7,8 @@ export class GamesRepository {
    *
    * @param {CreateGameDto} createGameDto
    */
-  async create({ title, genre, price, developed_by, release_date }) {
-    databaseConnector.exec(
+  create({ title, genre, price, developed_by, release_date }) {
+    DatabaseConnector.exec(
       createGameQuery,
       [title, genre, price, developed_by, release_date],
       (err) => {

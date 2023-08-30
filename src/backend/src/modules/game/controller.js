@@ -15,17 +15,20 @@ export class GamesController {
   /**
    * @type {import('express').RequestHandler}
    */
-  create(req, res, next) {
+  async create(req, res, next) {
     /**
      * @type {CreateGameDto}
      */
     const gameDto = req.body;
-    this.service.create(gameDto, (err) => {
-      if (err) {
-        return next(err);
-      }
+    const result = await this.service.create(gameDto);
+    res.status(201).json(result);
+  }
 
-      res.status(201).json({ message: "created" });
-    });
+  /**
+   * @type {import('express').RequestHandler}
+   */
+  async list(req, res, next) {
+    const result = await this.service.list();
+    res.status(200).json(result);
   }
 }

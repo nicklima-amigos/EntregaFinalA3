@@ -15,19 +15,19 @@ export class GamesService {
   /**
    *
    * @param {CreateGameDto} createGameDto
-   * @param {*} callback
    * @returns
    */
-  create({ title, genre, price, developed_by, release_date }, callback) {
-    return this.repository.create(
-      {
-        title,
-        genre,
-        price,
-        developed_by,
-        release_date,
-      },
-      callback,
-    );
+  async create({ title, genre, price, developed_by, release_date }) {
+    return this.repository.create({
+      title,
+      genre,
+      price,
+      developed_by,
+      release_date,
+    });
+  }
+
+  async list() {
+    return this.repository.list();
   }
 }

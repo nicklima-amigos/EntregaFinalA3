@@ -1,7 +1,7 @@
 // @ts-check
 
 import { Router } from "express";
-import { DatabasConnection } from "./infrastructure/database/connector.js";
+import { DatabasConnection } from "./infrastructure/database/connection.js";
 import { gamesModule } from "./modules/game/module.js";
 
 /**

@@ -18,7 +18,7 @@ export class GamesRepository {
     this.db.exec(
       createGameQuery,
       [title, genre, price, developed_by, release_date],
-      callback
+      callback,
     );
   }
 }

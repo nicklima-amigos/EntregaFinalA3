@@ -27,7 +27,7 @@ export class GamesService {
         developed_by,
         release_date,
       },
-      callback
+      callback,
     );
   }
 }

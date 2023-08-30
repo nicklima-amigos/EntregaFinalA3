@@ -1,7 +1,7 @@
 // @ts-check
 
-import { Router } from 'express';
-import { GamesController } from './controller.js';
+import { Router } from "express";
+import { GamesController } from "./controller.js";
 
 /**
  *
@@ -10,6 +10,6 @@ import { GamesController } from './controller.js';
  */
 export const gamesRoutes = (controller) => {
   const gamesRoutes = Router();
-  gamesRoutes.post('/', (req, res, next) => controller.create(req, res, next));
+  gamesRoutes.post("/", (req, res, next) => controller.create(req, res, next));
   return gamesRoutes;
 };

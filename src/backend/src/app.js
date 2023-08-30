@@ -1,8 +1,8 @@
 // @ts-check
 
 import express from 'express';
-import { routes } from './routes.js';
 import { DatabaseConnector } from './infrastructure/database/connector.js';
+import { mainRoutes } from './routes.js';
 export class App {
   /**
    *
@@ -18,7 +18,7 @@ export class App {
   }
 
   routes() {
-    this.app.use(routes);
+    this.app.use(mainRoutes(this.db));
   }
 
   async init() {

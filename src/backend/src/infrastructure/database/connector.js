@@ -20,22 +20,33 @@ export class DatabasConnection {
   /**
    * @param {string} queryString
    * @param {any[]} params
-   * @param {(err: Error) => void} callback
+   * @returns {Promise<{id: number, changes: number}>}
    */
-  exec(queryString, params = [], callback = () => {}) {
-    this.db.serialize(() => {
-      this.db.run(queryString, params, callback);
+  async exec(queryString, params = []) {
+    return new Promise((resolve, reject) => {
+      this.db.run(queryString, params, function (err) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve({ id: this.lastID, changes: this.changes });
+      });
     });
   }
 
   /**
    * @param {string} queryString
    * @param {any[]} params
-   * @param {(err: Error, row: any) => void} callback
    */
-  query(queryString, params = [], callback) {
-    this.db.serialize(() => {
-      this.db.each(queryString, params, callback);
+  async query(queryString, params = []) {
+    return new Promise((resolve, reject) => {
+      this.db.all(queryString, params, (err, rows) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(rows);
+      });
     });
   }
 
@@ -48,7 +59,7 @@ export class DatabasConnection {
       for (let q of queries) {
         this.db.run(q, (err) => {
           if (err) {
-            console.error(err.message);
+            throw err;
           }
         });
       }

@@ -11,14 +11,21 @@ export class GamesRepository {
   constructor(db) {
     this.db = db;
   }
+
   /**
    * @param {CreateGameDto} createGameDto
    */
-  create({ title, genre, price, developed_by, release_date }, callback) {
-    this.db.exec(
-      createGameQuery,
-      [title, genre, price, developed_by, release_date],
-      callback,
-    );
+  async create({ title, genre, price, developed_by, release_date }) {
+    return this.db.exec(createGameQuery, [
+      title,
+      genre,
+      price,
+      developed_by,
+      release_date,
+    ]);
+  }
+
+  async list() {
+    return this.db.query("SELECT * FROM games");
   }
 }

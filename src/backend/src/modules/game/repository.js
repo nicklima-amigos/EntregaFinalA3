@@ -3,6 +3,7 @@
 import "./dto/createGameDto.js";
 import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
+import { listGames } from "../../infrastructure/database/queries/games/list.js";
 export class GamesRepository {
   /**
    * @constructor
@@ -26,6 +27,6 @@ export class GamesRepository {
   }
 
   async list() {
-    return this.db.query("SELECT * FROM games");
+    return this.db.query(listGames);
   }
 }

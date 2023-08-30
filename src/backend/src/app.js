@@ -1,7 +1,7 @@
 // @ts-check
 
 import express from "express";
-import { DatabasConnection } from "./infrastructure/database/connector.js";
+import { DatabasConnection } from "./infrastructure/database/connection.js";
 import { mainRoutes } from "./routes.js";
 export class App {
   /**

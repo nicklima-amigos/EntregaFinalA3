@@ -1,6 +1,6 @@
 // @ts-check
 
-import { DatabasConnection } from "../../infrastructure/database/connector.js";
+import { DatabasConnection } from "../../infrastructure/database/connection.js";
 import { GamesController } from "./controller.js";
 import { GamesRepository } from "./repository.js";
 import { gamesRoutes } from "./routes.js";

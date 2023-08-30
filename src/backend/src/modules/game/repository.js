@@ -2,7 +2,7 @@
 
 import "./dto/createGameDto.js";
 import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
-import { DatabasConnection } from "../../infrastructure/database/connector.js";
+import { DatabasConnection } from "../../infrastructure/database/connection.js";
 export class GamesRepository {
   /**
    * @constructor

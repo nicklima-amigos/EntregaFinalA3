@@ -1,7 +1,7 @@
 // @ts-check
 
 import { App } from "./app.js";
-import { DatabasConnection } from "./infrastructure/database/connector.js";
+import { DatabasConnection } from "./infrastructure/database/connection.js";
 
 const bootstrap = async () => {
   const db = new DatabasConnection("./backend.db");

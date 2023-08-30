@@ -1,10 +1,10 @@
 // @ts-check
 
-import { App } from './app.js';
-import { DatabaseConnector } from './infrastructure/database/connector.js';
+import { App } from "./app.js";
+import { DatabasConnection } from "./infrastructure/database/connector.js";
 
 const bootstrap = async () => {
-  const db = new DatabaseConnector('./backend.db');
+  const db = new DatabasConnection("./backend.db");
   const app = new App(db);
 
   await app.init();

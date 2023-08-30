@@ -1,6 +1,6 @@
 // @ts-check
 
-import { GamesService } from './service.js';
+import { GamesService } from "./service.js";
 
 export class GamesController {
   /**
@@ -16,7 +16,12 @@ export class GamesController {
    */
   create(req, res, next) {
     const gameDto = req.body;
-    const result = this.service.create(gameDto);
-    res.status(201).json(result);
+    this.service.create(gameDto, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.status(201).json({ message: "created" });
+    });
   }
 }

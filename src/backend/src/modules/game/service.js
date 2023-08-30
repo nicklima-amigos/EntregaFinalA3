@@ -1,5 +1,5 @@
 // @ts-check
-import { GamesRepository } from './repository.js';
+import { GamesRepository } from "./repository.js";
 
 export class GamesService {
   /**
@@ -10,13 +10,16 @@ export class GamesService {
     this.repository = repository;
   }
 
-  create({ title, genre, price, developed_by, release_date }) {
-    return this.repository.create({
-      title,
-      genre,
-      price,
-      developed_by,
-      release_date,
-    });
+  create({ title, genre, price, developed_by, release_date }, callback) {
+    return this.repository.create(
+      {
+        title,
+        genre,
+        price,
+        developed_by,
+        release_date,
+      },
+      callback
+    );
   }
 }

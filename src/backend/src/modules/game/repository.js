@@ -1,11 +1,11 @@
 // @ts-check
 
-import { createGameQuery } from '../../infrastructure/database/queries/games/create.js';
-import { DatabaseConnector } from '../../infrastructure/database/connector.js';
+import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
+import { DatabasConnection } from "../../infrastructure/database/connector.js";
 export class GamesRepository {
   /**
    * @constructor
-   * @param {DatabaseConnector} db
+   * @param {DatabasConnection} db
    */
   constructor(db) {
     this.db = db;
@@ -13,15 +13,11 @@ export class GamesRepository {
   /**
    * @param {CreateGameDto} createGameDto
    */
-  create({ title, genre, price, developed_by, release_date }) {
+  create({ title, genre, price, developed_by, release_date }, callback) {
     this.db.exec(
       createGameQuery,
       [title, genre, price, developed_by, release_date],
-      (err) => {
-        if (err) {
-          throw err;
-        }
-      }
+      callback
     );
   }
 }

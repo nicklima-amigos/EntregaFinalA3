@@ -1,12 +1,12 @@
 // @ts-check
 
-import express from 'express';
-import { DatabaseConnector } from './infrastructure/database/connector.js';
-import { mainRoutes } from './routes.js';
+import express from "express";
+import { DatabasConnection } from "./infrastructure/database/connector.js";
+import { mainRoutes } from "./routes.js";
 export class App {
   /**
    *
-   * @param {DatabaseConnector} db
+   * @param {DatabasConnection} db
    */
   constructor(db) {
     this.db = db;
@@ -27,9 +27,9 @@ export class App {
   }
 
   listen() {
-    console.log('server about to listen');
-    return this.app.listen('3000', () => {
-      console.log('Server is running on port 3000');
+    console.log("server about to listen");
+    return this.app.listen("3000", () => {
+      console.log("Server is running on port 3000");
     });
   }
 }

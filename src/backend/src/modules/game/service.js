@@ -1,6 +1,6 @@
 // @ts-check
 
-import "./dto/createGameDto";
+import "./dto/createGameDto.js";
 import { GamesRepository } from "./repository.js";
 
 export class GamesService {

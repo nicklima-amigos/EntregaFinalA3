@@ -1,9 +1,9 @@
 // @ts-check
 
-import sqlite from 'sqlite3';
-import { init } from './queries/migrations/init.js';
+import sqlite from "sqlite3";
+import { init } from "./queries/migrations/init.js";
 
-export class DatabaseConnector {
+export class DatabasConnection {
   /**
    * @param {string} connString
    */
@@ -13,14 +13,14 @@ export class DatabaseConnector {
         console.error(err.message);
       }
       this.createTables(init);
-      console.log('Connected to the database.');
+      console.log("Connected to the database.");
     });
   }
 
   /**
    * @param {string} queryString
    * @param {any[]} params
-   * @param {(err) => void} callback
+   * @param {(err: Error) => void} callback
    */
   exec(queryString, params = [], callback = () => {}) {
     this.db.serialize(() => {
@@ -31,7 +31,7 @@ export class DatabaseConnector {
   /**
    * @param {string} queryString
    * @param {any[]} params
-   * @param {(err, result) => void} callback
+   * @param {(err: Error, row: any) => void} callback
    */
   query(queryString, params = [], callback) {
     this.db.serialize(() => {
@@ -49,13 +49,10 @@ export class DatabaseConnector {
         this.db.run(q, (err) => {
           if (err) {
             console.error(err.message);
-            return;
           }
         });
       }
     });
-    console.log('tables created');
+    console.log("tables created");
   }
 }
-
-export default new DatabaseConnector('./backend.db');

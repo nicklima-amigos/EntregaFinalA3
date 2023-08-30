@@ -1,5 +1,16 @@
+// @ts-check
+
 import { Router } from "express";
-import gamesRoutes from "./modules/game/routes.js";
-const routes = Router();
-routes.use("/games", gamesRoutes);
-export { routes };
+import { DatabasConnection } from "./infrastructure/database/connector.js";
+import { gamesModule } from "./modules/game/module.js";
+
+/**
+ *
+ * @param {DatabasConnection} db
+ */
+export const mainRoutes = (db) => {
+  const routes = Router();
+  routes.use("/games", gamesModule(db));
+
+  return routes;
+};

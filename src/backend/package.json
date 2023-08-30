@@ -6,13 +6,15 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --ext 'js' --exec 'node src/main.js'",
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "prettier": "^3.0.3",
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {

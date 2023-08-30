@@ -1,9 +1,15 @@
 // @ts-check
 
 import express from "express";
-import { routes } from "./routes.js";
-class App {
-  constructor() {
+import { DatabasConnection } from "./infrastructure/database/connector.js";
+import { mainRoutes } from "./routes.js";
+export class App {
+  /**
+   *
+   * @param {DatabasConnection} db
+   */
+  constructor(db) {
+    this.db = db;
     this.app = express();
   }
 
@@ -12,7 +18,7 @@ class App {
   }
 
   routes() {
-    this.app.use(routes);
+    this.app.use(mainRoutes(this.db));
   }
 
   async init() {
@@ -27,5 +33,3 @@ class App {
     });
   }
 }
-
-export const app = new App();

@@ -1,5 +1,6 @@
 // @ts-check
 
+import "./dto/createGameDto.js";
 import { GamesService } from "./service.js";
 
 export class GamesController {
@@ -15,6 +16,9 @@ export class GamesController {
    * @type {import('express').RequestHandler}
    */
   create(req, res, next) {
+    /**
+     * @type {CreateGameDto}
+     */
     const gameDto = req.body;
     this.service.create(gameDto, (err) => {
       if (err) {

@@ -1,18 +1,11 @@
 // @ts-check
 
-import { Router } from 'express';
-import { GamesController } from './controller.js';
+import { Router } from "express";
+import { GamesController } from "./controller.js";
 
-/**
- * @param {GamesController} controller
- * @returns {Router}
- */
-export const startGamesRoutes = (controller) => {
-  const gamesRoutes = Router();
+const gamesController = new GamesController();
+const gamesRoutes = Router();
 
-  gamesRoutes.route('/').post(controller.create);
+gamesRoutes.post("/", gamesController.create);
 
-  return gamesRoutes;
-};
-
-export default startGamesRoutes;
+export default gamesRoutes;

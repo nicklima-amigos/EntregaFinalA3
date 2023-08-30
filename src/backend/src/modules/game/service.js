@@ -1,17 +1,17 @@
 // @ts-check
 
-import { GamesRepository } from './repository.js';
+import { GamesRepository } from "./repository.js";
 
 export class GamesService {
-  /**
-   *
-   * @param {GamesRepository} repository
-   */
-  constructor(repository) {
-    this.repository = repository;
-  }
-
-  async create(gameDto) {
-    return this.repository.create(gameDto);
+  create({ title, genre, price, developed_by, release_date }) {
+    const gameRepository = new GamesRepository();
+    gameRepository.create({
+      title,
+      genre,
+      price,
+      developed_by,
+      release_date,
+    });
+    return;
   }
 }

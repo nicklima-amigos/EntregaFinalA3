@@ -10,6 +10,6 @@ import { GamesController } from './controller.js';
  */
 export const gamesRoutes = (controller) => {
   const gamesRoutes = Router();
-  gamesRoutes.post('/', controller.create);
+  gamesRoutes.post('/', (req, res, next) => controller.create(req, res, next));
   return gamesRoutes;
 };

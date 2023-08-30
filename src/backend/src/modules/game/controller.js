@@ -14,7 +14,7 @@ export class GamesController {
   /**
    * @type {import('express').RequestHandler}
    */
-  create(req, res) {
+  create(req, res, next) {
     const gameDto = req.body;
     const result = this.service.create(gameDto);
     res.status(201).json(result);

@@ -6,7 +6,6 @@ import { GamesController } from "./controller.js";
 /**
  *
  * @param {GamesController} controller
- * @returns {Router}
  */
 export const gamesRoutes = (controller) => {
   const gamesRoutes = Router();

@@ -1,4 +1,4 @@
-class Games {
+class Game {
   constructor(props) {
     this.title = props.title;
     this.genre = props.genre;
@@ -8,4 +8,4 @@ class Games {
   }
 }
 
-export default Games;
+export default Game;

@@ -11,7 +11,7 @@ export class GamesRepository {
     this.db = db;
   }
   /**
-   * @param createGameDto
+   * @param {CreateGameDto} createGameDto
    */
   create({ title, genre, price, developed_by, release_date }) {
     this.db.exec(

@@ -24,7 +24,6 @@ export class GamesController {
       const result = await this.service.create(gameDto);
       res.status(201).json(result);
     } catch (err) {
-      console.log("catchin error");
       next(err);
     }
   }

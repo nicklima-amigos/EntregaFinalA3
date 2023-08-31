@@ -14,9 +14,11 @@ export const usersRoutes = (controller) => {
     .post((req, res, next) => controller.create(req, res, next))
     .get((req, res, next) => controller.find(req, res, next));
 
-  usersRoutes.get("/:id", (req, res, next) =>
-    controller.findOne(req, res, next),
-  );
+  usersRoutes
+    .route("/:id")
+    .get((req, res, next) => controller.findOne(req, res, next))
+    .delete((req, res, next) => controller.delete(req, res, next))
+    .put((req, res, next) => controller.update(req, res, next));
 
   return usersRoutes;
 };

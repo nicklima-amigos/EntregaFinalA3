@@ -1,7 +1,7 @@
 // @ts-check
 
 import "./dto/createUserDto.js";
-import { UsersRepository } from "./repositoryUser.js";
+import { UsersRepository } from "./userRepository.js";
 
 export class UsersService {
   /**
@@ -30,8 +30,8 @@ export class UsersService {
     return this.repository.list();
   }
 
-  async show(userId) {
+  async get(userId) {
 
-    return this.repository.show(userId);
+    return this.repository.get(userId);
   }
 }

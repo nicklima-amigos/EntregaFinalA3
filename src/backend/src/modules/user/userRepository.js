@@ -3,7 +3,7 @@
 import "./dto/createUserDto.js";
 import { createUserQuery } from "../../infrastructure/database/queries/users/createUser.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { listUsers } from "../../infrastructure/database/queries/users/listUser.js";
+import { listUsers } from "../../infrastructure/database/queries/users/listUsers.js";
 
 export class UsersRepository {
   /**
@@ -30,7 +30,7 @@ export class UsersRepository {
     return this.db.query(listUsers);
   }
 
-  async show(userId) {
+  async get(userId) {
 
     return this.db.query(userId);
   }

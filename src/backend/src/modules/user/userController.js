@@ -1,6 +1,6 @@
 // @ts-check
 import "./dto/createUserDto.js"
-import { UsersService } from "./serviceUser.js"
+import { UsersService } from "./userService.js"
 
 export class UserController {
   /**
@@ -34,10 +34,10 @@ export class UserController {
    * @type {import('express').RequestHandler}
    */
 
-  async show(req, res, next) {
+  async get(req, res, next) {
 
     const userId = req.params;
-    const result = await this.service.show(userId);
+    const result = await this.service.get(userId);
 
     res.status(200).json(result);
   }

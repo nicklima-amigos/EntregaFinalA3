@@ -1,9 +1,9 @@
 // @ts-check
 
 import "./dto/createGameDto.js";
-import { createGameQuery } from "../../infrastructure/database/queries/games/create.js";
+import { createGameQuery } from "../../infrastructure/database/queries/games/createGame.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { listGames } from "../../infrastructure/database/queries/games/list.js";
+import { listGames } from "../../infrastructure/database/queries/games/listGames.js";
 export class GamesRepository {
   /**
    * @constructor

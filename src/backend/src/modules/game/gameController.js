@@ -1,7 +1,7 @@
 // @ts-check
 
 import "./dto/createGameDto.js";
-import { GamesService } from "./service.js";
+import { GamesService } from "./gameService.js";
 
 export class GamesController {
   /**

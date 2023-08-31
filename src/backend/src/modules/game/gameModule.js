@@ -1,10 +1,10 @@
 // @ts-check
 
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { GamesController } from "./controller.js";
-import { GamesRepository } from "./repository.js";
-import { gamesRoutes } from "./routes.js";
-import { GamesService } from "./service.js";
+import { GamesController } from "./gameController.js";
+import { GamesRepository } from "./gameRepository.js";
+import { gamesRoutes } from "./gameRoutes.js";
+import { GamesService } from "./gameService.js";
 
 /**
  *

@@ -1,7 +1,7 @@
 // @ts-check
 
 import "./dto/createGameDto.js";
-import { GamesRepository } from "./repository.js";
+import { GamesRepository } from "./gameRepository.js";
 
 export class GamesService {
   /**
@@ -27,7 +27,7 @@ export class GamesService {
     });
   }
 
-  async list() {
-    return this.repository.list();
+  async find() {
+    return this.repository.find();
   }
 }

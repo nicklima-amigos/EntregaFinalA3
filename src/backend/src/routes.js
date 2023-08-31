@@ -2,8 +2,8 @@
 
 import { Router } from "express";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
-import { gamesModule } from "./modules/game/module.js";
-import { usersModule } from "./modules/user/module.js";
+import { gamesModule } from "./modules/game/gameModule.js";
+import { usersModule } from "./modules/user/userModule.js";
 
 /**
  *
@@ -15,4 +15,3 @@ export const mainRoutes = (db) => {
   routes.use("/users", usersModule(db));
   return routes;
 };
-

@@ -27,7 +27,7 @@ export class GamesService {
     });
   }
 
-  async list() {
-    return this.repository.list();
+  async find() {
+    return this.repository.find();
   }
 }

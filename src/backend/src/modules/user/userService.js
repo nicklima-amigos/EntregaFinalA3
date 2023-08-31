@@ -22,16 +22,20 @@ export class UsersService {
       username,
       email,
       password,
-      birth_date
+      birth_date,
     });
   }
 
-  async list() {
-    return this.repository.list();
+  async find() {
+    return this.repository.find();
   }
 
-  async get(userId) {
-
-    return this.repository.get(userId);
+  /**
+   *
+   * @param {number} userId
+   * @returns
+   */
+  async findOne(userId) {
+    return this.repository.findOne(userId);
   }
 }

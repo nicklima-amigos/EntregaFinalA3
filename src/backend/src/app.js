@@ -5,6 +5,7 @@ import { DatabaseConnection } from "./infrastructure/database/connection.js";
 import { gamesModule } from "./modules/game/gameModule.js";
 import { platformsModule } from "./modules/platform/platformModule.js";
 import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
+import { usersModule } from "./modules/user/usersModule.js";
 export class App {
   /**
    *
@@ -22,6 +23,7 @@ export class App {
     const router = Router();
     router.use("/games", gamesModule(this.db));
     router.use("/platforms", platformsModule(this.db));
+    router.use("/users", usersModule(this.db));
     this.app.use(router);
 
     router.use(errorHandlingMiddleware);

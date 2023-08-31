@@ -3,7 +3,8 @@
 import "./dto/createUserDto.js";
 import { createUserQuery } from "../../infrastructure/database/queries/users/createUser.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { listUsers } from "../../infrastructure/database/queries/users/listUsers.js";
+import { findUsers } from "../../infrastructure/database/queries/users/findUsers.js";
+import { findOneUserQuery } from "../../infrastructure/database/queries/users/findOneUser.js";
 
 export class UsersRepository {
   /**
@@ -22,16 +23,20 @@ export class UsersRepository {
       username,
       email,
       password,
-      birth_date
+      birth_date,
     ]);
   }
 
-  async list() {
-    return this.db.query(listUsers);
+  async find() {
+    return this.db.query(findUsers);
   }
 
-  async get(userId) {
-
-    return this.db.query(userId);
+  /**
+   *
+   * @param {number} userId
+   * @returns
+   */
+  async findOne(userId) {
+    return this.db.query(findOneUserQuery, [userId]);
   }
 }

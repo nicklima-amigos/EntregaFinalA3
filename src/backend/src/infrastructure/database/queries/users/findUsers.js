@@ -1,3 +1,3 @@
-export const listUsers = `
+export const findUsers = `
     SELECT * FROM users
 `;

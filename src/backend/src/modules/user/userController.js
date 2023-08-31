@@ -1,6 +1,6 @@
 // @ts-check
-import "./dto/createUserDto.js"
-import { UsersService } from "./userService.js"
+import "./dto/createUserDto.js";
+import { UsersService } from "./userService.js";
 
 export class UserController {
   /**
@@ -11,8 +11,8 @@ export class UserController {
   }
 
   /**
- * @type {import('express').RequestHandler}
- */
+   * @type {import('express').RequestHandler}
+   */
   async create(req, res, next) {
     /**
      * @type {CreateUserDto}
@@ -25,20 +25,18 @@ export class UserController {
   /**
    * @type {import('express').RequestHandler}
    */
-  async list(req, res, next) {
-    const result = await this.service.list();
+  async find(req, res, next) {
+    const result = await this.service.find();
     res.status(200).json(result);
   }
+
   /**
    *
    * @type {import('express').RequestHandler}
    */
-
-  async get(req, res, next) {
-
-    const userId = req.params;
-    const result = await this.service.get(userId);
-
+  async findOne(req, res, next) {
+    const { id } = req.params;
+    const result = await this.service.findOne(+id);
     res.status(200).json(result);
   }
 }

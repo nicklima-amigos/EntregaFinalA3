@@ -12,9 +12,11 @@ export const usersRoutes = (controller) => {
   usersRoutes
     .route("/")
     .post((req, res, next) => controller.create(req, res, next))
-    .get((req, res, next) => controller.list(req, res, next));
+    .get((req, res, next) => controller.find(req, res, next));
 
-  usersRoutes.get("/:id", (req, res, next) => controller.get(req, res, next));
+  usersRoutes.get("/:id", (req, res, next) =>
+    controller.findOne(req, res, next),
+  );
 
   return usersRoutes;
 };

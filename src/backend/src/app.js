@@ -1,8 +1,8 @@
 // @ts-check
 
-import express from "express";
+import express, { Router } from "express";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
-import { mainRoutes } from "./routes.js";
+import { gamesModule } from "./modules/game/module.js";
 export class App {
   /**
    *
@@ -18,7 +18,10 @@ export class App {
   }
 
   routes() {
-    this.app.use(mainRoutes(this.db));
+    const router = Router();
+    router.use("/games", gamesModule(this.db));
+
+    this.app.use(router);
   }
 
   async init() {

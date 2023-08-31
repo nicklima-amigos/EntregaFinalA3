@@ -8,10 +8,10 @@ import { GamesController } from "./gameController.js";
  * @param {GamesController} controller
  */
 export const gamesRoutes = (controller) => {
-  const gamesRoutes = Router();
-  gamesRoutes
+  const router = Router();
+  router
     .route("/")
     .post((req, res, next) => controller.create(req, res, next))
     .get((req, res, next) => controller.list(req, res, next));
-  return gamesRoutes;
+  return router;
 };

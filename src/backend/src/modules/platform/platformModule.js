@@ -6,8 +6,6 @@ import { PlatformsRepository } from "./platformRepository.js";
 import { platformsRoutes } from "./platformRoutes.js";
 import { PlatformsService } from "./platformService.js";
 
-
-
 /**
  *
  * @param {DatabaseConnection} db

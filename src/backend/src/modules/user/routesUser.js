@@ -13,5 +13,8 @@ export const usersRoutes = (controller) => {
     .route("/")
     .post((req, res, next) => controller.create(req, res, next))
     .get((req, res, next) => controller.list(req, res, next));
+
+  usersRoutes.get("/:id", (req, res, next) => controller.show(req, res, next));
+
   return usersRoutes;
 };

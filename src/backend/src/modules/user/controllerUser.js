@@ -1,11 +1,12 @@
-import "./dto/createUserDto"
-import { UserService } from "./serviceUser.js"
+// @ts-check
+import "./dto/createUserDto.js"
+import { UsersService } from "./serviceUser.js"
 
 export class UserController {
   /**
-   * @param { UserService } service
+   * @param { UsersService } service
    */
-  constructor() {
+  constructor(service) {
     this.service = service;
   }
 
@@ -26,6 +27,18 @@ export class UserController {
    */
   async list(req, res, next) {
     const result = await this.service.list();
+    res.status(200).json(result);
+  }
+  /**
+   *
+   * @type {import('express').RequestHandler}
+   */
+
+  async show(req, res, next) {
+
+    const userId = req.params;
+    const result = await this.service.show(userId);
+
     res.status(200).json(result);
   }
 }

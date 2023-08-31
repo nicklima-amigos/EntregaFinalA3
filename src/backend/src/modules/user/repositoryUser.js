@@ -29,4 +29,9 @@ export class UsersRepository {
   async list() {
     return this.db.query(listUsers);
   }
+
+  async show(userId) {
+
+    return this.db.query(userId);
+  }
 }

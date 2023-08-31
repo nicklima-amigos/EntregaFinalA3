@@ -26,4 +26,13 @@
     "source.fixAll.eslint": true
   },
   "editor.fontFamily": "'JetBrains Mono', 'monospace', monospace",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "user",
+      "database": "./backend.db"
+    }
+  ],
+  "sqltools.useNodeRuntime": true,
 }

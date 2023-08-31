@@ -1,9 +1,9 @@
 // @ts-check
 
-import "./dto/createGameDto.js";
+import "./dto/createUserDto.js";
 import { UsersRepository } from "./repositoryUser.js";
 
-export class GamesService {
+export class UsersService {
   /**
    *
    * @param {UsersRepository} repository
@@ -28,5 +28,10 @@ export class GamesService {
 
   async list() {
     return this.repository.list();
+  }
+
+  async show(userId) {
+
+    return this.repository.show(userId);
   }
 }

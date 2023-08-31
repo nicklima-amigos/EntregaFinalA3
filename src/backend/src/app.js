@@ -3,6 +3,7 @@
 import express, { Router } from "express";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
 import { gamesModule } from "./modules/game/gameModule.js";
+import { platformsModule } from "./modules/platform/platformModule.js";
 import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
 export class App {
   /**
@@ -17,11 +18,10 @@ export class App {
   attachMiddleware() {
     this.app.use(express.json());
   }
-
   routes() {
     const router = Router();
     router.use("/games", gamesModule(this.db));
-
+    router.use("/platforms", platformsModule(this.db));
     this.app.use(router);
 
     router.use(errorHandlingMiddleware);

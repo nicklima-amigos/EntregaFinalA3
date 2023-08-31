@@ -3,6 +3,7 @@
 import express, { Router } from "express";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
 import { gamesModule } from "./modules/game/gameModule.js";
+import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
 export class App {
   /**
    *
@@ -22,6 +23,8 @@ export class App {
     router.use("/games", gamesModule(this.db));
 
     this.app.use(router);
+
+    router.use(errorHandlingMiddleware);
   }
 
   async init() {

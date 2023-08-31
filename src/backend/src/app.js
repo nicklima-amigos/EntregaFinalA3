@@ -19,14 +19,14 @@ export class App {
   attachMiddleware() {
     this.app.use(express.json());
   }
+
   routes() {
     const router = Router();
     router.use("/games", gamesModule(this.db));
     router.use("/platforms", platformsModule(this.db));
     router.use("/users", usersModule(this.db));
-    this.app.use(router);
-
     router.use(errorHandlingMiddleware);
+    this.app.use(router);
   }
 
   async init() {

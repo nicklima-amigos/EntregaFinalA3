@@ -38,4 +38,8 @@ export class UsersService {
   async findOne(userId) {
     return this.repository.findOne(userId);
   }
+
+  async delete(userId) {
+    return this.repository.delete(userId);
+  }
 }

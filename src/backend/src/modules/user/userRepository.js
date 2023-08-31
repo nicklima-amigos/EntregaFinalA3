@@ -5,6 +5,7 @@ import { createUserQuery } from "../../infrastructure/database/queries/users/cre
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { findUsers } from "../../infrastructure/database/queries/users/findUsers.js";
 import { findOneUserQuery } from "../../infrastructure/database/queries/users/findOneUser.js";
+import { deleteUserQuery } from "../../infrastructure/database/queries/users/deleteUser.js";
 
 export class UsersRepository {
   /**
@@ -38,5 +39,14 @@ export class UsersRepository {
    */
   async findOne(userId) {
     return this.db.query(findOneUserQuery, [userId]);
+  }
+
+  /**
+   *
+   * @param {number} userId
+   * @returns
+   */
+  async delete(userId) {
+    return this.db.exec(deleteUserQuery, [userId]);
   }
 }

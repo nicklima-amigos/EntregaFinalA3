@@ -1,7 +1,7 @@
 // @ts-check
 
 import { Router } from "express";
-import { GamesController } from "./controller.js";
+import { GamesController } from "./gameController.js";
 
 /**
  *

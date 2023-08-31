@@ -23,12 +23,13 @@ export class App {
     router.use("/games", gamesModule(this.db));
 
     this.app.use(router);
+
+    router.use(errorHandlingMiddleware);
   }
 
   async init() {
     this.attachMiddleware();
     this.routes();
-    this.app.use(errorHandlingMiddleware);
   }
 
   listen() {

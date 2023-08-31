@@ -26,7 +26,7 @@ export class GamesRepository {
     ]);
   }
 
-  async list() {
+  async find() {
     return this.db.query(listGames);
   }
 }

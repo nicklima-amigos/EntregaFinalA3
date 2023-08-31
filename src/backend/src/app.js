@@ -2,7 +2,7 @@
 
 import express, { Router } from "express";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
-import { gamesModule } from "./modules/game/module.js";
+import { gamesModule } from "./modules/game/gameModule.js";
 export class App {
   /**
    *

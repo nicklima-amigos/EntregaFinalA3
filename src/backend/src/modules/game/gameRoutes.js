@@ -12,6 +12,6 @@ export const gamesRoutes = (controller) => {
   router
     .route("/")
     .post((req, res, next) => controller.create(req, res, next))
-    .get((req, res, next) => controller.list(req, res, next));
+    .get((req, res, next) => controller.find(req, res, next));
   return router;
 };

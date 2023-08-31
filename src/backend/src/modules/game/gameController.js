@@ -27,8 +27,8 @@ export class GamesController {
   /**
    * @type {import('express').RequestHandler}
    */
-  async list(req, res, next) {
-    const result = await this.service.list();
+  async find(req, res, next) {
+    const result = await this.service.find();
     res.status(200).json(result);
   }
 }

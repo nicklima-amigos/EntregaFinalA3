@@ -1,6 +1,6 @@
-export const CreateUserQuery = `
+export const createUserQuery = `
 INSERT INTO
-  user
+  users
     (username, email, password, birth_date )
   VALUES
     (?, ?, ?, ?);

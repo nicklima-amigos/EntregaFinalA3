@@ -18,6 +18,14 @@ export class PlatformsService {
    * @returns
    */
   async create({ name }) {
+    console.log({ name });
+    const existingPlatform = await this.repository.findOneByName(name);
+    if (existingPlatform) {
+      throw {
+        status: 400,
+        message: "Bad Request! Platform already exists!",
+      };
+    }
     return this.repository.create({
       name,
     });
@@ -31,37 +39,58 @@ export class PlatformsService {
   }
 
   /**
-   * @param {FindOnePlatformDto} FindOnePlatformDto
+   * @param {number} id
    */
-  async findOne({ id }) {
-    const result = await this.repository.findOne({ id });
-    return result;
+  async findOne(id) {
+    const platform = await this.repository.findOne(id);
+    if (!platform) {
+      throw {
+        status: 404,
+        message: "Not found!",
+      };
+    }
+    return platform;
+  }
+
+  /**
+   * @param {string} name
+   */
+  async findOneByName(name) {
+    return this.repository.findOneByName(name);
   }
 
   /**
    * @param {UpdatePlatformDto} UpdatePlatformDto
    */
   async update({ id, name }) {
-    const foundPlatform = await this.repository.findOne({ id });
-    if (!foundPlatform || foundPlatform.name === name) {
-      return foundPlatform;
+    const foundPlatform = await this.repository.findOne(id);
+    if (!foundPlatform) {
+      throw {
+        status: 404,
+        message: "Not found!",
+      };
     }
-    Object.assign(foundPlatform, {
-      name,
-    });
-    const updatedPlatform = await this.repository.update({ id, name });
-    return updatedPlatform;
+    if (foundPlatform.name === name) {
+      throw {
+        status: 400,
+        message:
+          "Bad Request! You cannot change the platform name to the same name!",
+      };
+    }
+    return await this.repository.update({ id, name });
   }
 
   /**
-   * @param {deletePlatformDto} deletePlatformDto
+   * @param {number} id
    */
-  async delete({ id }) {
-    const foundPlatform = await this.repository.findOne({ id });
+  async delete(id) {
+    const foundPlatform = await this.repository.findOne(id);
     if (!foundPlatform) {
-      return foundPlatform;
+      throw {
+        status: 404,
+        message: "Not found!",
+      };
     }
-    await this.repository.delete({ id });
-    return foundPlatform;
+    return this.repository.delete(id);
   }
 }

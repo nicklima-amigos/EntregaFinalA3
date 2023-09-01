@@ -32,16 +32,14 @@ export class PlatformsRepository {
    * @param {number} id
    */
   async findOne(id) {
-    const result = await this.db.query(findOnePlatformQuery, [id]);
-    return result[0];
+    return await this.db.queryOne(findOnePlatformQuery, [id]);
   }
 
   /**
    * @param {string} name
    */
   async findOneByName(name) {
-    const result = await this.db.query(findOnePlatformByNameQuery, [name]);
-    return result[0];
+    return this.db.queryOne(findOnePlatformByNameQuery, [name]);
   }
 
   /**

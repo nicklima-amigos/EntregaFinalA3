@@ -7,7 +7,6 @@
  * @returns
  */
 export const errorHandlingMiddleware = (error, req, res, next) => {
-  console.log("running custom middleware");
   console.log(error);
   if (error.status) {
     return res.status(error.status).json({ error: error.message });

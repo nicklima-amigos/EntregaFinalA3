@@ -1,5 +1,6 @@
 // @ts-check
 import "./dto/createUserDto.js";
+import "./dto/updateUserDto.js";
 import { UsersService } from "./userService.js";
 
 export class UserController {
@@ -14,20 +15,28 @@ export class UserController {
    * @type {import('express').RequestHandler}
    */
   async create(req, res, next) {
-    /**
-     * @type {CreateUserDto}
-     */
-    const userDto = req.body;
-    const result = await this.service.create(userDto);
-    res.status(201).json(result);
+    try {
+      /**
+       * @type {CreateUserDto}
+       */
+      const userDto = req.body;
+      const result = await this.service.create(userDto);
+      res.status(201).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 
   /**
    * @type {import('express').RequestHandler}
    */
   async find(req, res, next) {
-    const result = await this.service.find();
-    res.status(200).json(result);
+    try {
+      const result = await this.service.find();
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 
   /**
@@ -35,8 +44,42 @@ export class UserController {
    * @type {import('express').RequestHandler}
    */
   async findOne(req, res, next) {
-    const { id } = req.params;
-    const result = await this.service.findOne(+id);
-    res.status(200).json(result);
+    try {
+      const { id } = req.params;
+      const result = await this.service.findOne(+id);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * @type {import('express').RequestHandler}
+   */
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await this.service.delete(+id);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * @type {import('express').RequestHandler}
+   */
+  async update(req, res, next) {
+    try {
+      const { id } = req.params;
+      /**
+       * @type {UpdateUserDto}
+       */
+      const userDto = req.body;
+      const result = await this.service.update(+id, userDto);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 }

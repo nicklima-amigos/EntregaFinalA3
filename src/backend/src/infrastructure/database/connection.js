@@ -51,6 +51,18 @@ export class DatabaseConnection {
     });
   }
 
+  async queryOne(queryString, params = []) {
+    return new Promise((resolve, reject) => {
+      this.db.get(queryString, params, (err, row) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(row);
+      });
+    });
+  }
+
   /**
    *
    * @param {string[]} queries

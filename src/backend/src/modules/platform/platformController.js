@@ -51,9 +51,7 @@ export class PlatformsController {
        * @param {FindOnePlatformDto} req.params
        */
       const { id } = req.params;
-
       const result = await this.service.findOne(Number(id));
-
       res.status(200).json(result);
     } catch (err) {
       next(err);
@@ -73,7 +71,6 @@ export class PlatformsController {
        * @type {UpdatePlatformDto}
        */
       const { name } = req.body;
-
       const result = await this.service.update({ id: Number(id), name });
       res.status(200).json(result);
     } catch (err) {

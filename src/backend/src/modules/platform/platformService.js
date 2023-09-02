@@ -3,6 +3,7 @@ import Platform from "./platformModel.js";
 import { PlatformsRepository } from "./platformRepository.js";
 import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
+import { HttpError } from "../../exceptions/httpError.js";
 export class PlatformsService {
   /**
    *
@@ -43,10 +44,7 @@ export class PlatformsService {
   async findOne(id) {
     const platform = await this.repository.findOne(id);
     if (!platform) {
-      throw {
-        status: 404,
-        message: "Not found!",
-      };
+      throw new HttpError(404, "Not found!");
     }
     return platform;
   }
@@ -64,17 +62,13 @@ export class PlatformsService {
   async update({ id, name }) {
     const foundPlatform = await this.repository.findOne(id);
     if (!foundPlatform) {
-      throw {
-        status: 404,
-        message: "Not found!",
-      };
+      throw new HttpError(404, "Not found!");
     }
     if (foundPlatform.name === name) {
-      throw {
-        status: 400,
-        message:
-          "Bad Request! You cannot change the platform name to the same name!",
-      };
+      throw new HttpError(
+        404,
+        "Bad Request! A platform with this name already exists!",
+      );
     }
     return await this.repository.update({ id, name });
   }
@@ -85,10 +79,7 @@ export class PlatformsService {
   async delete(id) {
     const foundPlatform = await this.repository.findOne(id);
     if (!foundPlatform) {
-      throw {
-        status: 404,
-        message: "Not found!",
-      };
+      throw new HttpError(404, "Not found!");
     }
     return this.repository.delete(id);
   }

@@ -18,7 +18,6 @@ export class PlatformsService {
    * @returns
    */
   async create({ name }) {
-    console.log({ name });
     const existingPlatform = await this.repository.findOneByName(name);
     if (existingPlatform) {
       throw {

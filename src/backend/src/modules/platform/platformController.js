@@ -18,81 +18,79 @@ export class PlatformsController {
    * @type {import('express').RequestHandler}
    */
   async create(req, res, next) {
-    /**
-     * @type {CreatePlatformDto}
-     */
-    const platformDto = req.body;
-    const result = await this.service.create(platformDto);
-    res.status(201).json(result);
+    try {
+      /**
+       * @type {CreatePlatformDto}
+       */
+      const platformDto = req.body;
+      const result = await this.service.create(platformDto);
+      res.status(201).json(result);
+    } catch (err) {
+      next(err);
+    }
   }
 
   /**
    * @type {import('express').RequestHandler}
    */
   async find(req, res, next) {
-    const result = await this.service.find();
-    res.status(200).json(result);
+    try {
+      const result = await this.service.find();
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
   }
 
   /**
    * @type { import('express').RequestHandler}
    */
   async findOne(req, res, next) {
-    /**
-     * @param {FindOnePlatformDto} req.params
-     */
-    const { id } = req.params;
-
-    const result = await this.service.findOne({ id: Number(id) });
-    if (!result) {
-      res.status(404).json({ message: "Not found!" });
-      return;
+    try {
+      /**
+       * @param {FindOnePlatformDto} req.params
+       */
+      const { id } = req.params;
+      const result = await this.service.findOne(Number(id));
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json(result);
   }
 
   /**
    * @type { import('express').RequestHandler}
    */
   async update(req, res, next) {
-    /**
-     * @param {FindOnePlatformDto} req.params
-     */
-    const { id } = req.params;
-    /**
-     * @type {UpdatePlatformDto}
-     */
-    const { name } = req.body;
-
-    const result = await this.service.update({ id: Number(id), name });
-    if (!result) {
-      res.status(404).json({ message: "Not found!" });
-      return;
+    try {
+      /**
+       * @param {FindOnePlatformDto} req.params
+       */
+      const { id } = req.params;
+      /**
+       * @type {UpdatePlatformDto}
+       */
+      const { name } = req.body;
+      const result = await this.service.update({ id: Number(id), name });
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
     }
-    if (result.name === name) {
-      res.status(400).json({
-        message:
-          "Bad Request! You cannot change the platform name to the same name!",
-      });
-      return;
-    }
-    res.status(200).json(result);
   }
 
   /**
    * @type { import('express').RequestHandler}
    */
   async delete(req, res, next) {
-    /**
-     * @param {FindOnePlatformDto} req.params
-     */
-    const { id } = req.params;
-
-    const result = await this.service.delete({ id: Number(id) });
-    if (!result) {
-      res.status(404).json({ message: "Not found!" });
-      return;
+    try {
+      /**
+       * @param {FindOnePlatformDto} req.params
+       */
+      const { id } = req.params;
+      const result = await this.service.delete(Number(id));
+      res.status(204).send(result);
+    } catch (err) {
+      next(err);
     }
-    res.status(204).send();
   }
 }

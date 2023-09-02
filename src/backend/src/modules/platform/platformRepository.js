@@ -8,6 +8,7 @@ import { findPlatformsQuery } from "../../infrastructure/database/queries/platfo
 import { findOnePlatformQuery } from "../../infrastructure/database/queries/platforms/findOnePlatform.js";
 import { updatePlatformQuery } from "../../infrastructure/database/queries/platforms/updatePlatform.js";
 import { deletePlatformQuery } from "../../infrastructure/database/queries/platforms/deletePlatform.js";
+import { findOnePlatformByNameQuery } from "../../infrastructure/database/queries/platforms/findOnePlatformByName.js";
 export class PlatformsRepository {
   /**
    * @constructor
@@ -28,11 +29,17 @@ export class PlatformsRepository {
     return await this.db.query(findPlatformsQuery);
   }
   /**
-   * @param {FindOnePlatformDto} FindOnePlatformDto
+   * @param {number} id
    */
-  async findOne({ id }) {
-    const result = await this.db.query(findOnePlatformQuery, [id]);
-    return result[0];
+  async findOne(id) {
+    return await this.db.queryOne(findOnePlatformQuery, [id]);
+  }
+
+  /**
+   * @param {string} name
+   */
+  async findOneByName(name) {
+    return this.db.queryOne(findOnePlatformByNameQuery, [name]);
   }
 
   /**
@@ -44,9 +51,9 @@ export class PlatformsRepository {
   }
 
   /**
-   * @param {deletePlatformDto} deletePlatformDto
+   * @param {number} id
    */
-  async delete({ id }) {
+  async delete(id) {
     const result = this.db.query(deletePlatformQuery, [id]);
     return result;
   }

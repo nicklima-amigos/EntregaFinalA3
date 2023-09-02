@@ -51,6 +51,12 @@ export class DatabaseConnection {
     });
   }
 
+  /**
+   *
+   * @param {string} queryString
+   * @param {any[]} params
+   * @returns {Promise<any>}
+   */
   async queryOne(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.get(queryString, params, (err, row) => {

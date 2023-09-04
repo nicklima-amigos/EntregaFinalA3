@@ -10,6 +10,7 @@ import { deleteGameQuery } from "../../infrastructure/database/queries/games/del
 import { updateGameQuery } from "../../infrastructure/database/queries/games/updateGame.js";
 export class GamesRepository {
   /**
+   *
    * @constructor
    * @param {DatabaseConnection} db
    */
@@ -18,6 +19,7 @@ export class GamesRepository {
   }
 
   /**
+   *
    * @param {CreateGameDto} createGameDto
    */
   async create({ title, genre, price, developed_by, release_date }) {

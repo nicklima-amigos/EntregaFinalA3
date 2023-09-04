@@ -7,9 +7,10 @@
  * @returns
  */
 export const errorHandlingMiddleware = (error, req, res, next) => {
-  console.log(error);
+  console.error({ error });
   if (error.status) {
-    return res.status(error.status).json({ error: error.message });
+    const { status, message } = error;
+    return res.status(status).json({ error: message, status });
   }
   return res.status(500).json({ error: error.message });
 };

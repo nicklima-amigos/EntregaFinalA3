@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FormField from '../UI/FormField';
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -17,27 +18,21 @@ export default function LoginForm() {
     <div className='container mt-5'>
       <h1>Login</h1>
       <form>
-        <div className='form-group mt-2 mb-2'>
-          <label>Email</label>
-          <input
-            type='email'
-            className='form-control'
-            placeholder='Digite seu email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <FormField
+          label='Email'
+          type='email'
+          placeholder='Digite seu email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-        <div className='form-group mt-2 mb-2'>
-          <label>Senha</label>
-          <input
-            type='password'
-            className='form-control'
-            placeholder='Digite sua senha'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <FormField
+          label='Senha'
+          type='password'
+          placeholder='Digite sua senha'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <button
           type='button'

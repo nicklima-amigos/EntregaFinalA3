@@ -10,7 +10,7 @@ export default function LoginForm() {
     setTimeout(() => {
       setLoading(false);
       console.log(`Login com email: ${email} e senha: ${password}`);
-    }, 2000); // Simulando uma espera de 2 segundos.
+    }, 2000);
   };
 
   return (

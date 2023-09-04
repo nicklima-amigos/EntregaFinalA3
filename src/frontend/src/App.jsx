@@ -1,10 +1,38 @@
-import { useState } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginForm from './components/UI/LoginForm/LoginForm';
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: (
+        <>
+          <h1>Home Page</h1>
+          <a href='/login'>Login</a>
+        </>
+      ),
+    },
+    {
+      path: 'login',
+      element: <LoginForm />,
+    },
+    {
+      path: 'signup',
+      element: <h1>Página de cadastro</h1>,
+    },
+    {
+      path: 'games',
+      element: <h1>Veja jogos aqui</h1>,
+    },
+    {
+      path: 'games/create',
+      element: <h1>Crie um jogo aqui</h1>,
+    },
+  ]);
+
   return (
     <>
-      <LoginForm />
+      <RouterProvider router={router} />
     </>
   );
 }

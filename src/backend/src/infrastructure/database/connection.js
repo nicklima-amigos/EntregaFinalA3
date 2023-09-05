@@ -5,6 +5,10 @@ import { init } from "./queries/migrations/init.js";
 
 export class DatabaseConnection {
   static isInternalConstructing = false;
+  /**
+   * @type {DatabaseConnection}
+   */
+  static instance;
 
   /**
    * @param {string} connString
@@ -29,6 +33,9 @@ export class DatabaseConnection {
    * @returns
    */
   static getInstance(connString) {
+    if (DatabaseConnection.instance) {
+      return DatabaseConnection.instance;
+    }
     this.isInternalConstructing = true;
     return new DatabaseConnection(connString);
   }

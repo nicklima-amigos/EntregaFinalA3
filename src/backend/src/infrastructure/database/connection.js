@@ -4,11 +4,11 @@ import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
 
 export class DatabaseConnection {
-  static __isInternalConstructing = false;
   /**
    * @type {DatabaseConnection}
    */
   static __instance;
+  static __isInternalConstructing = false;
 
   /**
    * @param {string} connString

@@ -4,17 +4,17 @@ import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
 
 export class DatabaseConnection {
-  static isInternalConstructing = false;
+  static __isInternalConstructing = false;
   /**
    * @type {DatabaseConnection}
    */
-  static instance;
+  static __instance;
 
   /**
    * @param {string} connString
    */
   constructor(connString) {
-    if (!DatabaseConnection.isInternalConstructing) {
+    if (!DatabaseConnection.__isInternalConstructing) {
       throw new Error("Cannot instantiate singleton class using constructor");
     }
     this.db = new sqlite.Database(connString, (err) => {
@@ -24,7 +24,7 @@ export class DatabaseConnection {
       this.createTables(init);
       console.log("Connected to the database.");
     });
-    DatabaseConnection.isInternalConstructing = false;
+    DatabaseConnection.__isInternalConstructing = false;
   }
 
   /**
@@ -33,10 +33,10 @@ export class DatabaseConnection {
    * @returns
    */
   static getInstance(connString) {
-    if (DatabaseConnection.instance) {
-      return DatabaseConnection.instance;
+    if (DatabaseConnection.__instance) {
+      return DatabaseConnection.__instance;
     }
-    this.isInternalConstructing = true;
+    this.__isInternalConstructing = true;
     return new DatabaseConnection(connString);
   }
 

@@ -45,7 +45,7 @@ export const init = [
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         game_id INTEGER NOT NULL,
-        tag VARCHAR(255) NOT NULL,
+        category VARCHAR(255) NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
         FOREIGN KEY (game_id) REFERENCES games(id)
     )

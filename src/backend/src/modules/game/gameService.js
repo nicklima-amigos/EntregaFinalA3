@@ -6,6 +6,7 @@ import "./dto/createGameDto.js";
 import "./dto/disassociateGamePlatformDto.js";
 import "./dto/updateGameDto.js";
 import { GamesRepository } from "./gameRepository.js";
+import { HttpError } from "../../exceptions/httpError.js";
 
 export class GamesService {
   /**
@@ -27,21 +28,14 @@ export class GamesService {
       createGameDto.title,
     );
     if (existingGame) {
-      throw {
-        status: 400,
-        message: "Bad Request! Game already exists!",
-      };
+      throw new HttpError(400, "Bad Request! Game already exists!");
     }
     const existingPlatform = await this.platformRepository.findOne(
       createGameDto.platform_id,
     );
     if (!existingPlatform) {
-      throw {
-        status: 404,
-        message: "Platform not found!",
-      };
+      throw new HttpError(404, "Platform not found!");
     }
-    return await this.gameRepository.create(createGameDto);
   }
 
   /**

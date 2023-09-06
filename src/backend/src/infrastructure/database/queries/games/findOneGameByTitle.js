@@ -1,3 +1,3 @@
 export const findOneGameByTitleQuery = `
-  SELECT * FROM games WHERE title = ?;
+  SELECT * FROM games WHERE title like ?;
 `;

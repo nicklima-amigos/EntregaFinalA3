@@ -21,10 +21,7 @@ export class PlatformsService {
   async create({ name }) {
     const existingPlatform = await this.repository.findOneByName(name);
     if (existingPlatform) {
-      throw {
-        status: 400,
-        message: "Bad Request! Platform already exists!",
-      };
+      throw new HttpError(400, "Bad Request! Platform already exists!");
     }
     return this.repository.create({
       name,

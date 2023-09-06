@@ -1,3 +1,3 @@
 export const findOnePlatformByNameQuery = `
-  SELECT * FROM platforms WHERE name = ?;
+  SELECT * FROM platforms WHERE name like ?;
 `;

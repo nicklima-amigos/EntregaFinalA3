@@ -31,14 +31,23 @@ export const init = [
     );
     `,
   `
-    CREATE TABLE IF NOT EXISTS users_games (
+    CREATE TABLE IF NOT EXISTS grades (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         game_id INTEGER NOT NULL,
-        user_grade DOUBLE NOT NULL,
-        status VARCHAR(255) NOT NULL,
+        grade DOUBLE NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
         FOREIGN KEY (game_id) REFERENCES games(id)
     );
     `,
+  `
+    CREATE TABLE IF NOT EXISTS tags (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        game_id INTEGER NOT NULL,
+        tag VARCHAR(255) NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (game_id) REFERENCES games(id)
+    )
+      `,
 ];

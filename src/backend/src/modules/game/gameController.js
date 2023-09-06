@@ -18,14 +18,10 @@ export class GamesController {
   async create(req, res, next) {
     try {
       /**
-   * @param {FindOnePlatformDto} req.params
-   */
-      const { id } = req.params;
-      /**
-         * @type {CreateGameDto}
+       * @type {CreateGameDto}
        */
       const gameDto = req.body;
-      const result = await this.service.create(Number(id), gameDto);
+      const result = await this.service.create(gameDto);
       res.status(201).json(result);
     } catch (err) {
       next(err);

@@ -1,12 +1,11 @@
 // @ts-check
 
 import { PlatformsRepository } from "../platform/platformRepository.js";
-import "./dto/createGameDto.js";
-import "./dto/updateGameDto.js";
 import "./dto/associateGamePlatformDto.js";
+import "./dto/createGameDto.js";
 import "./dto/disassociateGamePlatformDto.js";
+import "./dto/updateGameDto.js";
 import { GamesRepository } from "./gameRepository.js";
-import { HttpError } from "../../exceptions/httpError.js";
 
 export class GamesService {
   /**
@@ -16,23 +15,26 @@ export class GamesService {
    */
   constructor(gameRepository, platformRepository) {
     this.gameRepository = gameRepository;
-    this.platformRepository = platformRepository
+    this.platformRepository = platformRepository;
   }
 
   /**
-   * @param {number} platform_id
    * @param {CreateGameDto} createGameDto
    * @returns
    */
-  async create(platform_id, createGameDto) {
-    const existingGame = await this.gameRepository.findOneByTitle(createGameDto.title);
+  async create(createGameDto) {
+    const existingGame = await this.gameRepository.findOneByTitle(
+      createGameDto.title,
+    );
     if (existingGame) {
       throw {
         status: 400,
         message: "Bad Request! Platform already exists!",
       };
     }
-    const existingPlatform = await this.platformRepository.findOne(platform_id);
+    const existingPlatform = await this.platformRepository.findOne(
+      createGameDto.platform_id,
+    );
     if (!existingPlatform) {
       throw {
         status: 404,
@@ -40,8 +42,11 @@ export class GamesService {
       };
     }
     const result = await this.gameRepository.create(createGameDto);
-    this.associate({ game_id: result.id, platform_id })
-    return result
+    this.associate({
+      game_id: result.id,
+      platform_id: createGameDto.platform_id,
+    });
+    return result;
   }
 
   /**
@@ -54,10 +59,10 @@ export class GamesService {
   }
 
   /**
- *
- * @param {DisassociateGamePlatformDto} DisassociateGamePlatformDto
- * @returns
- */
+   *
+   * @param {DisassociateGamePlatformDto} DisassociateGamePlatformDto
+   * @returns
+   */
   async disassociate({ game_id, platform_id }) {
     return this.gameRepository.disassociate({ game_id, platform_id });
   }
@@ -71,11 +76,11 @@ export class GamesService {
    * @param {number} id
    */
   async findOne(id) {
-    return this.gameRepository.findOne(id)
+    return this.gameRepository.findOne(id);
   }
   /**
-    * @param {string} title
-    */
+   * @param {string} title
+   */
   async findOneByTitle(title) {
     return this.gameRepository.findOneByTitle(title);
   }

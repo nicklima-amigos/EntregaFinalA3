@@ -29,7 +29,7 @@ export class GamesService {
     if (existingGame) {
       throw {
         status: 400,
-        message: "Bad Request! Platform already exists!",
+        message: "Bad Request! Game already exists!",
       };
     }
     const existingPlatform = await this.platformRepository.findOne(
@@ -41,21 +41,7 @@ export class GamesService {
         message: "Platform not found!",
       };
     }
-    const result = await this.gameRepository.create(createGameDto);
-    this.associate({
-      game_id: result.id,
-      platform_id: createGameDto.platform_id,
-    });
-    return result;
-  }
-
-  /**
-   *
-   * @param {AssociateGamePlatformDto} AssociateGamePlatformDto
-   * @returns
-   */
-  async associate({ game_id, platform_id }) {
-    return this.gameRepository.associate({ game_id, platform_id });
+    return await this.gameRepository.create(createGameDto);
   }
 
   /**

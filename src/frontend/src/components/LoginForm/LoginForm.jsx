@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import FormField from '../UI/FormField';
+import FormField from '../UI/FormField/FormField';
+import Button from '../UI/Button/Button';
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -34,25 +35,9 @@ export default function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button
-          type='button'
-          className='btn btn-primary mt-2 mb-2'
-          onClick={handleLogin}
-          disabled={loading}
-        >
-          {loading ? (
-            <>
-              <span
-                className='spinner-border spinner-border-sm me-2'
-                role='status'
-                aria-hidden='true'
-              ></span>
-              Entrando...
-            </>
-          ) : (
-            'Login'
-          )}
-        </button>
+        <Button onClick={handleLogin} loading={loading}>
+          Login
+        </Button>
       </form>
     </div>
   );

@@ -41,7 +41,7 @@ export const init = [
     );
     `,
   `
-    CREATE TABLE IF NOT EXISTS tags (
+    CREATE TABLE IF NOT EXISTS categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         game_id INTEGER NOT NULL,

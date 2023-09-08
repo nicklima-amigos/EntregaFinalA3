@@ -17,7 +17,7 @@ export class UserController {
   async create(req, res, next) {
     try {
       /**
-       * @type {CreateUserDto}
+       * @type {import("../../types/user/createUserDto.js").CreateUserDto}
        */
       const userDto = req.body;
       const result = await this.service.create(userDto);
@@ -73,7 +73,7 @@ export class UserController {
     try {
       const { id } = req.params;
       /**
-       * @type {UpdateUserDto}
+       * @type {import("../../types/user/updateUserDto.js").UpdateUserDto}
        */
       const userDto = req.body;
       const result = await this.service.update(+id, userDto);

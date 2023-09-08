@@ -1,6 +1,4 @@
 // @ts-check
-import "./dto/createUserDto.js";
-import "./dto/updateUserDto.js";
 import { UsersService } from "./userService.js";
 
 export class UserController {

@@ -2,7 +2,7 @@
 
 /**
  *
- * @param {import("../types/Validator").ValidationFunction} validationFunction
+ * @param {import("../types/ValidationFunction").ValidationFunction} validationFunction
  * @returns {import("express").RequestHandler}
  */
 export const validationMiddleware = (validationFunction) => {

@@ -3,7 +3,7 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
 
 /**
- * @type {import("../../../types/Validator.js").ValidationFunction}
+ * @type {import("../../../types/ValidationFunction.js").ValidationFunction}
  */
 export const validateCreateUser = (body) => {
   const { email, password, username, birth_date } = body;

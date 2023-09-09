@@ -4,17 +4,17 @@ import "./dto/createGameDto.js";
 import "./dto/updateGameDto.js";
 import "./dto/associateGamePlatformDto.js";
 import "./dto/disassociateGamePlatformDto.js";
-import { createGameQuery } from "../../infrastructure/database/queries/games/createGame.js";
+import { createGameQuery } from "./queries/createGame.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { listGames } from "../../infrastructure/database/queries/games/findGames.js";
-import { findOneGameQuery } from "../../infrastructure/database/queries/games/findOneGame.js";
-import { deleteGameQuery } from "../../infrastructure/database/queries/games/deleteGame.js";
-import { updateGameQuery } from "../../infrastructure/database/queries/games/updateGame.js";
+import { listGames } from "./queries/findGames.js";
+import { findOneGameQuery } from "./queries/findOneGame.js";
+import { deleteGameQuery } from "./queries/deleteGame.js";
+import { updateGameQuery } from "./queries/updateGame.js";
 import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/createGamePlatform.js";
-import { findOneGameByTitleQuery } from "../../infrastructure/database/queries/games/findOneGameByTitle.js";
+import { findOneGameByTitleQuery } from "./queries/findOneGameByTitle.js";
 import { deleteGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/deleteGamePlatform.js";
 import Game from "./gameModel.js";
-import { findGamesByPlatformIdQuery } from "../../infrastructure/database/queries/games/findGamesByPlatformId.js";
+import { findGamesByPlatformIdQuery } from "./queries/findGamesByPlatformId.js";
 export class GamesRepository {
   /**
    *

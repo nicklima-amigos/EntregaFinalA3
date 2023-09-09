@@ -1,13 +1,15 @@
 // @ts-check
 
+import "./dto/createUserDto.js";
+import "./dto/updateUserDto.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { createUserQuery } from "../../infrastructure/database/queries/users/createUser.js";
-import { deleteUserQuery } from "../../infrastructure/database/queries/users/deleteUser.js";
-import { findOneByEmailQuery } from "../../infrastructure/database/queries/users/findOneByEmail.js";
-import { findOneByUsernameQuery } from "../../infrastructure/database/queries/users/findOneByUsername.js";
-import { findOneUserQuery } from "../../infrastructure/database/queries/users/findOneUser.js";
-import { findUsers } from "../../infrastructure/database/queries/users/findUsers.js";
-import { updateUserQuery } from "../../infrastructure/database/queries/users/updateUser.js";
+import { createUserQuery } from "./queries/createUser.js";
+import { deleteUserQuery } from "./queries/deleteUser.js";
+import { findOneByEmailQuery } from "./queries/findOneByEmail.js";
+import { findOneByUsernameQuery } from "./queries/findOneByUsername.js";
+import { findOneUserQuery } from "./queries/findOneUser.js";
+import { findUsers } from "./queries/findUsers.js";
+import { updateUserQuery } from "./queries/updateUser.js";
 import User from "./userModel.js";
 
 export class UsersRepository {

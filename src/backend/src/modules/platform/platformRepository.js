@@ -1,15 +1,15 @@
 // @ts-check
-import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
 import "./dto/platformDetailDto.js";
+import "./dto/createPlatformDto.js";
 import "./dto/updatePlatformDto.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { createPlatformQuery } from "../../infrastructure/database/queries/platforms/createPlatform.js";
-import { findPlatformsQuery } from "../../infrastructure/database/queries/platforms/findPlatforms.js";
-import { findOnePlatformQuery } from "../../infrastructure/database/queries/platforms/findOnePlatform.js";
-import { updatePlatformQuery } from "../../infrastructure/database/queries/platforms/updatePlatform.js";
-import { deletePlatformQuery } from "../../infrastructure/database/queries/platforms/deletePlatform.js";
-import { findOnePlatformByNameQuery } from "../../infrastructure/database/queries/platforms/findOnePlatformByName.js";
+import { createPlatformQuery } from "./queries/createPlatform.js";
+import { findPlatformsQuery } from "./queries/findPlatforms.js";
+import { findOnePlatformQuery } from "./queries/findOnePlatform.js";
+import { updatePlatformQuery } from "./queries/updatePlatform.js";
+import { deletePlatformQuery } from "./queries/deletePlatform.js";
+import { findOnePlatformByNameQuery } from "./queries/findOnePlatformByName.js";
 import Game from "../game/gameModel.js";
 import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/createGamePlatform.js";
 export class PlatformsRepository {

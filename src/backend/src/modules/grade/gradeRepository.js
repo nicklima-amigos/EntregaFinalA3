@@ -3,12 +3,12 @@
 import "./dto/createGradeDto.js";
 import "./dto/updateGradeDto.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { createGradeQuery } from "../../infrastructure/database/queries/grades/createGrade.js";
-import { deleteGradeQuery } from "../../infrastructure/database/queries/grades/deleteGrade.js";
-import { findGradesQuery } from "../../infrastructure/database/queries/grades/findGrades.js";
-import { findGradesByUserIdQuery } from "../../infrastructure/database/queries/grades/findGradesByUserId.js";
-import { findOneGradeQuery } from "../../infrastructure/database/queries/grades/findOneGrade.js";
-import { updateGradeQuery } from "../../infrastructure/database/queries/grades/updateGrade.js";
+import { createGradeQuery } from "./queries/createGrade.js";
+import { deleteGradeQuery } from "./queries/deleteGrade.js";
+import { findGradesQuery } from "./queries/findGrades.js";
+import { findGradesByUserIdQuery } from "./queries/findGradesByUserId.js";
+import { findOneGradeQuery } from "./queries/findOneGrade.js";
+import { updateGradeQuery } from "./queries/updateGrade.js";
 import Grade from "./gradeModel.js";
 
 export class GradesRepository {

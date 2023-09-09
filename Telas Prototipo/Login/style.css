@@ -1,0 +1,231 @@
+.login {
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.login .overlap-group-wrapper {
+  background-color: var(--monobackground);
+  width: 1262px;
+  height: 764px;
+}
+
+.login .overlap-group {
+  position: relative;
+  width: 1044px;
+  height: 600px;
+  top: 71px;
+  left: 174px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0px 0px 10px #2222224c;
+}
+
+.login .frame {
+  position: relative;
+  width: 302px;
+  height: 467px;
+  top: 80px;
+  left: 346px;
+}
+
+.login .div {
+  display: flex;
+  flex-direction: column;
+  width: 302px;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.login .icons {
+  position: relative;
+  width: 144px;
+  height: 116px;
+}
+
+.login .img {
+  position: absolute;
+  width: 144px;
+  height: 144px;
+  top: 0;
+  left: 0;
+}
+
+.login .text-wrapper {
+  position: relative;
+  width: fit-content;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 500;
+  color: var(--basicorange);
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.login .frame-2 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  position: absolute;
+  top: 210px;
+  left: 0;
+}
+
+.login .inputs {
+  display: flex;
+  width: 302px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 240px;
+  padding: 8px 16px;
+  position: relative;
+  background-color: var(--monobackground);
+  border-radius: 4px;
+}
+
+.login .frame-3 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 128px;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+}
+
+.login .placeholder {
+  position: relative;
+  width: fit-content;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--monogray);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.login .icons-2 {
+  position: relative;
+  width: 25px;
+  height: 25px;
+}
+
+.login .frame-4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 128px;
+  align-self: stretch;
+  flex: 0 0 auto;
+  margin-left: -2px;
+  margin-right: -2px;
+  justify-content: center;
+  position: relative;
+}
+
+.login .button {
+  position: relative;
+  width: 302px;
+  height: 45px;
+  all: unset;
+  box-sizing: border-box;
+}
+
+.login .div-wrapper {
+  display: flex;
+  width: 302px;
+  height: 45px;
+  align-items: center;
+  gap: 128px;
+  padding: 16px 0px;
+  background-color: var(--basicorange);
+  border-radius: 4px;
+  justify-content: center;
+  position: relative;
+}
+
+.login .text {
+  position: relative;
+  width: fit-content;
+  margin-top: -3.5px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--monolight);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.login .frame-5 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.login .checkbox {
+  position: relative;
+  width: 103px;
+  height: 20px;
+}
+
+.login .frame-6 {
+  display: flex;
+  width: 103px;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  top: -2px;
+}
+
+.login .text-wrapper-2 {
+  position: relative;
+  width: fit-content;
+  margin-right: -3px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--basicorange);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.login .frame-7 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
+  justify-content: center;
+  position: relative;
+}
+
+.login .text-wrapper-3 {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--basicorange);
+  font-size: 14px;
+  text-align: right;
+  letter-spacing: 0;
+  line-height: 20px;
+  white-space: nowrap;
+}

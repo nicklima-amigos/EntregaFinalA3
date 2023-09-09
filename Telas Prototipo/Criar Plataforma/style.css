@@ -1,0 +1,127 @@
+.criar-plataforma {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.criar-plataforma .overlap-wrapper {
+  width: 1044px;
+  height: 600px;
+}
+
+.criar-plataforma .overlap {
+  position: relative;
+  height: 600px;
+  border-radius: 14px;
+}
+
+.criar-plataforma .div {
+  position: absolute;
+  width: 1044px;
+  height: 600px;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0px 0px 10px #2222224c;
+}
+
+.criar-plataforma .overlap-group {
+  position: absolute;
+  width: 1044px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  background-image: url(./img/header-home.svg);
+  background-size: 100% 100%;
+}
+
+.criar-plataforma .login {
+  position: absolute;
+  height: 24px;
+  top: 37px;
+  left: 41px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 500;
+  color: #f5d499;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.criar-plataforma .email {
+  display: flex;
+  width: 314px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 240px;
+  padding: 8px 16px;
+  position: absolute;
+  top: 212px;
+  left: 442px;
+  background-color: var(--monobackground);
+  border-radius: 4px;
+}
+
+.criar-plataforma .frame {
+  display: flex;
+  width: 270px;
+  align-items: center;
+  gap: 128px;
+  position: relative;
+  align-self: stretch;
+}
+
+.criar-plataforma .placeholder {
+  position: relative;
+  width: fit-content;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--monogray);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.criar-plataforma .button {
+  position: absolute;
+  width: 302px;
+  height: 46px;
+  top: 319px;
+  left: 443px;
+  all: unset;
+  box-sizing: border-box;
+}
+
+.criar-plataforma .text-wrapper {
+  display: flex;
+  width: 302px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 128px;
+  padding: 16px 0px;
+  position: relative;
+  background-color: var(--basicorange);
+  border-radius: 4px;
+}
+
+.criar-plataforma .text {
+  position: relative;
+  width: fit-content;
+  margin-top: -3.5px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--monolight);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}

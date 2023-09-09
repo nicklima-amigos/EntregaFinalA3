@@ -1,0 +1,166 @@
+.criar-jogo {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.criar-jogo .cadastro-wrapper {
+  width: 1044px;
+  height: 600px;
+}
+
+.criar-jogo .cadastro {
+  position: relative;
+  height: 600px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0px 0px 10px #2222224c;
+}
+
+.criar-jogo .overlap-group {
+  position: absolute;
+  width: 1044px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  background-image: url(./img/header-home.svg);
+  background-size: 100% 100%;
+}
+
+.criar-jogo .login {
+  position: absolute;
+  height: 24px;
+  top: 37px;
+  left: 78px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 500;
+  color: #f5d499;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.criar-jogo .confirme-sua-senha {
+  display: flex;
+  width: 314px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 240px;
+  padding: 8px 16px;
+  position: absolute;
+  top: 366px;
+  left: 442px;
+  background-color: var(--monobackground);
+  border-radius: 4px;
+}
+
+.criar-jogo .frame {
+  width: 304px;
+  align-self: stretch;
+  margin-left: -11px;
+  margin-right: -11px;
+  display: flex;
+  align-items: center;
+  gap: 128px;
+  position: relative;
+}
+
+.criar-jogo .placeholder {
+  position: relative;
+  width: fit-content;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--monogray);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.criar-jogo .icons {
+  position: relative;
+  width: 25px;
+  height: 25px;
+}
+
+.criar-jogo .senha {
+  display: flex;
+  width: 314px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 240px;
+  padding: 8px 16px;
+  position: absolute;
+  top: 289px;
+  left: 442px;
+  background-color: var(--monobackground);
+  border-radius: 4px;
+}
+
+.criar-jogo .div {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 128px;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+}
+
+.criar-jogo .email {
+  display: flex;
+  width: 314px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 240px;
+  padding: 8px 16px;
+  position: absolute;
+  top: 212px;
+  left: 442px;
+  background-color: var(--monobackground);
+  border-radius: 4px;
+}
+
+.criar-jogo .button {
+  position: absolute;
+  width: 302px;
+  height: 45px;
+  top: 452px;
+  left: 448px;
+  all: unset;
+  box-sizing: border-box;
+}
+
+.criar-jogo .text-wrapper {
+  width: 302px;
+  height: 45px;
+  justify-content: center;
+  padding: 16px 0px;
+  background-color: var(--basicorange);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 128px;
+  position: relative;
+}
+
+.criar-jogo .text {
+  position: relative;
+  width: fit-content;
+  margin-top: -3.5px;
+  font-family: "Ubuntu", Helvetica;
+  font-weight: 400;
+  color: var(--monolight);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}

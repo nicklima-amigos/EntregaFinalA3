@@ -2,6 +2,7 @@
 
 import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
+import { fixtures } from "./queries/fixtures/fixtures.js";
 
 /**
  * @typedef {object} QueryResult
@@ -27,7 +28,7 @@ export class DatabaseConnection {
       if (err) {
         console.error(err.message);
       }
-      this.createTables(init);
+      this.createTables().then(() => this.insertFixtures());
       console.log("Connected to the database.");
     });
     DatabaseConnection.__isInternalConstructing = false;
@@ -43,7 +44,8 @@ export class DatabaseConnection {
       return DatabaseConnection.__instance;
     }
     this.__isInternalConstructing = true;
-    return new DatabaseConnection(connString);
+    this.__instance = new DatabaseConnection(connString);
+    return this.__instance;
   }
 
   /**
@@ -97,21 +99,22 @@ export class DatabaseConnection {
       });
     });
   }
+  async initialize() {}
 
-  /**
-   *
-   * @param {string[]} queries
-   */
-  createTables(queries) {
-    this.db.serialize(() => {
-      for (let q of queries) {
-        this.db.run(q, (err) => {
-          if (err) {
-            throw err;
-          }
-        });
+  async createTables() {
+    for (let q of init) {
+      await this.exec(q);
+    }
+    console.log("Tables created");
+  }
+
+  async insertFixtures() {
+    try {
+      for (let q of fixtures) {
+        await this.exec(q);
       }
-    });
-    console.log("tables created");
+    } catch (e) {
+      console.log("Failed to insert fixtures. Probably already inserted.");
+    }
   }
 }

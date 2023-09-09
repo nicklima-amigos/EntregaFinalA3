@@ -44,7 +44,8 @@ export class DatabaseConnection {
       return DatabaseConnection.__instance;
     }
     this.__isInternalConstructing = true;
-    return new DatabaseConnection(connString);
+    this.__instance = new DatabaseConnection(connString);
+    return this.__instance;
   }
 
   /**
@@ -113,8 +114,7 @@ export class DatabaseConnection {
         await this.exec(q);
       }
     } catch (e) {
-      console.log(e);
-      console.log("Error inserting fixtures\nContinuing startup...");
+      console.log("Failed to insert fixtures. Probably already inserted.");
     }
   }
 }

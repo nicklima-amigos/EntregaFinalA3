@@ -18,8 +18,6 @@ export class UsersService {
    * @param {CreateUserDto} createUserDto
    */
   async create({ username, email, password, birth_date }) {
-    await this.repository.findOneByEmail(email);
-    await this.repository.findOneByUsername(username);
     return this.repository.create({
       username,
       email,

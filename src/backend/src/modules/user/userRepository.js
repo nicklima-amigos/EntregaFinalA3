@@ -17,7 +17,7 @@ export class UsersRepository {
   }
 
   /**
-   * @param {import("../../types/user/createUserDto.js").CreateUserDto} createUserDto
+   * @param {CreateUserDto} createUserDto
    */
   async create({ username, email, password, birth_date }) {
     return this.db.exec(createUserQuery, [
@@ -52,7 +52,7 @@ export class UsersRepository {
 
   /**
    *
-   * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} param1
+   * @param {UpdateUserDto} param1
    * @returns
    */
   async update({ id, password }) {

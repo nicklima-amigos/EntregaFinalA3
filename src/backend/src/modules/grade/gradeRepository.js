@@ -1,4 +1,7 @@
 // @ts-check
+
+import "./dto/createGradeDto.js";
+import "./dto/updateGradeDto.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { createGradeQuery } from "../../infrastructure/database/queries/grades/createGrade.js";
 import { deleteGradeQuery } from "../../infrastructure/database/queries/grades/deleteGrade.js";

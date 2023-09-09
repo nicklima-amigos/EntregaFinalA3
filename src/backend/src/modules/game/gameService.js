@@ -7,6 +7,7 @@ import "./dto/disassociateGamePlatformDto.js";
 import "./dto/updateGameDto.js";
 import { GamesRepository } from "./gameRepository.js";
 import { HttpError } from "../../exceptions/httpError.js";
+import Game from "./gameModel.js";
 
 export class GamesService {
   /**
@@ -38,15 +39,6 @@ export class GamesService {
     }
   }
 
-  /**
-   *
-   * @param {DisassociateGamePlatformDto} DisassociateGamePlatformDto
-   * @returns
-   */
-  async disassociate({ game_id, platform_id }) {
-    return this.gameRepository.disassociate({ game_id, platform_id });
-  }
-
   async find() {
     return this.gameRepository.find();
   }
@@ -54,21 +46,32 @@ export class GamesService {
   /**
    *
    * @param {number} id
+   * @returns {Promise<Game>}
    */
   async findOne(id) {
-    return this.gameRepository.findOne(id);
+    const game = await this.gameRepository.findOne(id);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return game;
   }
+
   /**
    * @param {string} title
    */
   async findOneByTitle(title) {
-    return this.gameRepository.findOneByTitle(title);
+    const game = await this.gameRepository.findOneByTitle(title);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return game;
   }
   /**
    *
    * @param {number} id
    */
   async delete(id) {
+    await this.findOne(id);
     return this.gameRepository.delete(id);
   }
 
@@ -78,6 +81,10 @@ export class GamesService {
    * @returns
    */
   async update(updateGameDto) {
+    const game = await this.findOne(updateGameDto.id);
+    if (game.title === updateGameDto.title) {
+      throw new HttpError(404, "A game with this title already exists!");
+    }
     return this.gameRepository.update(updateGameDto);
   }
 }

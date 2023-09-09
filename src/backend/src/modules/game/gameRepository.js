@@ -71,7 +71,7 @@ export class GamesRepository {
    * @param {number} id
    */
   async findOne(id) {
-    return this.db.query(findOneGameQuery, [id]);
+    return this.db.queryOne(findOneGameQuery, [id]);
   }
   /**
    * @param {string} title

@@ -19,10 +19,7 @@ export class PlatformsService {
    * @returns
    */
   async create({ name }) {
-    const existingPlatform = await this.repository.findOneByName(name);
-    if (existingPlatform) {
-      throw new HttpError(400, "Bad Request! Platform already exists!");
-    }
+    await this.repository.findOneByName(name);
     return this.repository.create({
       name,
     });
@@ -50,17 +47,18 @@ export class PlatformsService {
    * @param {string} name
    */
   async findOneByName(name) {
-    return this.repository.findOneByName(name);
+    const platform = await this.repository.findOneByName(name);
+    if (!platform) {
+      throw new HttpError(404, "Not found!");
+    }
+    return platform;
   }
 
   /**
    * @param {UpdatePlatformDto} UpdatePlatformDto
    */
   async update({ id, name }) {
-    const foundPlatform = await this.repository.findOne(id);
-    if (!foundPlatform) {
-      throw new HttpError(404, "Not found!");
-    }
+    const foundPlatform = await this.findOne(id);
     if (foundPlatform.name === name) {
       throw new HttpError(
         404,
@@ -74,10 +72,7 @@ export class PlatformsService {
    * @param {number} id
    */
   async delete(id) {
-    const foundPlatform = await this.repository.findOne(id);
-    if (!foundPlatform) {
-      throw new HttpError(404, "Not found!");
-    }
+    await this.findOne(id);
     return this.repository.delete(id);
   }
 }

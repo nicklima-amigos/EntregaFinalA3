@@ -40,6 +40,16 @@ export class GamesController {
     }
   }
 
+  async findByPlatform(req, res, next) {
+    try {
+      const { platformId } = req.params;
+      const result = await this.service.findByPlatform(+platformId);
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   /**
    * @type {import('express').RequestHandler}
    */

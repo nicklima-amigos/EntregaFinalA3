@@ -44,6 +44,14 @@ export class GamesService {
 
   /**
    *
+   * @param {number} platformId
+   */
+  async findByPlatform(platformId) {
+    return this.gameRepository.findByPlatform(platformId);
+  }
+
+  /**
+   *
    * @param {number} id
    */
   async findOne(id) {
@@ -64,6 +72,7 @@ export class GamesService {
     }
     return game;
   }
+
   /**
    *
    * @param {number} id

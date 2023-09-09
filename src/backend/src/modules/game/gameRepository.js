@@ -10,10 +10,11 @@ import { listGames } from "../../infrastructure/database/queries/games/findGames
 import { findOneGameQuery } from "../../infrastructure/database/queries/games/findOneGame.js";
 import { deleteGameQuery } from "../../infrastructure/database/queries/games/deleteGame.js";
 import { updateGameQuery } from "../../infrastructure/database/queries/games/updateGame.js";
-import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_pĺatforms/createGamePlatform.js";
+import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/createGamePlatform.js";
 import { findOneGameByTitleQuery } from "../../infrastructure/database/queries/games/findOneGameByTitle.js";
-import { deleteGamePlatformQuery } from "../../infrastructure/database/queries/games_pĺatforms/deleteGamePlatform.js";
+import { deleteGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/deleteGamePlatform.js";
 import Game from "./gameModel.js";
+import { findGamesByPlatformIdQuery } from "../../infrastructure/database/queries/games/findGamesByPlatformId.js";
 export class GamesRepository {
   /**
    *
@@ -57,6 +58,15 @@ export class GamesRepository {
   async find() {
     return this.db.query(listGames);
   }
+
+  /**
+   *
+   * @param {number} platformId
+   */
+  async findByPlatform(platformId) {
+    return this.db.query(findGamesByPlatformIdQuery, [platformId]);
+  }
+
   /**
    *
    * @param {AssociateGamePlatformDto} AssociateGamePlatformDto

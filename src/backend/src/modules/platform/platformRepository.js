@@ -1,6 +1,7 @@
 // @ts-check
 import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
+import "./dto/platformDetailDto.js";
 import "./dto/updatePlatformDto.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { createPlatformQuery } from "../../infrastructure/database/queries/platforms/createPlatform.js";
@@ -9,6 +10,7 @@ import { findOnePlatformQuery } from "../../infrastructure/database/queries/plat
 import { updatePlatformQuery } from "../../infrastructure/database/queries/platforms/updatePlatform.js";
 import { deletePlatformQuery } from "../../infrastructure/database/queries/platforms/deletePlatform.js";
 import { findOnePlatformByNameQuery } from "../../infrastructure/database/queries/platforms/findOnePlatformByName.js";
+import Game from "../game/gameModel.js";
 export class PlatformsRepository {
   /**
    * @constructor
@@ -30,9 +32,26 @@ export class PlatformsRepository {
   }
   /**
    * @param {number} id
+   * @returns {Promise<import("./dto/platformDetailDto.js").PlatformDetailDto>}
    */
   async findOne(id) {
-    return await this.db.queryOne(findOnePlatformQuery, [id]);
+    const rows = await this.db.query(findOnePlatformQuery, [id]);
+    const { name } = rows[0];
+    return {
+      id,
+      name,
+      games: rows.map(
+        (r) =>
+          new Game({
+            id: r.id,
+            title: r.title,
+            genre: r.genre,
+            price: r.price,
+            developed_by: r.developed_by,
+            release_date: r.release_date,
+          }),
+      ),
+    };
   }
 
   /**

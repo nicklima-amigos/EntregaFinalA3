@@ -33,7 +33,6 @@ export class GradesService {
   /**
    *
    * @param {number} userId
-   * @returns
    */
   async findGradesByUser(userId) {
     return this.gradesRepository.findGradesByUser(userId);
@@ -57,12 +56,12 @@ export class GradesService {
   }
 
   /**
-   *
+   * @param {number} id
    * @param {UpdateGradeDto} updateGradeDto
    * @returns
    */
-  async update({ id, grade }) {
-    return this.gradesRepository.update({ id, grade });
+  async update(id, { grade }) {
+    return this.gradesRepository.update(id, { grade });
   }
 
   /**

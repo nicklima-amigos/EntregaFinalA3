@@ -55,9 +55,10 @@ export class PlatformsService {
   }
 
   /**
+   * @param {number} id
    * @param {UpdatePlatformDto} UpdatePlatformDto
    */
-  async update({ id, name }) {
+  async update(id, { name }) {
     const foundPlatform = await this.findOne(id);
     if (foundPlatform.name === name) {
       throw new HttpError(
@@ -65,7 +66,7 @@ export class PlatformsService {
         "Bad Request! A platform with this name already exists!",
       );
     }
-    return await this.repository.update({ id, name });
+    return await this.repository.update(id, { name });
   }
 
   /**

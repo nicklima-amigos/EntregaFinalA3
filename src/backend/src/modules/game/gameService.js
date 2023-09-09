@@ -74,14 +74,14 @@ export class GamesService {
   }
 
   /**
-   *
+   * @param {number} id
    * @param {UpdateGameDto} updateGameDto
    */
-  async update(updateGameDto) {
+  async update(id, updateGameDto) {
     const game = await this.findOneByTitle(updateGameDto.title);
     if (game.title === updateGameDto.title) {
       throw new HttpError(404, "A game with this title already exists!");
     }
-    return this.gameRepository.update(updateGameDto);
+    return this.gameRepository.update(id, updateGameDto);
   }
 }

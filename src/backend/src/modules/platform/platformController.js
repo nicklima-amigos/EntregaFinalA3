@@ -71,7 +71,7 @@ export class PlatformsController {
        * @type {UpdatePlatformDto}
        */
       const { name } = req.body;
-      const result = await this.service.update({ id: Number(id), name });
+      const result = await this.service.update(+id, { name });
       res.status(200).json(result);
     } catch (err) {
       next(err);

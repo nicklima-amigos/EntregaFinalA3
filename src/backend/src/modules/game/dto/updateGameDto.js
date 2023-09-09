@@ -1,6 +1,5 @@
 /**
  * @typedef {Object} UpdateGameDto
- * @property {number} id
  * @property {string} title
  * @property {string} genre
  * @property {number} price

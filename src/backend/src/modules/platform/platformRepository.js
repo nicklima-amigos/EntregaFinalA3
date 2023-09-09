@@ -43,9 +43,10 @@ export class PlatformsRepository {
   }
 
   /**
+   * @param {number} id
    * @param {UpdatePlatformDto} UpdatePlatformDto
    */
-  async update({ id, name }) {
+  async update(id, { name }) {
     const result = await this.db.exec(updatePlatformQuery, [name, id]);
     return result;
   }

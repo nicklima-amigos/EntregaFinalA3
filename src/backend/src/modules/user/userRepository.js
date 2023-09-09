@@ -70,10 +70,10 @@ export class UsersRepository {
   }
 
   /**
-   *
+   * @param {number} id
    * @param {UpdateUserDto} param1
    */
-  async update({ id, password }) {
+  async update(id, { password }) {
     return this.db.exec(updateUserQuery, [password, id]);
   }
 }

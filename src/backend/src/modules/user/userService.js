@@ -85,11 +85,11 @@ export class UsersService {
   }
 
   /**
-   *
+   * @param {number} id
    * @param {UpdateUserDto} updateUserDto
    */
-  async update(updateUserDto) {
-    await this.findOne(updateUserDto.id);
-    return this.repository.update(updateUserDto);
+  async update(id, updateUserDto) {
+    await this.findOne(id);
+    return this.repository.update(id, updateUserDto);
   }
 }

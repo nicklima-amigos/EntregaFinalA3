@@ -52,9 +52,10 @@ export class GradesRepository {
   }
 
   /**
+   * @param {number} id
    * @param {UpdateGradeDto} UpdatePlatformDto
    */
-  async update({ id, grade }) {
+  async update(id, { grade }) {
     const result = await this.db.exec(updateGradeQuery, [grade, id]);
     return result;
   }

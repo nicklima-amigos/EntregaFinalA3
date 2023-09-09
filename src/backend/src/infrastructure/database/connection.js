@@ -3,6 +3,12 @@
 import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
 
+/**
+ * @typedef {object} QueryResult
+ * @property {number} id
+ * @property {number} changes
+ */
+
 export class DatabaseConnection {
   /**
    * @type {DatabaseConnection}
@@ -43,7 +49,7 @@ export class DatabaseConnection {
   /**
    * @param {string} queryString
    * @param {any[]} params
-   * @returns {Promise<{id: number, changes: number}>}
+   * @returns {Promise<QueryResult>}
    */
   async exec(queryString, params = []) {
     return new Promise((resolve, reject) => {

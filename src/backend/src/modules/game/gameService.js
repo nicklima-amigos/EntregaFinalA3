@@ -22,7 +22,6 @@ export class GamesService {
 
   /**
    * @param {CreateGameDto} createGameDto
-   * @returns
    */
   async create(createGameDto) {
     const existingGame = await this.gameRepository.findOneByTitle(
@@ -37,8 +36,13 @@ export class GamesService {
     if (!existingPlatform) {
       throw new HttpError(404, "Platform not found!");
     }
+    return this.gameRepository.create(createGameDto);
   }
 
+  /**
+   *
+   * @returns {Promise<Game[]>}
+   */
   async find() {
     return this.gameRepository.find();
   }
@@ -58,6 +62,7 @@ export class GamesService {
 
   /**
    * @param {string} title
+   * @returns {Promise<Game>}
    */
   async findOneByTitle(title) {
     const game = await this.gameRepository.findOneByTitle(title);
@@ -78,10 +83,9 @@ export class GamesService {
   /**
    *
    * @param {UpdateGameDto} updateGameDto
-   * @returns
    */
   async update(updateGameDto) {
-    const game = await this.findOne(updateGameDto.id);
+    const game = await this.findOneByTitle(updateGameDto.title);
     if (game.title === updateGameDto.title) {
       throw new HttpError(404, "A game with this title already exists!");
     }

@@ -1,9 +1,15 @@
 // @ts-check
 
 import { Router } from "express";
+<<<<<<< HEAD
 import { validationMiddleware } from "@middleware/validation.js";
 import { validateCreateUser } from "./middleware/validateCreateUser.js";
 import { validateUpdateUser } from "./middleware/validateUpdateUser.js";
+=======
+import { validationMiddleware } from "../../middleware/validation.js";
+import { validateCreateUser } from "./validation/validateCreateUser.js";
+import { validateUpdateUser } from "./validation/validateUpdateUser.js";
+>>>>>>> dev
 import { UserController } from "./userController.js";
 
 /**

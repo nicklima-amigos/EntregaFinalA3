@@ -1,15 +1,16 @@
+<<<<<<< HEAD:src/backend/src/modules/user/middleware/validateCreateUser.js
 // @ts-check
 
 import { ValidationError } from "@exceptions/validationError.js";
+=======
+import { ValidationError } from "../../../exceptions/validationError.js";
+>>>>>>> dev:src/backend/src/modules/user/validation/validateCreateUser.js
 
 /**
- * @type {import("../../../types/ValidationFunction.js").ValidationFunction}
+ * @param {*} body
  */
 export const validateCreateUser = (body) => {
   const { email, password, username, birth_date } = body;
-  /**
-   * @type {import("../../../types/user/validation.js").CreateUserValidationErrors}
-   */
   const errors = {};
   if (!username) {
     errors.username = "username is required";

@@ -4,6 +4,7 @@ import "./dto/createGameDto.js";
 import "./dto/updateGameDto.js";
 import "./dto/associateGamePlatformDto.js";
 import "./dto/disassociateGamePlatformDto.js";
+<<<<<<< HEAD
 import { createGameQuery } from "@infrastructure/database/queries/games/createGame.js";
 import { DatabaseConnection } from "@infrastructure/database/connection.js";
 
@@ -16,6 +17,19 @@ import { createGamePlatformQuery } from "@infrastructure/database/queries/games_
 import { findOneGameByTitleQuery } from "@infrastructure/database/queries/games/findOneGameByTitle.js";
 import { deleteGamePlatformQuery } from "@infrastructure/database/queries/games_pĺatforms/deleteGamePlatform.js";
 
+=======
+import { createGameQuery } from "./queries/createGame.js";
+import { DatabaseConnection } from "../../infrastructure/database/connection.js";
+import { listGames } from "./queries/findGames.js";
+import { findOneGameQuery } from "./queries/findOneGame.js";
+import { deleteGameQuery } from "./queries/deleteGame.js";
+import { updateGameQuery } from "./queries/updateGame.js";
+import { createGamePlatformQuery } from "../common/queries/createGamePlatform.js";
+import { findOneGameByTitleQuery } from "./queries/findOneGameByTitle.js";
+import { deleteGamePlatformQuery } from "../common/queries/deleteGamePlatform.js";
+import Game from "./gameModel.js";
+import { findGamesByPlatformIdQuery } from "./queries/findGamesByPlatformId.js";
+>>>>>>> dev
 export class GamesRepository {
   /**
    *
@@ -45,16 +59,29 @@ export class GamesRepository {
       developed_by,
       release_date,
     ]);
-    const associateGameToPlatformResult = await this.associate({
+    await this.associate({
       game_id: createGameResult.id,
       platform_id,
     });
     return createGameResult;
   }
 
+  /**
+   *
+   * @returns {Promise<Game[]>}
+   */
   async find() {
     return this.db.query(listGames);
   }
+
+  /**
+   *
+   * @param {number} platformId
+   */
+  async findByPlatform(platformId) {
+    return this.db.query(findGamesByPlatformIdQuery, [platformId]);
+  }
+
   /**
    *
    * @param {AssociateGamePlatformDto} AssociateGamePlatformDto
@@ -70,20 +97,21 @@ export class GamesRepository {
     return this.db.exec(deleteGamePlatformQuery, [game_id, platform_id]);
   }
   /**
-   *
    * @param {number} id
+   * @returns {Promise<Game>}
    */
   async findOne(id) {
-    return this.db.query(findOneGameQuery, [id]);
+    return this.db.queryOne(findOneGameQuery, [id]);
   }
   /**
    * @param {string} title
+   * @returns {Promise<Game>}
    */
   async findOneByTitle(title) {
     return this.db.queryOne(findOneGameByTitleQuery, [title]);
   }
+
   /**
-   *
    * @param {number} id
    */
   async delete(id) {
@@ -91,10 +119,8 @@ export class GamesRepository {
   }
 
   /**
-   *
    * @param {number} id
-   * @param {UpdateGameDto} param1
-   * @returns
+   * @param {UpdateGameDto} updateGameDto
    */
   async update(id, { title, genre, price, developed_by, release_date }) {
     return this.db.exec(updateGameQuery, [

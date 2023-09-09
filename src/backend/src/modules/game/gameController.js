@@ -40,6 +40,16 @@ export class GamesController {
     }
   }
 
+  async findByPlatform(req, res, next) {
+    try {
+      const { platformId } = req.params;
+      const result = await this.service.findByPlatform(+platformId);
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   /**
    * @type {import('express').RequestHandler}
    */
@@ -72,8 +82,8 @@ export class GamesController {
   async update(req, res, next) {
     try {
       const { id } = req.params;
-      const gameDto = req.body;
-      const result = await this.service.update(+id, gameDto);
+      const updateGameDto = req.body;
+      const result = await this.service.update(+id, updateGameDto);
       res.status(200).json(result);
     } catch (err) {
       next(err);

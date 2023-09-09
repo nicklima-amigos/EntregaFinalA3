@@ -1,12 +1,16 @@
+<<<<<<< HEAD:src/backend/src/modules/user/middleware/validateUpdateUser.js
 // @ts-check
 
 import { ValidationError } from "@exceptions/validationError.js";
+=======
+import { ValidationError } from "../../../exceptions/validationError.js";
+>>>>>>> dev:src/backend/src/modules/user/validation/validateUpdateUser.js
 
+/**
+ * @param {*} body
+ */
 export const validateUpdateUser = (body) => {
   const { password } = body;
-  /**
-   * @type {import("../../../types/user/validation").UpdateUserValidationErrors}
-   */
   const errors = {};
   if (!password) {
     errors.password = "password is required";

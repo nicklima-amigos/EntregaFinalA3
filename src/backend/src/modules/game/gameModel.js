@@ -2,6 +2,7 @@
 
 /**
  * @typedef {Object} GameProps;
+ * @property {number} id
  * @property {string} title
  * @property {string} genre
  * @property {number} price
@@ -13,12 +14,13 @@ class Game {
    *
    * @param {GameProps} props
    */
-  constructor(props) {
-    this.title = props.title;
-    this.genre = props.genre;
-    this.price = props.price;
-    this.developed_by = props.developed_by;
-    this.release_date = props.release_date;
+  constructor({ id, title, genre, price, developed_by, release_date }) {
+    this.id = id;
+    this.title = title;
+    this.genre = genre;
+    this.price = price;
+    this.developed_by = developed_by;
+    this.release_date = release_date;
   }
 }
 

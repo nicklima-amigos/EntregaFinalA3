@@ -1,5 +1,8 @@
 // @ts-check
 
+import { HttpError } from "../../exceptions/httpError.js";
+import "./dto/createUserDto.js";
+import "./dto/updateUserDto.js";
 import { UsersRepository } from "./userRepository.js";
 
 export class UsersService {
@@ -12,11 +15,17 @@ export class UsersService {
   }
 
   /**
-   *
-   * @param {import("../../types/user/createUserDto.js").CreateUserDto} createUserDto
-   * @returns
+   * @param {CreateUserDto} createUserDto
    */
   async create({ username, email, password, birth_date }) {
+    let existingUser = await this.repository.findOneByEmail(email);
+    if (existingUser) {
+      throw new HttpError(400, "Bad Request! User already exists!");
+    }
+    existingUser = await this.repository.findOneByUsername(username);
+    if (existingUser) {
+      throw new HttpError(400, "Bad Request! User already exists!");
+    }
     return this.repository.create({
       username,
       email,
@@ -30,30 +39,57 @@ export class UsersService {
   }
 
   /**
-   *
    * @param {number} userId
-   * @returns
    */
   async findOne(userId) {
-    return this.repository.findOne(userId);
+    const user = await this.repository.findOne(userId);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
+    return user;
+  }
+
+  /**
+   *
+   * @param {string} email
+   * @returns
+   */
+  async findOneByEmail(email) {
+    const user = await this.repository.findOneByEmail(email);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
+    return user;
+  }
+
+  /**
+   *
+   * @param {string} username
+   * @returns
+   */
+  async findOneByUsername(username) {
+    const user = await this.repository.findOneByUsername(username);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
+    return user;
   }
 
   /**
    *
    * @param {number} userId
-   * @returns
    */
   async delete(userId) {
+    await this.findOne(userId);
     return this.repository.delete(userId);
   }
 
   /**
-   *
-   * @param {number} userId
-   * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} updateUserDto
-   * @returns
+   * @param {number} id
+   * @param {UpdateUserDto} updateUserDto
    */
-  async update(userId, updateUserDto) {
-    return this.repository.update(userId, updateUserDto);
+  async update(id, updateUserDto) {
+    await this.findOne(id);
+    return this.repository.update(id, updateUserDto);
   }
 }

@@ -1,5 +1,6 @@
 // @ts-check
 
+<<<<<<< HEAD
 import { createUserQuery } from "@infrastructure/database/queries/users/createUser.js";
 import { DatabaseConnection } from "@infrastructure/database/connection.js";
 
@@ -8,6 +9,19 @@ import { findUsers } from "@infrastructure/database/queries/users/findUsers.js";
 import { findOneUserQuery } from "@infrastructure/database/queries/users/findOneUser.js";
 import { deleteUserQuery } from "@infrastructure/database/queries/users/deleteUser.js";
 import { updateUserQuery } from "@infrastructure/database/queries/users/updateUser.js";
+=======
+import "./dto/createUserDto.js";
+import "./dto/updateUserDto.js";
+import { DatabaseConnection } from "../../infrastructure/database/connection.js";
+import { createUserQuery } from "./queries/createUser.js";
+import { deleteUserQuery } from "./queries/deleteUser.js";
+import { findOneByEmailQuery } from "./queries/findOneByEmail.js";
+import { findOneByUsernameQuery } from "./queries/findOneByUsername.js";
+import { findOneUserQuery } from "./queries/findOneUser.js";
+import { findUsers } from "./queries/findUsers.js";
+import { updateUserQuery } from "./queries/updateUser.js";
+import User from "./userModel.js";
+>>>>>>> dev
 
 export class UsersRepository {
   /**
@@ -19,7 +33,7 @@ export class UsersRepository {
   }
 
   /**
-   * @param {import("../../types/user/createUserDto.js").CreateUserDto} createUserDto
+   * @param {CreateUserDto} createUserDto
    */
   async create({ username, email, password, birth_date }) {
     return this.db.exec(createUserQuery, [
@@ -37,28 +51,42 @@ export class UsersRepository {
   /**
    *
    * @param {number} userId
-   * @returns
+   * @returns {Promise<User>}
    */
   async findOne(userId) {
-    return this.db.query(findOneUserQuery, [userId]);
+    return this.db.queryOne(findOneUserQuery, [userId]);
+  }
+
+  /**
+   *
+   * @param {string} email
+   * @returns {Promise<User>}
+   */
+  async findOneByEmail(email) {
+    return this.db.queryOne(findOneByEmailQuery, [email]);
+  }
+
+  /*
+   * @param {string} email
+   * @returns {Promise<User>}
+   * */
+  async findOneByUsername(username) {
+    return this.db.queryOne(findOneByUsernameQuery, [username]);
   }
 
   /**
    *
    * @param {number} userId
-   * @returns
    */
   async delete(userId) {
     return this.db.exec(deleteUserQuery, [userId]);
   }
 
   /**
-   *
-   * @param {number} userId
-   * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} param1
-   * @returns
+   * @param {number} id
+   * @param {UpdateUserDto} param1
    */
-  async update(userId, { password }) {
-    return this.db.exec(updateUserQuery, [password, userId]);
+  async update(id, { password }) {
+    return this.db.exec(updateUserQuery, [password, id]);
   }
 }

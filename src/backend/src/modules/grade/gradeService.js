@@ -1,20 +1,20 @@
 // @ts-check
 
-import { HttpError } from "../../exceptions/httpError";
-import { PlatformsRepository } from "../platform/platformRepository";
-import { UsersRepository } from "../user/userRepository";
-import { GradesRepository } from "./gradeRepository";
+import { HttpError } from "../../exceptions/httpError.js";
+import { GamesRepository } from "../game/gameRepository.js";
+import { UsersRepository } from "../user/userRepository.js";
+import { GradesRepository } from "./gradeRepository.js";
 
 export class GradesService {
   /**
    * @param {GradesRepository} gradesRepository
    * @param {UsersRepository} usersRepository
-   * @param {PlatformsRepository} platformsRepository
+   * @param {GamesRepository} gamesRepository
    */
-  constructor(gradesRepository, usersRepository, platformsRepository) {
+  constructor(gradesRepository, usersRepository, gamesRepository) {
     this.gradesRepository = gradesRepository;
     this.usersRepository = usersRepository;
-    this.platformsRepository = platformsRepository;
+    this.gamesRepository = gamesRepository;
   }
 
   async find() {
@@ -48,9 +48,9 @@ export class GradesService {
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
-    const platform = await this.platformsRepository.findOne(gameId);
+    const platform = await this.gamesRepository.findOne(gameId);
     if (!platform) {
-      throw new HttpError(404, "Platform not found!");
+      throw new HttpError(404, "Game not found!");
     }
     return this.gradesRepository.create({ userId, gameId, grade });
   }

@@ -1,6 +1,6 @@
 // @ts-check
 
-import { GradesService } from "./gradeService";
+import { GradesService } from "./gradeService.js";
 
 export class GradesController {
   /**
@@ -10,6 +10,9 @@ export class GradesController {
     this.service = service;
   }
 
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async find(req, res, next) {
     try {
       const grades = await this.service.find();
@@ -19,24 +22,36 @@ export class GradesController {
     }
   }
 
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async findOne(req, res, next) {
     try {
-      const grade = await this.service.findOne(req.params.id);
+      const { id } = req.params;
+
+      const grade = await this.service.findOne(+id);
       res.json(grade);
     } catch (error) {
       next(error);
     }
   }
 
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async findGradesByUser(req, res, next) {
     try {
-      const grades = await this.service.findGradesByUser(req.params.userId);
+      const { userId } = req.params;
+      const grades = await this.service.findGradesByUser(+userId);
       res.json(grades);
     } catch (error) {
       next(error);
     }
   }
 
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async create(req, res, next) {
     try {
       const grade = await this.service.create(req.body);
@@ -46,6 +61,9 @@ export class GradesController {
     }
   }
 
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async update(req, res, next) {
     try {
       const { id } = req.params;
@@ -56,9 +74,13 @@ export class GradesController {
     }
   }
 
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async delete(req, res, next) {
     try {
-      const grade = await this.service.delete(req.params.id);
+      const { id } = req.params;
+      const grade = await this.service.delete(+id);
       res.json(grade);
     } catch (error) {
       next(error);

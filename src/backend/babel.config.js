@@ -4,19 +4,21 @@ module.exports = {
       "module-resolver",
       {
         alias: {
-          "@usersQuery": "./src/infrastructure/database/queries/users",
-          "@gamesQuery": "./src/infrastructure/database/queries/games",
-          "@games_plataformsQuery": "./src/infrastructure/database/queries/games_plataforms",
-          "@migrationsQuery": "./src/infrastructure/database/queries/migrations",
-          "@platformsQuery": "./src/infrastructure/database/queries/platforms",
+          "@usersQueries": "./src/modules/user/queries",
+          "@gamesQueries": "./src/modules/game/queries",
+          "@gradesQueries": "./src/modules/grade/queries",
+          "@gamesPlatformsQueries": "./src/modules/queries/gamesPlatforms",
+          "@migrationsQueries":
+            "./src/infrastructure/database/queries/migrations",
+          "@platformsQueries": "./src/modules/platform/queries",
 
-          "@exceptions": "./src/exceptions",
           "@infrastructure": "./src/infrastructure",
+          "@exceptions": "./src/exceptions",
           "@middleware": "./src/middleware",
           "@modules": "./src/modules",
-          "@types": "./src/types"
-        }
-      }
-    ]
-  ]
+          "@types": "./src/types",
+        },
+      },
+    ],
+  ],
 };

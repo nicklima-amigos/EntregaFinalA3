@@ -11,7 +11,7 @@ import { updatePlatformQuery } from "./queries/updatePlatform.js";
 import { deletePlatformQuery } from "./queries/deletePlatform.js";
 import { findOnePlatformByNameQuery } from "./queries/findOnePlatformByName.js";
 import Game from "../game/gameModel.js";
-import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/createGamePlatform.js";
+import { createGamePlatformQuery } from "../common/queries/createGamePlatform.js";
 export class PlatformsRepository {
   /**
    * @constructor

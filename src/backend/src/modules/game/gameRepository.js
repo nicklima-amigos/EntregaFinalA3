@@ -10,9 +10,9 @@ import { listGames } from "./queries/findGames.js";
 import { findOneGameQuery } from "./queries/findOneGame.js";
 import { deleteGameQuery } from "./queries/deleteGame.js";
 import { updateGameQuery } from "./queries/updateGame.js";
-import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/createGamePlatform.js";
+import { createGamePlatformQuery } from "../common/queries/createGamePlatform.js";
 import { findOneGameByTitleQuery } from "./queries/findOneGameByTitle.js";
-import { deleteGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/deleteGamePlatform.js";
+import { deleteGamePlatformQuery } from "../common/queries/deleteGamePlatform.js";
 import Game from "./gameModel.js";
 import { findGamesByPlatformIdQuery } from "./queries/findGamesByPlatformId.js";
 export class GamesRepository {

@@ -1,7 +1,5 @@
 // @ts-check
 
-import "./dto/createUserDto.js";
-import "./dto/updateUserDto.js";
 import { createUserQuery } from "../../infrastructure/database/queries/users/createUser.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { findUsers } from "../../infrastructure/database/queries/users/findUsers.js";
@@ -19,7 +17,7 @@ export class UsersRepository {
   }
 
   /**
-   * @param {CreateUserDto} createUserDto
+   * @param {import("../../types/user/createUserDto.js").CreateUserDto} createUserDto
    */
   async create({ username, email, password, birth_date }) {
     return this.db.exec(createUserQuery, [
@@ -55,17 +53,10 @@ export class UsersRepository {
   /**
    *
    * @param {number} userId
-   * @param {UpdateUserDto} param1
+   * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} param1
    * @returns
    */
-  async update(userId, { username, email, password, birth_date }) {
-    console.log({ username, email, password, birth_date })
-    return this.db.exec(updateUserQuery, [
-      username,
-      email,
-      password,
-      birth_date,
-      userId,
-    ]);
+  async update(userId, { password }) {
+    return this.db.exec(updateUserQuery, [password, userId]);
   }
 }

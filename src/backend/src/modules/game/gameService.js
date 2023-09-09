@@ -1,6 +1,6 @@
 // @ts-check
 
-import { HttpError } from "@exceptions/httpError.js";
+import { HttpError } from "../../exceptions/httpError.js";
 import { PlatformsRepository } from "../platform/platformRepository.js";
 import "./dto/associateGamePlatformDto.js";
 import "./dto/createGameDto.js";

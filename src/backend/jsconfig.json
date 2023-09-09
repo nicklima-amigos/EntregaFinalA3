@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@exceptions/*": ["src/exceptions/*"],
-      "@infrastructure/*": ["src/infrastructure/*"],
-      "@middleware/*": ["src/middleware/*"],
-      "@modules/*": ["src/modules/*"],
-      "@types/*": ["src/types/*"]
+      "@exceptions/*": ["exceptions/*"],
+      "@infrastructure/*": ["infrastructure/*"],
+      "@middleware/*": ["middleware/*"],
+      "@modules/*": ["modules/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "build"]
 }

@@ -1,10 +1,4 @@
-<<<<<<< HEAD:src/backend/src/modules/user/middleware/validateCreateUser.js
-// @ts-check
-
-import { ValidationError } from "@exceptions/validationError.js";
-=======
 import { ValidationError } from "../../../exceptions/validationError.js";
->>>>>>> dev:src/backend/src/modules/user/validation/validateCreateUser.js
 
 /**
  * @param {*} body

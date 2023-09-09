@@ -7,6 +7,8 @@ import { platformsModule } from "./modules/platform/platformModule.js";
 import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
 import { usersModule } from "./modules/user/usersModule.js";
 import { gradesModule } from "./modules/grade/gradeModule.js";
+
+
 export class App {
   /**
    *

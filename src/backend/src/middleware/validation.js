@@ -1,8 +1,14 @@
 // @ts-check
 
 /**
+ * @typedef {function} ValidationFunction
+ * @param {any} body
+ * @returns {void}
+ */
+
+/**
  *
- * @param {import("../types/ValidationFunction").ValidationFunction} validationFunction
+ * @param {ValidationFunction} validationFunction
  * @returns {import("express").RequestHandler}
  */
 export const validationMiddleware = (validationFunction) => {

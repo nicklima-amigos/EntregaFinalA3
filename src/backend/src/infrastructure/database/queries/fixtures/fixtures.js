@@ -98,14 +98,14 @@ export const fixtures = [
       INSERT INTO categories (id, user_id, game_id, category) VALUES
       (1, 1, 1, "RPG"),
       (2, 1, 2, "RPG"),
-      (3, 1, 3, "Action"),
-      (4, 1, 4, "RPG"),
-      (5, 1, 5, "RPG"),
+      (3, 1, 3, "Ação"),
+      (4, 1, 4, "Jogando"),
+      (5, 1, 5, "Zerado"),
       (6, 1, 6, "RPG"),
       (7, 1, 7, "RPG"),
-      (8, 1, 8, "Action"),
-      (9, 1, 9, "Action"),
-      (10, 1, 10, "Action");
+      (8, 1, 8, "Tiro em primeira pessoa"),
+      (9, 1, 9, "Ação"),
+      (10, 1, 10, "Terror");
   `,
 
   `

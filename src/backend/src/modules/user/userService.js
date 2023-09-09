@@ -4,6 +4,7 @@ import { HttpError } from "../../exceptions/httpError.js";
 import "./dto/createUserDto.js";
 import "./dto/updateUserDto.js";
 import { UsersRepository } from "./userRepository.js";
+import User from "./userModel.js";
 
 export class UsersService {
   /**
@@ -35,7 +36,6 @@ export class UsersService {
   /**
    *
    * @param {number} userId
-   * @returns
    */
   async findOne(userId) {
     const user = await this.repository.findOne(userId);
@@ -45,10 +45,13 @@ export class UsersService {
     return user;
   }
 
+  async findOneByEmail(email) {}
+
+  async findOneByUsername(username) {}
+
   /**
    *
    * @param {number} userId
-   * @returns
    */
   async delete(userId) {
     await this.findOne(userId);
@@ -58,7 +61,6 @@ export class UsersService {
   /**
    *
    * @param {UpdateUserDto} updateUserDto
-   * @returns
    */
   async update(updateUserDto) {
     await this.findOne(updateUserDto.id);

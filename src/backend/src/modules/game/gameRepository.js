@@ -13,6 +13,7 @@ import { updateGameQuery } from "../../infrastructure/database/queries/games/upd
 import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_pĺatforms/createGamePlatform.js";
 import { findOneGameByTitleQuery } from "../../infrastructure/database/queries/games/findOneGameByTitle.js";
 import { deleteGamePlatformQuery } from "../../infrastructure/database/queries/games_pĺatforms/deleteGamePlatform.js";
+import Game from "./gameModel.js";
 export class GamesRepository {
   /**
    *
@@ -42,13 +43,17 @@ export class GamesRepository {
       developed_by,
       release_date,
     ]);
-    const associateGameToPlatformResult = await this.associate({
+    await this.associate({
       game_id: createGameResult.id,
       platform_id,
     });
     return createGameResult;
   }
 
+  /**
+   *
+   * @returns {Promise<Game[]>}
+   */
   async find() {
     return this.db.query(listGames);
   }
@@ -67,20 +72,21 @@ export class GamesRepository {
     return this.db.exec(deleteGamePlatformQuery, [game_id, platform_id]);
   }
   /**
-   *
    * @param {number} id
+   * @returns {Promise<Game>}
    */
   async findOne(id) {
     return this.db.queryOne(findOneGameQuery, [id]);
   }
   /**
    * @param {string} title
+   * @returns {Promise<Game>}
    */
   async findOneByTitle(title) {
     return this.db.queryOne(findOneGameByTitleQuery, [title]);
   }
+
   /**
-   *
    * @param {number} id
    */
   async delete(id) {
@@ -90,7 +96,6 @@ export class GamesRepository {
   /**
    *
    * @param {UpdateGameDto} param1
-   * @returns
    */
   async update({ id, title, genre, price, developed_by, release_date }) {
     return this.db.exec(updateGameQuery, [

@@ -39,10 +39,6 @@ export class GamesService {
     return this.gameRepository.create(createGameDto);
   }
 
-  /**
-   *
-   * @returns {Promise<Game[]>}
-   */
   async find() {
     return this.gameRepository.find();
   }
@@ -50,7 +46,6 @@ export class GamesService {
   /**
    *
    * @param {number} id
-   * @returns {Promise<Game>}
    */
   async findOne(id) {
     const game = await this.gameRepository.findOne(id);
@@ -62,7 +57,6 @@ export class GamesService {
 
   /**
    * @param {string} title
-   * @returns {Promise<Game>}
    */
   async findOneByTitle(title) {
     const game = await this.gameRepository.findOneByTitle(title);

@@ -4,20 +4,6 @@ import "./dto/createGameDto.js";
 import "./dto/updateGameDto.js";
 import "./dto/associateGamePlatformDto.js";
 import "./dto/disassociateGamePlatformDto.js";
-<<<<<<< HEAD
-import { createGameQuery } from "@infrastructure/database/queries/games/createGame.js";
-import { DatabaseConnection } from "@infrastructure/database/connection.js";
-
-import { listGames } from "@infrastructure/database/queries/games/findGames.js";
-
-import { findOneGameQuery } from "@infrastructure/database/queries/games/findOneGame.js";
-import { deleteGameQuery } from "@infrastructure/database/queries/games/deleteGame.js";
-import { updateGameQuery } from "@infrastructure/database/queries/games/updateGame.js";
-import { createGamePlatformQuery } from "@infrastructure/database/queries/games_pĺatforms/createGamePlatform.js";
-import { findOneGameByTitleQuery } from "@infrastructure/database/queries/games/findOneGameByTitle.js";
-import { deleteGamePlatformQuery } from "@infrastructure/database/queries/games_pĺatforms/deleteGamePlatform.js";
-
-=======
 import { createGameQuery } from "./queries/createGame.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { listGames } from "./queries/findGames.js";
@@ -29,7 +15,7 @@ import { findOneGameByTitleQuery } from "./queries/findOneGameByTitle.js";
 import { deleteGamePlatformQuery } from "../common/queries/deleteGamePlatform.js";
 import Game from "./gameModel.js";
 import { findGamesByPlatformIdQuery } from "./queries/findGamesByPlatformId.js";
->>>>>>> dev
+
 export class GamesRepository {
   /**
    *

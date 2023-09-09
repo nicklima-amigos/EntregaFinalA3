@@ -1,16 +1,14 @@
 // @ts-check
 
-import { HttpError } from "../../exceptions/httpError.js";
+import { HttpError } from "@exceptions/httpError.js";
 import { PlatformsRepository } from "../platform/platformRepository.js";
 import "./dto/associateGamePlatformDto.js";
 import "./dto/createGameDto.js";
 import "./dto/disassociateGamePlatformDto.js";
 import "./dto/updateGameDto.js";
 import { GamesRepository } from "./gameRepository.js";
-<<<<<<< HEAD
-import { HttpError } from "@exceptions/httpError.js";
-=======
->>>>>>> dev
+
+
 
 export class GamesService {
   /**

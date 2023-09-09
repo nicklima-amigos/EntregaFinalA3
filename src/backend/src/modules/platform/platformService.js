@@ -3,12 +3,9 @@ import Platform from "./platformModel.js";
 import { PlatformsRepository } from "./platformRepository.js";
 import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
-<<<<<<< HEAD
-import { HttpError } from "@exceptions/httpError.js";
-=======
 import { HttpError } from "../../exceptions/httpError.js";
 import { GamesRepository } from "../game/gameRepository.js";
->>>>>>> dev
+
 export class PlatformsService {
   /**
    *

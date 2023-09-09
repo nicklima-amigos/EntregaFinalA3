@@ -1,6 +1,6 @@
 // @ts-check
 
-import { DatabaseConnection } from "@infrastructure/database/connection.js";
+import { DatabaseConnection } from "../../infrastructure/database/connection.js";
 import { PlatformsRepository } from "../platform/platformRepository.js";
 import { GamesController } from "./gameController.js";
 import { GamesRepository } from "./gameRepository.js";

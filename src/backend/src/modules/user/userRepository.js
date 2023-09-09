@@ -1,15 +1,5 @@
 // @ts-check
 
-<<<<<<< HEAD
-import { createUserQuery } from "@infrastructure/database/queries/users/createUser.js";
-import { DatabaseConnection } from "@infrastructure/database/connection.js";
-
-import { findUsers } from "@infrastructure/database/queries/users/findUsers.js";
-
-import { findOneUserQuery } from "@infrastructure/database/queries/users/findOneUser.js";
-import { deleteUserQuery } from "@infrastructure/database/queries/users/deleteUser.js";
-import { updateUserQuery } from "@infrastructure/database/queries/users/updateUser.js";
-=======
 import "./dto/createUserDto.js";
 import "./dto/updateUserDto.js";
 import { DatabaseConnection } from "../../infrastructure/database/connection.js";
@@ -21,7 +11,6 @@ import { findOneUserQuery } from "./queries/findOneUser.js";
 import { findUsers } from "./queries/findUsers.js";
 import { updateUserQuery } from "./queries/updateUser.js";
 import User from "./userModel.js";
->>>>>>> dev
 
 export class UsersRepository {
   /**

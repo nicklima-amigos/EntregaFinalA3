@@ -1,7 +1,5 @@
 // @ts-check
 
-import "./dto/createUserDto.js";
-import "./dto/updateUserDto.js";
 import { UsersRepository } from "./userRepository.js";
 
 export class UsersService {
@@ -15,7 +13,7 @@ export class UsersService {
 
   /**
    *
-   * @param {CreateUserDto} createUserDto
+   * @param {import("../../types/user/createUserDto.js").CreateUserDto} createUserDto
    * @returns
    */
   async create({ username, email, password, birth_date }) {
@@ -41,10 +39,10 @@ export class UsersService {
   }
 
   /**
-  *
-  * @param {number} userId
-  * @returns
-  */
+   *
+   * @param {number} userId
+   * @returns
+   */
   async delete(userId) {
     return this.repository.delete(userId);
   }
@@ -52,7 +50,7 @@ export class UsersService {
   /**
    *
    * @param {number} userId
-   * @param {UpdateUserDto} updateUserDto
+   * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} updateUserDto
    * @returns
    */
   async update(userId, updateUserDto) {

@@ -1,4 +1,4 @@
 export const updateUserQuery = `
-  UPDATE users SET username = ?, email = ?, password = ?, birth_date = ?
+  UPDATE users SET password = ?
   WHERE id = ?;
 `;

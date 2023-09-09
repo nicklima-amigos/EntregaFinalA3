@@ -9,8 +9,9 @@ import { findGradesQuery } from "../../infrastructure/database/queries/grades/fi
 import { findGradesByUserIdQuery } from "../../infrastructure/database/queries/grades/findGradesByUserId.js";
 import { findOneGradeQuery } from "../../infrastructure/database/queries/grades/findOneGrade.js";
 import { updateGradeQuery } from "../../infrastructure/database/queries/grades/updateGrade.js";
+import Grade from "./gradeModel.js";
 
-export class PlatformsRepository {
+export class GradesRepository {
   /**
    * @constructor
    * @param {DatabaseConnection} db
@@ -26,11 +27,17 @@ export class PlatformsRepository {
     return await this.db.exec(createGradeQuery, [userId, gameId, grade]);
   }
 
+  /**
+   *
+   * @returns {Promise<Grade[]>}
+   */
   async find() {
     return await this.db.query(findGradesQuery);
   }
+
   /**
    * @param {number} id
+   * @returns {Promise<Grade>}
    */
   async findOne(id) {
     return await this.db.queryOne(findOneGradeQuery, [id]);
@@ -38,9 +45,10 @@ export class PlatformsRepository {
 
   /**
    * @param {number} userId
+   * @returns {Promise<Grade[]>}
    */
   async findGradesByUser(userId) {
-    return this.db.queryOne(findGradesByUserIdQuery, [userId]);
+    return this.db.query(findGradesByUserIdQuery, [userId]);
   }
 
   /**

@@ -33,6 +33,19 @@ export class PlatformsController {
   /**
    * @type {import('express').RequestHandler}
    */
+  async addGame(req, res, next) {
+    try {
+      const { id, gameId } = req.params;
+      const result = await this.service.addGame(+id, +gameId);
+      res.status(201).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  /**
+   * @type {import('express').RequestHandler}
+   */
   async find(req, res, next) {
     try {
       const result = await this.service.find();

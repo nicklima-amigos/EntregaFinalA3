@@ -4,13 +4,16 @@ import { PlatformsRepository } from "./platformRepository.js";
 import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
 import { HttpError } from "../../exceptions/httpError.js";
+import { GamesRepository } from "../game/gameRepository.js";
 export class PlatformsService {
   /**
    *
    * @param {PlatformsRepository} repository
+   * @param {GamesRepository} gamesRepository
    */
-  constructor(repository) {
+  constructor(repository, gamesRepository) {
     this.repository = repository;
+    this.gamesRepository = gamesRepository;
   }
 
   /**
@@ -23,6 +26,21 @@ export class PlatformsService {
     return this.repository.create({
       name,
     });
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {number} gameId
+   * @returns
+   */
+  async addGame(id, gameId) {
+    await this.repository.findOne(id);
+    const game = await this.gamesRepository.findOne(gameId);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return this.repository.addGame(id, gameId);
   }
 
   /**

@@ -11,6 +11,7 @@ import { updatePlatformQuery } from "../../infrastructure/database/queries/platf
 import { deletePlatformQuery } from "../../infrastructure/database/queries/platforms/deletePlatform.js";
 import { findOnePlatformByNameQuery } from "../../infrastructure/database/queries/platforms/findOnePlatformByName.js";
 import Game from "../game/gameModel.js";
+import { createGamePlatformQuery } from "../../infrastructure/database/queries/games_platforms/createGamePlatform.js";
 export class PlatformsRepository {
   /**
    * @constructor
@@ -25,6 +26,17 @@ export class PlatformsRepository {
    */
   async create({ name }) {
     return await this.db.exec(createPlatformQuery, [name]);
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {number} gameId
+   * @returns
+   */
+  async addGame(id, gameId) {
+    const result = await this.db.exec(createGamePlatformQuery, [gameId, id]);
+    return result;
   }
 
   async find() {

@@ -1,6 +1,6 @@
 // @ts-check
 
-import { DatabaseConnection } from "../../infrastructure/database/connection.js";
+import { DatabaseConnection } from "@infrastructure/database/connection.js";
 import { UserController } from "./userController.js";
 import { UsersRepository } from "./userRepository.js";
 import { usersRoutes } from "./userRoutes.js";

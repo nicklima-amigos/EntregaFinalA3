@@ -3,7 +3,7 @@ import Platform from "./platformModel.js";
 import { PlatformsRepository } from "./platformRepository.js";
 import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
-import { HttpError } from "../../exceptions/httpError.js";
+import { HttpError } from "@exceptions/httpError.js";
 export class PlatformsService {
   /**
    *

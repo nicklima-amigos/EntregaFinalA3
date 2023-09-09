@@ -6,7 +6,7 @@ import "./dto/createGameDto.js";
 import "./dto/disassociateGamePlatformDto.js";
 import "./dto/updateGameDto.js";
 import { GamesRepository } from "./gameRepository.js";
-import { HttpError } from "../../exceptions/httpError.js";
+import { HttpError } from "@exceptions/httpError.js";
 
 export class GamesService {
   /**

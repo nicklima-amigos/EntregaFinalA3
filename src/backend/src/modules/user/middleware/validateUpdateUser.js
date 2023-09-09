@@ -1,6 +1,6 @@
 // @ts-check
 
-import { ValidationError } from "../../../exceptions/validationError.js";
+import { ValidationError } from "@exceptions/validationError.js";
 
 export const validateUpdateUser = (body) => {
   const { password } = body;

@@ -2,13 +2,14 @@
 import "./dto/createPlatformDto.js";
 import "./dto/findOnePlatformDto.js";
 import "./dto/updatePlatformDto.js";
-import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { createPlatformQuery } from "../../infrastructure/database/queries/platforms/createPlatform.js";
-import { findPlatformsQuery } from "../../infrastructure/database/queries/platforms/findPlatforms.js";
-import { findOnePlatformQuery } from "../../infrastructure/database/queries/platforms/findOnePlatform.js";
-import { updatePlatformQuery } from "../../infrastructure/database/queries/platforms/updatePlatform.js";
-import { deletePlatformQuery } from "../../infrastructure/database/queries/platforms/deletePlatform.js";
-import { findOnePlatformByNameQuery } from "../../infrastructure/database/queries/platforms/findOnePlatformByName.js";
+import { DatabaseConnection } from "@infrastructure/database/connection.js";
+
+import { createPlatformQuery } from "@infrastructure/database/queries/platforms/createPlatform.js";
+import { findPlatformsQuery } from "@infrastructure/database/queries/platforms/findPlatforms.js";
+import { findOnePlatformQuery } from "@infrastructure/database/queries/platforms/findOnePlatform.js";
+import { updatePlatformQuery } from "@infrastructure/database/queries/platforms/updatePlatform.js";
+import { deletePlatformQuery } from "@infrastructure/database/queries/platforms/deletePlatform.js";
+import { findOnePlatformByNameQuery } from "@infrastructure/database/queries/platforms/findOnePlatformByName.js";
 export class PlatformsRepository {
   /**
    * @constructor

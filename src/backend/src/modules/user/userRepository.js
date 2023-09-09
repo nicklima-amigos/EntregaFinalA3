@@ -1,11 +1,13 @@
 // @ts-check
 
-import { createUserQuery } from "../../infrastructure/database/queries/users/createUser.js";
-import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { findUsers } from "../../infrastructure/database/queries/users/findUsers.js";
-import { findOneUserQuery } from "../../infrastructure/database/queries/users/findOneUser.js";
-import { deleteUserQuery } from "../../infrastructure/database/queries/users/deleteUser.js";
-import { updateUserQuery } from "../../infrastructure/database/queries/users/updateUser.js";
+import { createUserQuery } from "@infrastructure/database/queries/users/createUser.js";
+import { DatabaseConnection } from "@infrastructure/database/connection.js";
+
+import { findUsers } from "@infrastructure/database/queries/users/findUsers.js";
+
+import { findOneUserQuery } from "@infrastructure/database/queries/users/findOneUser.js";
+import { deleteUserQuery } from "@infrastructure/database/queries/users/deleteUser.js";
+import { updateUserQuery } from "@infrastructure/database/queries/users/updateUser.js";
 
 export class UsersRepository {
   /**

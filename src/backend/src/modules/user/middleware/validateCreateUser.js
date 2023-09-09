@@ -1,6 +1,6 @@
 // @ts-check
 
-import { ValidationError } from "../../../exceptions/validationError.js";
+import { ValidationError } from "@exceptions/validationError.js";
 
 /**
  * @type {import("../../../types/ValidationFunction.js").ValidationFunction}
@@ -28,7 +28,13 @@ export const validateCreateUser = (body) => {
   }
   if (!birth_date) {
     errors.birth_date = "birth_date is required";
+
+    // @ts-ignore
+  } else if (isNaN(new Date(birth_date))) {
+
+    errors.birth_date = "birth_date must be a valid date";
   }
+
   if (Object.keys(errors).length > 0) {
     throw new ValidationError("invalid request body", errors);
   }

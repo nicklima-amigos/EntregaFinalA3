@@ -4,7 +4,6 @@ import { HttpError } from "../../exceptions/httpError.js";
 import "./dto/createUserDto.js";
 import "./dto/updateUserDto.js";
 import { UsersRepository } from "./userRepository.js";
-import User from "./userModel.js";
 
 export class UsersService {
   /**
@@ -16,11 +15,11 @@ export class UsersService {
   }
 
   /**
-   *
    * @param {CreateUserDto} createUserDto
-   * @returns
    */
   async create({ username, email, password, birth_date }) {
+    await this.repository.findOneByEmail(email);
+    await this.repository.findOneByUsername(username);
     return this.repository.create({
       username,
       email,
@@ -34,7 +33,6 @@ export class UsersService {
   }
 
   /**
-   *
    * @param {number} userId
    */
   async findOne(userId) {
@@ -45,9 +43,31 @@ export class UsersService {
     return user;
   }
 
-  async findOneByEmail(email) {}
+  /**
+   *
+   * @param {string} email
+   * @returns
+   */
+  async findOneByEmail(email) {
+    const user = await this.repository.findOneByEmail(email);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
+    return user;
+  }
 
-  async findOneByUsername(username) {}
+  /**
+   *
+   * @param {string} username
+   * @returns
+   */
+  async findOneByUsername(username) {
+    const user = await this.repository.findOneByUsername(username);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
+    return user;
+  }
 
   /**
    *

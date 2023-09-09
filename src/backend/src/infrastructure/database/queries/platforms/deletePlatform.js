@@ -1,3 +1,3 @@
 export const deletePlatformQuery = `
-  DELETE FROM platforms WHERE id = ? CASCADE;
+  DELETE FROM platforms WHERE id = ?;
 `;

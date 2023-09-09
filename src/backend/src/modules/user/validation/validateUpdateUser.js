@@ -1,12 +1,10 @@
-// @ts-check
-
 import { ValidationError } from "../../../exceptions/validationError.js";
 
+/**
+ * @param {*} body
+ */
 export const validateUpdateUser = (body) => {
   const { password } = body;
-  /**
-   * @type {import("../../../types/user/validation").UpdateUserValidationErrors}
-   */
   const errors = {};
   if (!password) {
     errors.password = "password is required";

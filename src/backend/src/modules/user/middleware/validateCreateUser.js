@@ -7,26 +7,29 @@ import { ValidationError } from "../../../exceptions/validationError.js";
  */
 export const validateCreateUser = (body) => {
   const { email, password, username, birth_date } = body;
-  const errors = [];
+  /**
+   * @type {import("../../../types/user/validation.js").CreateUserValidationErrors}
+   */
+  const errors = {};
   if (!username) {
-    errors.push("username is required");
+    errors.username = "username is required";
   } else if (username.length < 3) {
-    errors.push("username must be at least 3 characters long");
+    errors.username = "username must be at least 3 characters long";
   }
   if (!email) {
-    errors.push("email is required");
+    errors.email = "email is required";
   } else if (!email.includes("@")) {
-    errors.push("email must be a valid email");
+    errors.email = "email must be a valid email";
   }
   if (!password) {
-    errors.push("password is required");
+    errors.password = "password is required";
   } else if (password?.length < 6) {
-    errors.push("password must be at least 6 characters long");
+    errors.password = "password must be at least 6 characters long";
   }
   if (!birth_date) {
-    errors.push("birth_date is required");
+    errors.birth_date = "birth_date is required";
   }
-  if (errors.length > 0) {
+  if (Object.keys(errors).length > 0) {
     throw new ValidationError("invalid request body", errors);
   }
 };

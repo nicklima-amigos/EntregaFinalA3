@@ -89,11 +89,10 @@ export class GamesRepository {
 
   /**
    *
-   * @param {number} id
    * @param {UpdateGameDto} param1
    * @returns
    */
-  async update(id, { title, genre, price, developed_by, release_date }) {
+  async update({ id, title, genre, price, developed_by, release_date }) {
     return this.db.exec(updateGameQuery, [
       title,
       genre,

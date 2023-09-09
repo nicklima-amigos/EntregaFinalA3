@@ -74,11 +74,10 @@ export class GamesService {
 
   /**
    *
-   * @param {number} id
    * @param {UpdateGameDto} updateGameDto
    * @returns
    */
-  async update(id, updateGameDto) {
-    return this.gameRepository.update(id, updateGameDto);
+  async update(updateGameDto) {
+    return this.gameRepository.update(updateGameDto);
   }
 }

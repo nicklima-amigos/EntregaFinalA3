@@ -52,11 +52,10 @@ export class UsersRepository {
 
   /**
    *
-   * @param {number} userId
    * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} param1
    * @returns
    */
-  async update(userId, { password }) {
-    return this.db.exec(updateUserQuery, [password, userId]);
+  async update({ id, password }) {
+    return this.db.exec(updateUserQuery, [password, id]);
   }
 }

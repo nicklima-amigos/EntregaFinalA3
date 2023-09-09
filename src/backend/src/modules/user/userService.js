@@ -49,11 +49,10 @@ export class UsersService {
 
   /**
    *
-   * @param {number} userId
    * @param {import("../../types/user/updateUserDto.js").UpdateUserDto} updateUserDto
    * @returns
    */
-  async update(userId, updateUserDto) {
-    return this.repository.update(userId, updateUserDto);
+  async update(updateUserDto) {
+    return this.repository.update(updateUserDto);
   }
 }

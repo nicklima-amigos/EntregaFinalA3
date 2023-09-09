@@ -2,6 +2,7 @@
 
 /**
  * @typedef {Object} GameProps;
+ * @property {number} id
  * @property {string} title
  * @property {string} genre
  * @property {number} price
@@ -14,6 +15,7 @@ class Game {
    * @param {GameProps} props
    */
   constructor(props) {
+    this.id = props.id;
     this.title = props.title;
     this.genre = props.genre;
     this.price = props.price;

@@ -12,17 +12,17 @@ export class App {
   }
 
   attachMiddleware() {
-    this.app.use(express.json());
-    this.app.use(cors());
+    this.app.use(express.json()).use(cors());
   }
 
   routes() {
     const router = Router();
-    router.use("/games", gamesModule(this.db));
-    router.use("/platforms", platformsModule(this.db));
-    router.use("/users", usersModule(this.db));
-    router.use("/grades", gradesModule(this.db));
-    router.use(errorHandlingMiddleware);
+    router
+      .use("/games", gamesModule(this.db))
+      .use("/platforms", platformsModule(this.db))
+      .use("/users", usersModule(this.db))
+      .use("/grades", gradesModule(this.db))
+      .use(errorHandlingMiddleware);
     this.app.use(router);
   }
 

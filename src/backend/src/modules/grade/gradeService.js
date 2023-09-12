@@ -7,15 +7,15 @@ export class GradesService {
     this.gamesRepository = gamesRepository;
   }
 
-  async find() {
+  find() {
     return this.gradesRepository.find();
   }
 
-  async findOne(id) {
+  findOne(id) {
     return this.gradesRepository.findOne(id);
   }
 
-  async findGradesByUser(userId) {
+  findGradesByUser(userId) {
     return this.gradesRepository.findGradesByUser(userId);
   }
 
@@ -24,18 +24,18 @@ export class GradesService {
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
-    const platform = await this.gamesRepository.findOne(gameId);
-    if (!platform) {
+    const game = await this.gamesRepository.findOne(gameId);
+    if (!game) {
       throw new HttpError(404, "Game not found!");
     }
     return this.gradesRepository.create({ userId, gameId, grade });
   }
 
-  async update(id, { grade }) {
+  update(id, { grade }) {
     return this.gradesRepository.update(id, { grade });
   }
 
-  async delete(id) {
+  delete(id) {
     return this.gradesRepository.delete(id);
   }
 }

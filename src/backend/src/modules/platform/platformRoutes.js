@@ -1,12 +1,5 @@
-// @ts-check
-
 import { Router } from "express";
-import { PlatformsController } from "./platformController.js";
 
-/**
- *
- * @param {PlatformsController} controller
- */
 export const platformsRoutes = (controller) => {
   const router = Router();
   router

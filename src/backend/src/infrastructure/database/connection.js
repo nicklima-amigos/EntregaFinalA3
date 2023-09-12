@@ -1,25 +1,11 @@
-// @ts-check
-
 import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
 import { fixtures } from "./queries/fixtures/fixtures.js";
 
-/**
- * @typedef {object} QueryResult
- * @property {number} id
- * @property {number} changes
- */
-
 export class DatabaseConnection {
-  /**
-   * @type {DatabaseConnection}
-   */
   static __instance;
   static __isInternalConstructing = false;
 
-  /**
-   * @param {string} connString
-   */
   constructor(connString) {
     if (!DatabaseConnection.__isInternalConstructing) {
       throw new Error("Cannot instantiate singleton class using constructor");
@@ -34,11 +20,6 @@ export class DatabaseConnection {
     DatabaseConnection.__isInternalConstructing = false;
   }
 
-  /**
-   *
-   * @param {string} connString
-   * @returns
-   */
   static getInstance(connString) {
     if (DatabaseConnection.__instance) {
       return DatabaseConnection.__instance;
@@ -48,11 +29,6 @@ export class DatabaseConnection {
     return this.__instance;
   }
 
-  /**
-   * @param {string} queryString
-   * @param {any[]} params
-   * @returns {Promise<QueryResult>}
-   */
   async exec(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.run(queryString, params, function (err) {
@@ -65,11 +41,6 @@ export class DatabaseConnection {
     });
   }
 
-  /**
-   * @param {string} queryString
-   * @param {any[]} params
-   * @returns {Promise<any[]>}
-   */
   async query(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.all(queryString, params, (err, rows) => {
@@ -82,12 +53,6 @@ export class DatabaseConnection {
     });
   }
 
-  /**
-   *
-   * @param {string} queryString
-   * @param {any[]} params
-   * @returns {Promise<any>}
-   */
   async queryOne(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.get(queryString, params, (err, row) => {

@@ -1,26 +1,10 @@
-// @ts-check
-import Platform from "./platformModel.js";
-import { PlatformsRepository } from "./platformRepository.js";
-import "./dto/createPlatformDto.js";
-import "./dto/findOnePlatformDto.js";
 import { HttpError } from "../../exceptions/httpError.js";
-import { GamesRepository } from "../game/gameRepository.js";
 export class PlatformsService {
-  /**
-   *
-   * @param {PlatformsRepository} repository
-   * @param {GamesRepository} gamesRepository
-   */
   constructor(repository, gamesRepository) {
     this.repository = repository;
     this.gamesRepository = gamesRepository;
   }
 
-  /**
-   *
-   * @param {CreatePlatformDto} CreatePlatformDto
-   * @returns
-   */
   async create({ name }) {
     await this.repository.findOneByName(name);
     return this.repository.create({
@@ -28,12 +12,6 @@ export class PlatformsService {
     });
   }
 
-  /**
-   *
-   * @param {number} id
-   * @param {number} gameId
-   * @returns
-   */
   async addGame(id, gameId) {
     await this.repository.findOne(id);
     const game = await this.gamesRepository.findOne(gameId);
@@ -43,16 +21,10 @@ export class PlatformsService {
     return this.repository.addGame(id, gameId);
   }
 
-  /**
-   * @returns {Promise<Platform[]>}
-   */
   async find() {
     return this.repository.find();
   }
 
-  /**
-   * @param {number} id
-   */
   async findOne(id) {
     const platform = await this.repository.findOne(id);
     if (!platform) {
@@ -61,9 +33,6 @@ export class PlatformsService {
     return platform;
   }
 
-  /**
-   * @param {string} name
-   */
   async findOneByName(name) {
     const platform = await this.repository.findOneByName(name);
     if (!platform) {
@@ -72,10 +41,6 @@ export class PlatformsService {
     return platform;
   }
 
-  /**
-   * @param {number} id
-   * @param {UpdatePlatformDto} UpdatePlatformDto
-   */
   async update(id, { name }) {
     const foundPlatform = await this.findOne(id);
     if (foundPlatform.name === name) {
@@ -87,9 +52,6 @@ export class PlatformsService {
     return await this.repository.update(id, { name });
   }
 
-  /**
-   * @param {number} id
-   */
   async delete(id) {
     await this.findOne(id);
     return this.repository.delete(id);

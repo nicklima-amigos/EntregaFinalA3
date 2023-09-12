@@ -1,12 +1,10 @@
-// @ts-check
-
 import express, { Router } from "express";
-import { DatabaseConnection } from "./infrastructure/database/connection.js";
-import { gamesModule } from "./modules/game/gameModule.js";
-import { platformsModule } from "./modules/platform/platformModule.js";
 import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
-import { usersModule } from "./modules/user/usersModule.js";
+import { gamesModule } from "./modules/game/gameModule.js";
 import { gradesModule } from "./modules/grade/gradeModule.js";
+import { platformsModule } from "./modules/platform/platformModule.js";
+import { usersModule } from "./modules/user/usersModule.js";
+import cors from "cors";
 export class App {
   constructor(db) {
     this.db = db;
@@ -15,6 +13,7 @@ export class App {
 
   attachMiddleware() {
     this.app.use(express.json());
+    this.app.use(cors());
   }
 
   routes() {

@@ -1,18 +1,8 @@
-// @ts-check
-
-import { GradesService } from "./gradeService.js";
-
 export class GradesController {
-  /**
-   * @param {GradesService} service
-   */
   constructor(service) {
     this.service = service;
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async find(req, res, next) {
     try {
       const grades = await this.service.find();
@@ -22,9 +12,6 @@ export class GradesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async findOne(req, res, next) {
     try {
       const { id } = req.params;
@@ -36,9 +23,6 @@ export class GradesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async findGradesByUser(req, res, next) {
     try {
       const { userId } = req.params;
@@ -49,9 +33,6 @@ export class GradesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async create(req, res, next) {
     try {
       const grade = await this.service.create(req.body);
@@ -61,9 +42,6 @@ export class GradesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async update(req, res, next) {
     try {
       const { id } = req.params;
@@ -74,9 +52,6 @@ export class GradesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async delete(req, res, next) {
     try {
       const { id } = req.params;

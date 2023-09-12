@@ -47,7 +47,7 @@ export class GradesRepository {
    * @param {number} userId
    * @returns {Promise<Grade[]>}
    */
-  async findGradesByUser(userId) {
+  findGradesByUser(userId) {
     return this.db.query(findGradesByUserIdQuery, [userId]);
   }
 
@@ -55,7 +55,7 @@ export class GradesRepository {
    * @param {number} id
    * @param {UpdateGradeDto} UpdatePlatformDto
    */
-  async update(id, { grade }) {
+  update(id, { grade }) {
     return this.db.exec(updateGradeQuery, [grade, id]);
   }
 

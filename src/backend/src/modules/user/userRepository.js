@@ -11,7 +11,7 @@ export class UsersRepository {
     this.db = db;
   }
 
-  async create({ username, email, password, birth_date }) {
+  create({ username, email, password, birth_date }) {
     return this.db.exec(createUserQuery, [
       username,
       email,
@@ -20,27 +20,27 @@ export class UsersRepository {
     ]);
   }
 
-  async find() {
+  find() {
     return this.db.query(findUsers);
   }
 
-  async findOne(userId) {
+  findOne(userId) {
     return this.db.queryOne(findOneUserQuery, [userId]);
   }
 
-  async findOneByEmail(email) {
+  findOneByEmail(email) {
     return this.db.queryOne(findOneByEmailQuery, [email]);
   }
 
-  async findOneByUsername(username) {
+  findOneByUsername(username) {
     return this.db.queryOne(findOneByUsernameQuery, [username]);
   }
 
-  async delete(userId) {
+  delete(userId) {
     return this.db.exec(deleteUserQuery, [userId]);
   }
 
-  async update(id, { password }) {
+  update(id, { password }) {
     return this.db.exec(updateUserQuery, [password, id]);
   }
 }

@@ -22,7 +22,7 @@ export class UsersService {
     });
   }
 
-  async find() {
+  find() {
     return this.repository.find();
   }
 

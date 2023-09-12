@@ -21,7 +21,7 @@ export class PlatformsService {
     return this.repository.addGame(id, gameId);
   }
 
-  async find() {
+  find() {
     return this.repository.find();
   }
 

@@ -22,11 +22,11 @@ export class GamesService {
     return this.gameRepository.create(createGameDto);
   }
 
-  async find() {
+  find() {
     return this.gameRepository.find();
   }
 
-  async findByPlatform(platformId) {
+  findByPlatform(platformId) {
     return this.gameRepository.findByPlatform(platformId);
   }
 

@@ -1,10 +1,5 @@
-// @ts-check
-import { GradesController } from "./gradeController.js";
 import { Router } from "express";
 
-/**
- * @param {GradesController} controller
- */
 export const gradesRoutes = (controller) => {
   const router = Router();
   router

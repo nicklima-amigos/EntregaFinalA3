@@ -1,15 +1,8 @@
-// @ts-check
-
 import { Router } from "express";
 import { validationMiddleware } from "../../middleware/validation.js";
 import { validateCreateUser } from "./validation/validateCreateUser.js";
 import { validateUpdateUser } from "./validation/validateUpdateUser.js";
-import { UserController } from "./userController.js";
 
-/**
- *
- * @param {UserController} controller
- */
 export const usersRoutes = (controller) => {
   const usersRoutes = Router();
   usersRoutes

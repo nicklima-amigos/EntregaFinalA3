@@ -1,8 +1,5 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
 
-/**
- * @param {*} body
- */
 export const validateUpdateUser = (body) => {
   const { password } = body;
   const errors = {};

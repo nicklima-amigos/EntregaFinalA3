@@ -62,7 +62,7 @@ export class GradesRepository {
   /**
    * @param {number} id
    */
-  async delete(id) {
+  delete(id) {
     return this.db.query(deleteGradeQuery, [id]);
   }
 }

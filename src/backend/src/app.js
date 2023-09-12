@@ -1,5 +1,3 @@
-// @ts-check
-
 import express, { Router } from "express";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
 import { gamesModule } from "./modules/game/gameModule.js";

@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginForm from './components/LoginForm/LoginForm';
+import styles from './App.module.css';
 
 function App() {
   const router = createBrowserRouter([
@@ -51,9 +52,9 @@ function App() {
   ]);
 
   return (
-    <>
+    <div className={styles.mainContainer}>
       <RouterProvider router={router} />
-    </>
+    </div>
   );
 }
 

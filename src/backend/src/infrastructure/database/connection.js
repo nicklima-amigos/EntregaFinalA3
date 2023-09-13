@@ -64,7 +64,6 @@ export class DatabaseConnection {
       });
     });
   }
-  async initialize() {}
 
   async createTables() {
     for (let q of init) {

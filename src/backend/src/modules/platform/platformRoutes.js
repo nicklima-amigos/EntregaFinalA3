@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { validationMiddleware } from "../../middleware/validation";
-import { validateCreatePlatform } from "./validation/validateCreatePlatform";
-import { validateUpdatePlatform } from "./validation/validateUpdatePlatform";
+import { validationMiddleware } from "../../middleware/validation.js";
+import { validateCreatePlatform } from "./validation/validateCreatePlatform.js";
+import { validateUpdatePlatform } from "./validation/validateUpdatePlatform.js";
 
 export const platformsRoutes = (controller) => {
   const router = Router();

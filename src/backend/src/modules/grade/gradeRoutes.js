@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { validationMiddleware } from "../../middleware/validation";
-import { validateCreateGrade } from "./validation/validateCreateGrade";
-import { validateUpdateGrade } from "./validation/validateUpdateGrade";
+import { validationMiddleware } from "../../middleware/validation.js";
+import { validateCreateGrade } from "./validation/validateCreateGrade.js";
+import { validateUpdateGrade } from "./validation/validateUpdateGrade.js";
 
 export const gradesRoutes = (controller) => {
   const router = Router();

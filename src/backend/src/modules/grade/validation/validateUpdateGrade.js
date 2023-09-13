@@ -1,4 +1,4 @@
-import { ValidationError } from "../../../exceptions/validationError";
+import { ValidationError } from "../../../exceptions/validationError.js";
 
 export const validateUpdateGrade = (body) => {
   const { grade } = body;

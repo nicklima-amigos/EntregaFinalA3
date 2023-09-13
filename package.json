@@ -8,10 +8,13 @@
     "install-frontend": "cd src/frontend && npm install",
     "backend": "cd src/backend && npm run start",
     "frontend": "cd src/frontend && npm run dev",
-    "all": "npm run backend & npm run frontend",
-    "start-all": "npm run install-backend && npm run install-frontend && npm run backend & npm run frontend"
+    "all": "concurrently \"npm:backend\"  \"npm:frontend\"",
+    "start-all": "npm run install-backend && npm run install-frontend && npm run all"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
 }

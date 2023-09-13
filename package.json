@@ -6,9 +6,9 @@
   "scripts": {
     "install-backend": "cd src/backend && npm install",
     "install-frontend": "cd src/frontend && npm install",
-    "run-backend": "cd src/backend && npm run start",
-    "run-frontend": "cd src/frontend && npm run dev",
-    "run-all": "npm run run-backend & npm run run-frontend",
+    "backend": "cd src/backend && npm run start",
+    "frontend": "cd src/frontend && npm run dev",
+    "all": "npm run run-backend & npm run run-frontend",
     "start-all": "npm run install-backend && npm run install-frontend && npm run run-backend & npm run run-frontend"
   },
   "keywords": [],

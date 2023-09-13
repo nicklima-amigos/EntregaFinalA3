@@ -1,6 +1,7 @@
 .formField input {
   background-color: #e5e5e5;
   border-style: none;
+  margin-top: 5px;
   height: 40px;
   padding: 20px;
   outline: none;

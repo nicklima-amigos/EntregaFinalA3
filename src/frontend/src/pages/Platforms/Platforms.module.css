@@ -2,4 +2,7 @@
   width: fit-content;
   background-color: #c94a21;
   color: white;
+  button + button {
+    margin-left: 5px;
+  }
 }

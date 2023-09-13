@@ -1,16 +1,18 @@
-import styles from './FormField.module.css';
+import styles from "./FormField.module.css";
 
 export default function FormField({
-  type = 'text',
+  type = "text",
   value,
   onChange,
-  placeholder = '',
+  placeholder = "",
+  label,
 }) {
   return (
-    <div className={'mt-2 mb-2 ' + styles.formField}>
+    <div className={"mt-2 mb-2 d-flex flex-column " + styles.formField}>
+      <label htmlFor={placeholder}>{label}</label>
       <input
         type={type}
-        className=''
+        className=""
         placeholder={placeholder}
         value={value}
         onChange={onChange}

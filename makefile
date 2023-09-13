@@ -1,5 +1,6 @@
 all: start
 
+
 start: 
 	$(MAKE) install
 	$(MAKE) run

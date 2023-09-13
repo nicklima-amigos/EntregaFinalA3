@@ -1,8 +1,14 @@
 all: start
 
 start: 
-	$(MAKE) install-backend && $(MAKE) install-frontend
+	$(MAKE) install
+	$(MAKE) run
+
+run:
 	$(MAKE) -j2 start-backend start-frontend
+
+install: 
+	$(MAKE) install-backend && $(MAKE) install-frontend
 
 start-backend:
 	cd src/backend && npm run dev

@@ -1,7 +1,9 @@
 all: start
 
+
 start: 
 	$(MAKE) install-backend && $(MAKE) install-frontend
+  
 	$(MAKE) -j2 start-backend start-frontend
 
 start-backend:

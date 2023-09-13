@@ -34,35 +34,35 @@ export class GamesRepository {
     return createGameResult;
   }
 
-  async find() {
+  find() {
     return this.db.query(listGames);
   }
 
-  async findByPlatform(platformId) {
+  findByPlatform(platformId) {
     return this.db.query(findGamesByPlatformIdQuery, [platformId]);
   }
 
-  async associate({ game_id, platform_id }) {
+  associate({ game_id, platform_id }) {
     return this.db.exec(createGamePlatformQuery, [game_id, platform_id]);
   }
 
-  async disassociate({ game_id, platform_id }) {
+  disassociate({ game_id, platform_id }) {
     return this.db.exec(deleteGamePlatformQuery, [game_id, platform_id]);
   }
 
-  async findOne(id) {
+  findOne(id) {
     return this.db.queryOne(findOneGameQuery, [id]);
   }
 
-  async findOneByTitle(title) {
+  findOneByTitle(title) {
     return this.db.queryOne(findOneGameByTitleQuery, [title]);
   }
 
-  async delete(id) {
+  delete(id) {
     return this.db.exec(deleteGameQuery, [id]);
   }
 
-  async update(id, { title, genre, price, developed_by, release_date }) {
+  update(id, { title, genre, price, developed_by, release_date }) {
     return this.db.exec(updateGameQuery, [
       title,
       genre,

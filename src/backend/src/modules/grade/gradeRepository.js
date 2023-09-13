@@ -10,29 +10,27 @@ export class GradesRepository {
     this.db = db;
   }
 
-  async create({ userId, gameId, grade }) {
-    return await this.db.exec(createGradeQuery, [userId, gameId, grade]);
+  create({ userId, gameId, grade }) {
+    return this.db.exec(createGradeQuery, [userId, gameId, grade]);
   }
 
-  async find() {
-    return await this.db.query(findGradesQuery);
+  find() {
+    return this.db.query(findGradesQuery);
   }
 
-  async findOne(id) {
-    return await this.db.queryOne(findOneGradeQuery, [id]);
+  findOne(id) {
+    return this.db.queryOne(findOneGradeQuery, [id]);
   }
 
-  async findGradesByUser(userId) {
+  findGradesByUser(userId) {
     return this.db.query(findGradesByUserIdQuery, [userId]);
   }
 
   async update(id, { grade }) {
-    const result = await this.db.exec(updateGradeQuery, [grade, id]);
-    return result;
+    return this.db.exec(updateGradeQuery, [grade, id]);
   }
 
-  async delete(id) {
-    const result = this.db.query(deleteGradeQuery, [id]);
-    return result;
+  delete(id) {
+    return this.db.query(deleteGradeQuery, [id]);
   }
 }

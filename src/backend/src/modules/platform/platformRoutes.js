@@ -1,22 +1,22 @@
-// @ts-check
-
 import { Router } from "express";
-import { PlatformsController } from "./platformController.js";
+import { validationMiddleware } from "../../middleware/validation.js";
+import { validateCreatePlatform } from "./validation/validateCreatePlatform.js";
+import { validateUpdatePlatform } from "./validation/validateUpdatePlatform.js";
 
-/**
- *
- * @param {PlatformsController} controller
- */
 export const platformsRoutes = (controller) => {
   const router = Router();
   router
     .route("/")
-    .post((req, res, next) => controller.create(req, res, next))
+    .post(validationMiddleware(validateCreatePlatform), (req, res, next) =>
+      controller.create(req, res, next),
+    )
     .get((req, res, next) => controller.find(req, res, next));
   router
     .route("/:id")
     .get((req, res, next) => controller.findOne(req, res, next))
-    .put((req, res, next) => controller.update(req, res, next))
+    .put(validationMiddleware(validateUpdatePlatform), (req, res, next) =>
+      controller.update(req, res, next),
+    )
     .delete((req, res, next) => controller.delete(req, res, next));
 
   router

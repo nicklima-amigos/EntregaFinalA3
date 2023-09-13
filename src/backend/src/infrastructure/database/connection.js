@@ -1,24 +1,11 @@
-// @ts-check
-
 import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
-
-/**
- * @typedef {object} QueryResult
- * @property {number} id
- * @property {number} changes
- */
+import { fixtures } from "./queries/fixtures/fixtures.js";
 
 export class DatabaseConnection {
-  /**
-   * @type {DatabaseConnection}
-   */
   static __instance;
   static __isInternalConstructing = false;
 
-  /**
-   * @param {string} connString
-   */
   constructor(connString) {
     if (!DatabaseConnection.__isInternalConstructing) {
       throw new Error("Cannot instantiate singleton class using constructor");
@@ -27,30 +14,21 @@ export class DatabaseConnection {
       if (err) {
         console.error(err.message);
       }
-      this.createTables(init);
+      this.createTables().then(() => this.insertFixtures());
       console.log("Connected to the database.");
     });
     DatabaseConnection.__isInternalConstructing = false;
   }
 
-  /**
-   *
-   * @param {string} connString
-   * @returns
-   */
   static getInstance(connString) {
     if (DatabaseConnection.__instance) {
       return DatabaseConnection.__instance;
     }
     this.__isInternalConstructing = true;
-    return new DatabaseConnection(connString);
+    this.__instance = new DatabaseConnection(connString);
+    return this.__instance;
   }
 
-  /**
-   * @param {string} queryString
-   * @param {any[]} params
-   * @returns {Promise<QueryResult>}
-   */
   async exec(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.run(queryString, params, function (err) {
@@ -63,11 +41,6 @@ export class DatabaseConnection {
     });
   }
 
-  /**
-   * @param {string} queryString
-   * @param {any[]} params
-   * @returns {Promise<any[]>}
-   */
   async query(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.all(queryString, params, (err, rows) => {
@@ -80,12 +53,6 @@ export class DatabaseConnection {
     });
   }
 
-  /**
-   *
-   * @param {string} queryString
-   * @param {any[]} params
-   * @returns {Promise<any>}
-   */
   async queryOne(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.db.get(queryString, params, (err, row) => {
@@ -97,21 +64,22 @@ export class DatabaseConnection {
       });
     });
   }
+  async initialize() {}
 
-  /**
-   *
-   * @param {string[]} queries
-   */
-  createTables(queries) {
-    this.db.serialize(() => {
-      for (let q of queries) {
-        this.db.run(q, (err) => {
-          if (err) {
-            throw err;
-          }
-        });
+  async createTables() {
+    for (let q of init) {
+      await this.exec(q);
+    }
+    console.log("Tables created");
+  }
+
+  async insertFixtures() {
+    try {
+      for (let q of fixtures) {
+        await this.exec(q);
       }
-    });
-    console.log("tables created");
+    } catch (e) {
+      console.log("Failed to insert fixtures. Probably already inserted.");
+    }
   }
 }

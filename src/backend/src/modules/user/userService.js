@@ -1,22 +1,10 @@
-// @ts-check
-
 import { HttpError } from "../../exceptions/httpError.js";
-import "./dto/createUserDto.js";
-import "./dto/updateUserDto.js";
-import { UsersRepository } from "./userRepository.js";
 
 export class UsersService {
-  /**
-   *
-   * @param {UsersRepository} repository
-   */
   constructor(repository) {
     this.repository = repository;
   }
 
-  /**
-   * @param {CreateUserDto} createUserDto
-   */
   async create({ username, email, password, birth_date }) {
     let existingUser = await this.repository.findOneByEmail(email);
     if (existingUser) {
@@ -34,13 +22,10 @@ export class UsersService {
     });
   }
 
-  async find() {
+  find() {
     return this.repository.find();
   }
 
-  /**
-   * @param {number} userId
-   */
   async findOne(userId) {
     const user = await this.repository.findOne(userId);
     if (!user) {
@@ -49,11 +34,6 @@ export class UsersService {
     return user;
   }
 
-  /**
-   *
-   * @param {string} email
-   * @returns
-   */
   async findOneByEmail(email) {
     const user = await this.repository.findOneByEmail(email);
     if (!user) {
@@ -62,11 +42,6 @@ export class UsersService {
     return user;
   }
 
-  /**
-   *
-   * @param {string} username
-   * @returns
-   */
   async findOneByUsername(username) {
     const user = await this.repository.findOneByUsername(username);
     if (!user) {
@@ -75,19 +50,11 @@ export class UsersService {
     return user;
   }
 
-  /**
-   *
-   * @param {number} userId
-   */
   async delete(userId) {
     await this.findOne(userId);
     return this.repository.delete(userId);
   }
 
-  /**
-   * @param {number} id
-   * @param {UpdateUserDto} updateUserDto
-   */
   async update(id, updateUserDto) {
     await this.findOne(id);
     return this.repository.update(id, updateUserDto);

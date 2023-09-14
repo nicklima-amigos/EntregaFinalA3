@@ -1,3 +1,5 @@
 .button {
-  width: 100px;
+  width: fit-content;
+  background-color: #c94a21;
+  color: white;
 }

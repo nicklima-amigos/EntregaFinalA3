@@ -1,25 +1,10 @@
-// @ts-check
-
-import "./dto/createGameDto.js";
-import { GamesService } from "./gameService.js";
-
 export class GamesController {
-  /**
-   *
-   * @param {GamesService} service
-   */
   constructor(service) {
     this.service = service;
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async create(req, res, next) {
     try {
-      /**
-       * @type {CreateGameDto}
-       */
       const gameDto = req.body;
       const result = await this.service.create(gameDto);
       res.status(201).json(result);
@@ -28,9 +13,6 @@ export class GamesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async find(req, res, next) {
     try {
       const result = await this.service.find();
@@ -40,9 +22,16 @@ export class GamesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
+  async findByPlatform(req, res, next) {
+    try {
+      const { platformId } = req.params;
+      const result = await this.service.findByPlatform(+platformId);
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async findOne(req, res, next) {
     try {
       const { id } = req.params;
@@ -53,9 +42,6 @@ export class GamesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async delete(req, res, next) {
     try {
       const { id } = req.params;
@@ -66,14 +52,11 @@ export class GamesController {
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async update(req, res, next) {
     try {
       const { id } = req.params;
-      const gameDto = req.body;
-      const result = await this.service.update(+id, gameDto);
+      const updateGameDto = req.body;
+      const result = await this.service.update(+id, updateGameDto);
       res.status(200).json(result);
     } catch (err) {
       next(err);

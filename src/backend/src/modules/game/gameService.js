@@ -1,28 +1,11 @@
-// @ts-check
-
-import { PlatformsRepository } from "../platform/platformRepository.js";
-import "./dto/associateGamePlatformDto.js";
-import "./dto/createGameDto.js";
-import "./dto/disassociateGamePlatformDto.js";
-import "./dto/updateGameDto.js";
-import { GamesRepository } from "./gameRepository.js";
 import { HttpError } from "../../exceptions/httpError.js";
 
 export class GamesService {
-  /**
-   *
-   * @param {GamesRepository} gameRepository
-   * @param {PlatformsRepository} platformRepository
-   */
   constructor(gameRepository, platformRepository) {
     this.gameRepository = gameRepository;
     this.platformRepository = platformRepository;
   }
 
-  /**
-   * @param {CreateGameDto} createGameDto
-   * @returns
-   */
   async create(createGameDto) {
     const existingGame = await this.gameRepository.findOneByTitle(
       createGameDto.title,
@@ -36,49 +19,43 @@ export class GamesService {
     if (!existingPlatform) {
       throw new HttpError(404, "Platform not found!");
     }
+    return this.gameRepository.create(createGameDto);
   }
 
-  /**
-   *
-   * @param {DisassociateGamePlatformDto} DisassociateGamePlatformDto
-   * @returns
-   */
-  async disassociate({ game_id, platform_id }) {
-    return this.gameRepository.disassociate({ game_id, platform_id });
-  }
-
-  async find() {
+  find() {
     return this.gameRepository.find();
   }
 
-  /**
-   *
-   * @param {number} id
-   */
+  findByPlatform(platformId) {
+    return this.gameRepository.findByPlatform(platformId);
+  }
+
   async findOne(id) {
-    return this.gameRepository.findOne(id);
+    const game = await this.gameRepository.findOne(id);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return game;
   }
-  /**
-   * @param {string} title
-   */
+
   async findOneByTitle(title) {
-    return this.gameRepository.findOneByTitle(title);
+    const game = await this.gameRepository.findOneByTitle(title);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return game;
   }
-  /**
-   *
-   * @param {number} id
-   */
+
   async delete(id) {
+    await this.findOne(id);
     return this.gameRepository.delete(id);
   }
 
-  /**
-   *
-   * @param {number} id
-   * @param {UpdateGameDto} updateGameDto
-   * @returns
-   */
   async update(id, updateGameDto) {
+    const game = await this.findOneByTitle(updateGameDto.title);
+    if (game.title === updateGameDto.title) {
+      throw new HttpError(404, "A game with this title already exists!");
+    }
     return this.gameRepository.update(id, updateGameDto);
   }
 }

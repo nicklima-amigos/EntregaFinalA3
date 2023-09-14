@@ -1,58 +1,49 @@
-// @ts-check
-import "./dto/createPlatformDto.js";
-import "./dto/findOnePlatformDto.js";
-import "./dto/updatePlatformDto.js";
-import { DatabaseConnection } from "../../infrastructure/database/connection.js";
-import { createPlatformQuery } from "../../infrastructure/database/queries/platforms/createPlatform.js";
-import { findPlatformsQuery } from "../../infrastructure/database/queries/platforms/findPlatforms.js";
-import { findOnePlatformQuery } from "../../infrastructure/database/queries/platforms/findOnePlatform.js";
-import { updatePlatformQuery } from "../../infrastructure/database/queries/platforms/updatePlatform.js";
-import { deletePlatformQuery } from "../../infrastructure/database/queries/platforms/deletePlatform.js";
-import { findOnePlatformByNameQuery } from "../../infrastructure/database/queries/platforms/findOnePlatformByName.js";
+import { createGamePlatformQuery } from "../common/queries/createGamePlatform.js";
+import Game from "../game/gameModel.js";
+import { createPlatformQuery } from "./queries/createPlatform.js";
+import { deletePlatformQuery } from "./queries/deletePlatform.js";
+import { findOnePlatformQuery } from "./queries/findOnePlatform.js";
+import { findOnePlatformByNameQuery } from "./queries/findOnePlatformByName.js";
+import { findPlatformGamesQuery } from "./queries/findPlatformGames.js";
+import { findPlatformsQuery } from "./queries/findPlatforms.js";
+import { updatePlatformQuery } from "./queries/updatePlatform.js";
+
 export class PlatformsRepository {
-  /**
-   * @constructor
-   * @param {DatabaseConnection} db
-   */
   constructor(db) {
     this.db = db;
   }
 
-  /**
-   * @param {CreatePlatformDto} CreatePlatformDto
-   */
   async create({ name }) {
     return await this.db.exec(createPlatformQuery, [name]);
+  }
+
+  async addGame(id, gameId) {
+    const result = await this.db.exec(createGamePlatformQuery, [gameId, id]);
+    return result;
   }
 
   async find() {
     return await this.db.query(findPlatformsQuery);
   }
-  /**
-   * @param {number} id
-   */
+
   async findOne(id) {
-    return await this.db.queryOne(findOnePlatformQuery, [id]);
+    const platform = await this.db.queryOne(findOnePlatformQuery, [id]);
+    const games = await this.db.query(findPlatformGamesQuery, [id]);
+    return {
+      ...platform,
+      games: games.map((game) => new Game(game)),
+    };
   }
 
-  /**
-   * @param {string} name
-   */
   async findOneByName(name) {
     return this.db.queryOne(findOnePlatformByNameQuery, [name]);
   }
 
-  /**
-   * @param {UpdatePlatformDto} UpdatePlatformDto
-   */
-  async update({ id, name }) {
+  async update(id, { name }) {
     const result = await this.db.exec(updatePlatformQuery, [name, id]);
     return result;
   }
 
-  /**
-   * @param {number} id
-   */
   async delete(id) {
     const result = this.db.query(deletePlatformQuery, [id]);
     return result;

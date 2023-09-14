@@ -1,5 +1,3 @@
-// @ts-check
-
 import { App } from "./app.js";
 import { DatabaseConnection } from "./infrastructure/database/connection.js";
 

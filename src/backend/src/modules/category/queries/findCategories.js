@@ -1,3 +1,3 @@
 export const findCategoriesQuery = `
-    SELECT * FROM categories
+    SELECT * FROM categories;
 `;

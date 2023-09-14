@@ -20,10 +20,10 @@ export class App {
     const router = Router();
 
     router
-      .use("/categories", categoriesModule(this.db))
       .use("/games", gamesModule(this.db))
       .use("/platforms", platformsModule(this.db))
       .use("/users", usersModule(this.db))
+      .use("/categories", categoriesModule(this.db))
       .use("/grades", gradesModule(this.db))
       .use(errorHandlingMiddleware);
     this.app.use(router);

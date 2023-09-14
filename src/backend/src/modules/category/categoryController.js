@@ -1,97 +1,81 @@
-// @ts-check
-
-import "./dto/createCategoryDto.js";
-import "./dto/findOneCategoryDto.js";
-import "./dto/updateCategoryDto.js";
-import {CategoriesService} from './categoryService.js';
-
 export class CategoriesController {
-  /**
-   *
-   * @param {CategoriesService} service
-   */
   constructor(service) {
     this.service = service;
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async create(req, res, next) {
     try {
-      /**
-       * @type {CreateCategoryDto}
-       */
       const categoryDto = req.body;
-      console.log('categoryDto', categoryDto)
-      const result = await this.service.create(categoryDto);
-      res.status(201).json(result);
-    } catch (err) {
-      next(err);
+      const category = await this.service.create(categoryDto);
+      res.status(201).json(category);
+    } catch (error) {
+      next(error);
     }
   }
 
-  /**
-   * @type {import('express').RequestHandler}
-   */
   async find(req, res, next) {
     try {
-      const result = await this.service.find();
-      res.status(200).json(result);
-    } catch (err) {
-      next(err);
+      const categories = await this.service.find();
+      res.status(200).json(categories);
+    } catch (error) {
+      next(error);
     }
   }
 
-  /**
-   * @type { import('express').RequestHandler}
-   */
+  async findCategoriesByGameId(req, res, next) {
+    try {
+      const { gameId } = req.params;
+      const categories = await this.service.findCategoriesByGameId({ gameId });
+      res.status(200).json(categories);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findCategoriesByUserId(req, res, next) {
+    try {
+      const { userId } = req.params;
+      const categories = await this.service.findCategoriesByUserId({ userId });
+      res.status(200).json(categories);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async findOne(req, res, next) {
     try {
-      /**
-       * @param {FindOneCategoryDto} req.params
-       */
       const { id } = req.params;
-      const result = await this.service.findOne(Number(id));
-      res.status(200).json(result);
-    } catch (err) {
-      next(err);
+
+      const category = await this.service.findOne(Number(id));
+      res.status(200).json(category);
+    } catch (error) {
+      next(error);
     }
   }
 
-  /**
-   * @type { import('express').RequestHandler}
-   */
   async update(req, res, next) {
     try {
-      /**
-       * @param {FindOneCategoryDto} req.params
-       */
       const { id } = req.params;
-      /**
-       * @type {UpdateCategoryDto}
-       */
+
       const { category } = req.body;
+
       const result = await this.service.update({ id: Number(id), category });
+
       res.status(200).json(result);
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   }
 
-  /**
-   * @type { import('express').RequestHandler}
-   */
   async delete(req, res, next) {
     try {
-      /**
-       * @param {FindOneCategoryDto} req.params
-       */
       const { id } = req.params;
-      const result = await this.service.delete(Number(id));
-      res.status(204).send(result);
-    } catch (err) {
-      next(err);
+
+      await this.service.delete(Number(id));
+
+      res.status(204).send();
+    } catch (error) {
+      next(error);
     }
   }
 }

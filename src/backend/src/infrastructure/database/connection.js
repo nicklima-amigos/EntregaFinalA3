@@ -2,14 +2,17 @@ import sqlite from "sqlite3";
 import { init } from "./queries/migrations/init.js";
 import { fixtures } from "./queries/fixtures/fixtures.js";
 
-export class DatabaseConnection {
-  static __instance;
-  static __isInternalConstructing = false;
+let instance = null;
 
+export const getDatabaseConnection = () => {
+  if (!instance) {
+    instance = new DatabaseConnection("./backend.db");
+  }
+  return instance;
+};
+
+class DatabaseConnection {
   constructor(connString) {
-    if (!DatabaseConnection.__isInternalConstructing) {
-      throw new Error("Cannot instantiate singleton class using constructor");
-    }
     this.db = new sqlite.Database(connString, (err) => {
       if (err) {
         console.error(err.message);
@@ -17,16 +20,6 @@ export class DatabaseConnection {
       this.createTables().then(() => this.insertFixtures());
       console.log("Connected to the database.");
     });
-    DatabaseConnection.__isInternalConstructing = false;
-  }
-
-  static getInstance(connString) {
-    if (DatabaseConnection.__instance) {
-      return DatabaseConnection.__instance;
-    }
-    this.__isInternalConstructing = true;
-    this.__instance = new DatabaseConnection(connString);
-    return this.__instance;
   }
 
   async exec(queryString, params = []) {

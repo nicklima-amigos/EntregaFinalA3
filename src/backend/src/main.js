@@ -1,10 +1,11 @@
-// @ts-check
-
-import { app } from './app.js';
+import { App } from "./app.js";
+import { getDatabaseConnection } from "./infrastructure/database/connection.js";
 
 const bootstrap = async () => {
+  const db = getDatabaseConnection();
+  const app = new App(db);
+
   await app.init();
-  console.log('app initialized');
   app.listen();
 };
 

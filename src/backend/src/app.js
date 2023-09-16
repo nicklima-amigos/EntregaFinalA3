@@ -1,47 +1,42 @@
-// @ts-check
-
-import express, { Router } from 'express';
-import { GamesController } from './modules/game/controller.js';
-import { GamesRepository } from './modules/game/repository.js';
-import startGamesRoutes from './modules/game/routes.js';
-import { GamesService } from './modules/game/service.js';
-
-class App {
-  constructor() {
+import express, { Router } from "express";
+import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
+import { gamesModule } from "./modules/game/gameModule.js";
+import { gradesModule } from "./modules/grade/gradeModule.js";
+import { categoriesModule } from "./modules/category/categoryModule.js";
+import { platformsModule } from "./modules/platform/platformModule.js";
+import { usersModule } from "./modules/user/usersModule.js";
+import cors from "cors";
+export class App {
+  constructor(db) {
+    this.db = db;
     this.app = express();
   }
 
   attachMiddleware() {
-    this.app.use(express.json());
+    this.app.use(express.json()).use(cors());
   }
 
-  /**
-   *
-   * @param {Router} mainRouter
-   */
-  routes(mainRouter) {
-    const gamesRepository = new GamesRepository();
-    const gamesService = new GamesService(gamesRepository);
-    const gamesController = new GamesController(gamesService);
-    mainRouter.use('/games', startGamesRoutes(gamesController));
+  routes() {
+    const router = Router();
+
+    router
+      .use("/games", gamesModule(this.db))
+      .use("/platforms", platformsModule(this.db))
+      .use("/users", usersModule(this.db))
+      .use("/categories", categoriesModule(this.db))
+      .use("/grades", gradesModule(this.db))
+      .use(errorHandlingMiddleware);
+    this.app.use(router);
   }
 
   async init() {
     this.attachMiddleware();
-
-    // initialize routes
-    const mainRouter = express.Router();
-    this.app.use('/api', mainRouter);
-
-    this.routes(mainRouter);
+    this.routes();
   }
 
   listen() {
-    console.log('server about to listen');
-    return this.app.listen('3000', () => {
-      console.log('Server is running on port 3000');
+    return this.app.listen("3000", () => {
+      console.log("Server is running on port 3000");
     });
   }
 }
-
-export const app = new App();

@@ -1,4 +1,31 @@
 {
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnPaste": true,
+  "editor.wordWrap": "bounded",
+  "editor.trimAutoWhitespace": true,
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.formatOnSave": true,
+  "files.autoSave": "off",
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "javascript.validate.enable": true,
+  "git.enableSmartCommit": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.sideBar.location": "left",
+  "explorer.confirmDelete": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.fontFamily": "'JetBrains Mono', 'monospace', monospace",
   "sqltools.connections": [
     {
       "previewLimit": 50,
@@ -7,5 +34,5 @@
       "database": "${workspaceFolder:backend}/backend.db"
     }
   ],
-  "sqltools.useNodeRuntime": true
+  "sqltools.useNodeRuntime": true,
 }

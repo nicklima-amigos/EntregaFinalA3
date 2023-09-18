@@ -25,6 +25,9 @@ export class App {
       .use("/users", usersModule(this.db))
       .use("/categories", categoriesModule(this.db))
       .use("/grades", gradesModule(this.db))
+      .get("/", (req, res) => {
+        res.status(200).send({ status: "Ok" });
+      })
       .use(errorHandlingMiddleware);
     this.app.use(router);
   }

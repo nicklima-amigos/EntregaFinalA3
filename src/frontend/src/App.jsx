@@ -6,8 +6,12 @@ import GameForm from './pages/GameForm/GameForm';
 import CategoryForm from './pages/CategoryForm/CategoryForm';
 import styles from './App.module.css';
 import SignUpForm from './pages/SignUpForm/SignUpForm';
+import { AuthContext } from './contexts/authContext';
+import { useState } from 'react';
 
 function App() {
+  const [user, setUser] = useState(null);
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -50,7 +54,9 @@ function App() {
 
   return (
     <div className={styles.mainContainer}>
-      <RouterProvider router={router} />
+      <AuthContext.Provider value={{ user, setUser }}>
+        <RouterProvider router={router} />
+      </AuthContext.Provider>
     </div>
   );
 }

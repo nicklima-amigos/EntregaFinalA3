@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import styles from './App.module.css';
-import CategoryForm from './pages/CategoryForm/CategoryForm';
-import GameForm from './pages/GameForm/GameForm';
 import LoginForm from './pages/LoginForm/LoginForm';
-import PlatformForm from './pages/PlatformForm/PlatformForm';
 import Platforms from './pages/Platforms/Platforms';
+import PlatformForm from './pages/PlatformForm/PlatformForm';
+import GameForm from './pages/GameForm/GameForm';
+import CategoryForm from './pages/CategoryForm/CategoryForm';
+import styles from './App.module.css';
 import SignUpForm from './pages/SignUpForm/SignUpForm';
 
 function App() {

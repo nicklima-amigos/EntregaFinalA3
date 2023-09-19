@@ -11,7 +11,6 @@ export default function Platforms() {
 
   const getPlatforms = async () => {
     const response = await apiClient.get("/platforms");
-    console.log(response);
     setPlatforms(response.data);
     setLoading(false);
   };

@@ -17,7 +17,7 @@ export default function SignUpForm() {
     setTimeout(() => {
       setLoading(false);
       console.log(
-        `usuario criado: Username: ${username} email: ${email} password: ${password} created_at: ${createdAt}`
+        `usuario criado: Username: ${username} email: ${email} password: ${password} created_at: ${new Date()}`
       );
     }, 2000);
   };

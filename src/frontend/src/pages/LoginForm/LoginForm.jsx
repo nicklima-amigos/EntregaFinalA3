@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormField from "../../components/UI/FormField/FormField";
 import Button from "../../components/UI/Button/Button";
@@ -13,15 +13,11 @@ export default function LoginForm() {
 
   const handleLogin = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      console.log(`Login com email: ${email} e senha: ${password}`);
-      navigate("/platforms");
-    }, 2000);
   };
   const handleSignUp = () => {
     navigate("signup");
   };
+
   return (
     <div className="container mt-5 mx-auto d-flex flex-column align-items-center justify-content-center h-100 w-100 ">
       <MainLogo />

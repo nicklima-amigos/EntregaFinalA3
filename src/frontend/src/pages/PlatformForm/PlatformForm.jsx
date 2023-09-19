@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom";
 import FormField from "../../components/UI/FormField/FormField";
 import Button from "../../components/UI/Button/Button";
 import MainLogo from "../../components/icons/MainLogo";
+import { apiClient } from "../../services/apiClient";
 
 export default function PlatformForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      console.log(`Plataforma criada: ${name}`);
-    }, 2000);
+    await apiClient.post("/platforms", { name });
+    setLoading(false);
+    navigate("/platforms");
   };
   const goBack = () => {
     navigate(-1);

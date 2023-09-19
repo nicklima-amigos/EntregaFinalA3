@@ -27,10 +27,9 @@ export const apiClient = {
 };
 
 const fetchFromBaseUrl = async (endpoint, requestData, options) => {
-  const headers = {
-    "Content-Type": "application/json",
-    ...options.headers,
-  };
+  if (!options.headers) options.headers = {};
+  const { headers } = options;
+  headers["Content-Type"] = "application/json";
   const body = JSON.stringify(requestData);
   const response = await fetch(`${baseURL}${endpoint}`, {
     headers,

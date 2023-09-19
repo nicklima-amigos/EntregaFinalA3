@@ -1,4 +1,4 @@
-export const validateUpdatePlatform = (body) => {
+export const validateUpdatePlatform = (body, params) => {
   const { name } = body;
   const errors = {};
   if (!name) {

@@ -6,6 +6,7 @@ import { categoriesModule } from "./modules/category/categoryModule.js";
 import { platformsModule } from "./modules/platform/platformModule.js";
 import { usersModule } from "./modules/user/usersModule.js";
 import cors from "cors";
+import { authModule } from "./modules/auth/authModule.js";
 export class App {
   constructor(db) {
     this.db = db;
@@ -25,6 +26,7 @@ export class App {
       .use("/users", usersModule(this.db))
       .use("/categories", categoriesModule(this.db))
       .use("/grades", gradesModule(this.db))
+      .use("/auth", authModule(this.db))
       .get("/", (req, res) => {
         res.status(200).send({ status: "Ok" });
       })

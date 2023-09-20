@@ -1,7 +1,7 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
 
 export const validateSignUp = (body) => {
-  const { email, password, username, birth_date } = body;
+  const { email, password, confirm_password, username, birth_date } = body;
   const errors = {};
   if (!username) {
     errors.username = "username is required";
@@ -18,7 +18,7 @@ export const validateSignUp = (body) => {
   } else if (password?.length < 6) {
     errors.password = "password must be at least 6 characters long";
   }
-  if (password !== confirmPassword) {
+  if (password !== confirm_password) {
     errors.password = "passwords do not match";
   }
   if (!birth_date) {

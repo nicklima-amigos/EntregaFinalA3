@@ -31,6 +31,26 @@ export class UserController {
     }
   }
 
+  async findOneByEmail(req, res, next) {
+    try {
+      const { email } = req.params;
+      const result = await this.service.findOneByEmail(email);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findOneByUsername(req, res, next) {
+    try {
+      const { username } = req.params;
+      const result = await this.service.findOneByUsername(username);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async delete(req, res, next) {
     try {
       const { id } = req.params;

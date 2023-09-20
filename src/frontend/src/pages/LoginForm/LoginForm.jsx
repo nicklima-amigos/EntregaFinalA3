@@ -1,18 +1,29 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormField from "../../components/UI/FormField/FormField";
 import Button from "../../components/UI/Button/Button";
 import MainLogo from "../../components/icons/MainLogo";
 import styles from "./LoginForm.module.css";
+import { apiClient } from "../../services/apiClient";
+import { AuthContext } from "../../contexts/authContext";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [formErrors, setFormErrors] = useState("");
+  const { setUser } = useContext(AuthContext);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
+    const response = await apiClient.post("/auth/signin", { email, password });
+    setLoading(false);
+    if (response.status !== 200) {
+      setFormErrors("Credenciais inválidas. Tente novamente.");
+      return;
+    }
+    setUser(response.data);
   };
   const handleSignUp = () => {
     navigate("signup");
@@ -21,6 +32,7 @@ export default function LoginForm() {
   return (
     <div className="container mt-5 mx-auto d-flex flex-column align-items-center justify-content-center h-100 w-100 ">
       <MainLogo />
+      {formErrors && <p className="text-danger">{formErrors}</p>}
       <form className="col-4 mx-auto d-flex align-content-center flex-wrap flex-column">
         <FormField
           type="email"

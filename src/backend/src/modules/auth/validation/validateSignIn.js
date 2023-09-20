@@ -1,9 +1,9 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
 
 export const validateSignIn = (body) => {
-  const { username, password } = body;
+  const { email, password } = body;
   const errors = {};
-  if (!username) {
+  if (!email) {
     errors.username = "username is required";
   }
   if (!password) {

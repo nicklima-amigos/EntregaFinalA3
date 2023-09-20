@@ -5,24 +5,29 @@ export class AuthService {
     this.userService = userService;
   }
 
-  async signIn({ username, password }) {
+  async signIn({ email, password }) {
     let user;
     try {
-      user = await this.userService.findOneByUsername(username);
+      user = await this.userService.findOneByEmail(email);
     } catch (e) {
       throw new HttpError(401, "invalid credentials");
     }
     if (password != user.password) {
       throw new HttpError(401, "invalid credentials");
     }
-    return { token: "authorized" };
+    return {
+      token: "authorized",
+      username: user.username,
+      email: user.email,
+      birthDate: user.birthDate,
+    };
   }
 
-  async signUp({ username, email, birthDate, password }) {
+  async signUp({ username, email, birth_date, password }) {
     return this.userService.create({
       username,
       email,
-      birthDate,
+      birth_date,
       password,
     });
   }

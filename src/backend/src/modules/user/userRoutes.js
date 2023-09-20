@@ -20,5 +20,13 @@ export const usersRoutes = (controller) => {
       controller.update(req, res, next),
     );
 
+  usersRoutes
+    .route("/email/:email")
+    .get((req, res, next) => controller.findOneByEmail(req, res, next));
+
+  usersRoutes
+    .route("/username/:username")
+    .get((req, res, next) => controller.findOneByUsername(req, res, next));
+
   return usersRoutes;
 };

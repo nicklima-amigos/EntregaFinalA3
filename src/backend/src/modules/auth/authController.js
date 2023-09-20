@@ -6,7 +6,7 @@ export class AuthController {
   async signUp(req, res, next) {
     try {
       const result = await this.authService.signUp(req.body);
-      res.status(200).json(result);
+      res.status(201).json(result);
     } catch (e) {
       next(e);
     }

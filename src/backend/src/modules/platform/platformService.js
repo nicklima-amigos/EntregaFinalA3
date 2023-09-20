@@ -27,7 +27,6 @@ export class PlatformsService {
 
   async findOne(id) {
     const platform = await this.repository.findOne(id);
-    console.log({ platform });
     if (!platform) {
       throw new HttpError(404, "Not found!");
     }

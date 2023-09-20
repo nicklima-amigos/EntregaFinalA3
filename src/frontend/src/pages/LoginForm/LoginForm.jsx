@@ -36,7 +36,7 @@ export default function LoginForm() {
     const { token } = JSON.parse(user);
     apiClient
       .get("/auth/authorize", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: token },
       })
       .then((res) => {
         if (res.status !== 200) {

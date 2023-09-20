@@ -45,7 +45,7 @@ export class PlatformsService {
     const foundPlatform = await this.findOne(id);
     if (foundPlatform.name === name) {
       throw new HttpError(
-        404,
+        409,
         "Bad Request! A platform with this name already exists!",
       );
     }

@@ -43,14 +43,21 @@ export default function SignUpForm() {
       setFormError("Favor inserir um Email válido");
       return false;
     }
-    const usernameExists = await apiClient.get(`/users/username/${username}`);
-    const emailExists = await apiClient.get(`/users/email/${email}`);
-    if (usernameExists.status === 200) {
-      setUsernameError("Username já cadastrado");
-      return false;
-    }
-    if (emailExists.status === 200) {
-      setEmailError("Email já cadastrado");
+    const existChecks = await Promise.all([
+      apiClient.get(`/users/username/${username}`).then((res) => {
+        if (res.status === 200) {
+          setUsernameError("Username já cadastrado");
+          return false;
+        }
+      }),
+      apiClient.get(`/users/email/${email}`).then((res) => {
+        if (res.status === 200) {
+          setEmailError("Email já cadastrado");
+          return false;
+        }
+      }),
+    ]);
+    if (existChecks.includes(false)) {
       return false;
     }
     return true;
@@ -63,7 +70,7 @@ export default function SignUpForm() {
       setLoading(false);
       return;
     }
-    const { status } = await apiClient.post("/auth/signup", {
+    const { status } = await apiClient.post("/users", {
       username,
       email,
       password,
@@ -72,12 +79,13 @@ export default function SignUpForm() {
     });
     setLoading(false);
     console.log({ status });
-    if (status !== 201) {
-      console.log("bad status:", { status });
-      setFormError("Erro ao criar usuário. Tente novamente.");
+    if (status === 201) {
+      navigate("/");
       return;
     }
-    navigate("/");
+    console.log("bad status:", { status });
+    setFormError("Erro ao criar usuário. Tente novamente.");
+    return;
   };
 
   const goBack = () => {

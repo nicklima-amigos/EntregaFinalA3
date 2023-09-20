@@ -11,7 +11,7 @@ export class GamesService {
       createGameDto.title,
     );
     if (existingGame) {
-      throw new HttpError(400, "Bad Request! Game already exists!");
+      throw new HttpError(409, "Bad Request! Game already exists!");
     }
     const existingPlatform = await this.platformRepository.findOne(
       createGameDto.platform_id,

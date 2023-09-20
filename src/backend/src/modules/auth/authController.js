@@ -3,15 +3,6 @@ export class AuthController {
     this.authService = authService;
   }
 
-  async signUp(req, res, next) {
-    try {
-      const result = await this.authService.signUp(req.body);
-      res.status(201).json(result);
-    } catch (e) {
-      next(e);
-    }
-  }
-
   async signIn(req, res, next) {
     try {
       const result = await this.authService.signIn(req.body);

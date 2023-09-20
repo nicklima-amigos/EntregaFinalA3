@@ -24,6 +24,7 @@ export default function LoginForm() {
       return;
     }
     setUser(response.data);
+    navigate("/games");
   };
   const handleSignUp = () => {
     navigate("signup");

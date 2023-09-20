@@ -78,7 +78,6 @@ export default function SignUpForm() {
       birth_date: birthDate,
     });
     setLoading(false);
-    console.log({ status });
     if (status === 201) {
       navigate("/");
       return;

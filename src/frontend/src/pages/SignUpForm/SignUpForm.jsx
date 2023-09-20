@@ -53,7 +53,6 @@ export default function SignUpForm() {
       setEmailError("Email já cadastrado");
       return false;
     }
-
     return true;
   };
 
@@ -64,7 +63,7 @@ export default function SignUpForm() {
       setLoading(false);
       return;
     }
-    const { status } = apiClient.post("/auth/signup", {
+    const { status } = await apiClient.post("/auth/signup", {
       username,
       email,
       password,
@@ -72,7 +71,9 @@ export default function SignUpForm() {
       birth_date: birthDate,
     });
     setLoading(false);
+    console.log({ status });
     if (status !== 201) {
+      console.log("bad status:", { status });
       setFormError("Erro ao criar usuário. Tente novamente.");
       return;
     }

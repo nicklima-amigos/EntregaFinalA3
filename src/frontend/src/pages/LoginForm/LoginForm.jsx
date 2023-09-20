@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormField from "../../components/UI/FormField/FormField";
 import Button from "../../components/UI/Button/Button";
@@ -24,8 +24,29 @@ export default function LoginForm() {
       return;
     }
     setUser(response.data);
+    localStorage.setItem("user", JSON.stringify(response.data));
     navigate("/games");
   };
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      return;
+    }
+    const { token } = JSON.parse(user);
+    apiClient
+      .get("/auth/authorize", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        }
+        setUser(JSON.parse(user));
+        navigate("/games");
+      });
+  }, [setUser, navigate]);
+
   const handleSignUp = () => {
     navigate("signup");
   };

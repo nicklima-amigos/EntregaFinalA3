@@ -24,7 +24,7 @@ export class AuthService {
     };
   }
 
-  async authorize({ token }) {
+  async authorize(token) {
     if (!token) {
       throw new HttpError(403, "forbidden");
     }

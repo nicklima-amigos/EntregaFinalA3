@@ -14,7 +14,7 @@ export class AuthController {
 
   async authorize(req, res, next) {
     try {
-      const result = await this.authService.authorize(req.body);
+      const result = await this.authService.authorize(req.get("authorization"));
       return res.status(200).json(result);
     } catch (e) {
       next(e);

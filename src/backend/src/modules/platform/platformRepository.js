@@ -13,21 +13,23 @@ export class PlatformsRepository {
     this.db = db;
   }
 
-  async create({ name }) {
-    return await this.db.exec(createPlatformQuery, [name]);
+  create({ name }) {
+    return this.db.exec(createPlatformQuery, [name]);
   }
 
-  async addGame(id, gameId) {
-    const result = await this.db.exec(createGamePlatformQuery, [gameId, id]);
-    return result;
+  addGame(id, gameId) {
+    return this.db.exec(createGamePlatformQuery, [gameId, id]);
   }
 
-  async find() {
-    return await this.db.query(findPlatformsQuery);
+  find() {
+    return this.db.query(findPlatformsQuery);
   }
 
   async findOne(id) {
     const platform = await this.db.queryOne(findOnePlatformQuery, [id]);
+    if (!platform) {
+      return null;
+    }
     const games = await this.db.query(findPlatformGamesQuery, [id]);
     return {
       ...platform,
@@ -35,17 +37,15 @@ export class PlatformsRepository {
     };
   }
 
-  async findOneByName(name) {
+  findOneByName(name) {
     return this.db.queryOne(findOnePlatformByNameQuery, [name]);
   }
 
-  async update(id, { name }) {
-    const result = await this.db.exec(updatePlatformQuery, [name, id]);
-    return result;
+  update(id, { name }) {
+    return this.db.exec(updatePlatformQuery, [name, id]);
   }
 
-  async delete(id) {
-    const result = this.db.query(deletePlatformQuery, [id]);
-    return result;
+  delete(id) {
+    return this.db.query(deletePlatformQuery, [id]);
   }
 }

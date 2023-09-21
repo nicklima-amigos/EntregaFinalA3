@@ -5,8 +5,7 @@ export class PlatformsController {
 
   async create(req, res, next) {
     try {
-      const platformDto = req.body;
-      const result = await this.service.create(platformDto);
+      const result = await this.service.create(req.body);
       res.status(201).json(result);
     } catch (err) {
       next(err);
@@ -35,7 +34,7 @@ export class PlatformsController {
   async findOne(req, res, next) {
     try {
       const { id } = req.params;
-      const result = await this.service.findOne(Number(id));
+      const result = await this.service.findOne(+id);
       res.status(200).json(result);
     } catch (err) {
       next(err);

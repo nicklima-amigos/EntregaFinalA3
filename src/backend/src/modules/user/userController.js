@@ -5,8 +5,7 @@ export class UserController {
 
   async create(req, res, next) {
     try {
-      const userDto = req.body;
-      const result = await this.service.create(userDto);
+      const result = await this.service.create(req.body);
       res.status(201).json(result);
     } catch (error) {
       next(error);
@@ -32,6 +31,26 @@ export class UserController {
     }
   }
 
+  async findOneByEmail(req, res, next) {
+    try {
+      const { email } = req.params;
+      const result = await this.service.findOneByEmail(email);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findOneByUsername(req, res, next) {
+    try {
+      const { username } = req.params;
+      const result = await this.service.findOneByUsername(username);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async delete(req, res, next) {
     try {
       const { id } = req.params;
@@ -45,8 +64,7 @@ export class UserController {
   async update(req, res, next) {
     try {
       const { id } = req.params;
-      const userDto = req.body;
-      const result = await this.service.update(+id, userDto);
+      const result = await this.service.update(+id, req.body);
       res.status(200).json(result);
     } catch (error) {
       next(error);

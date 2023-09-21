@@ -34,7 +34,7 @@ export class UserController {
   async findOneByEmail(req, res, next) {
     try {
       const { email } = req.params;
-      const result = await this.service.findOneByEmail(email);
+      const { password, ...result } = await this.service.findOneByEmail(email);
       res.status(200).json(result);
     } catch (error) {
       next(error);

@@ -22,8 +22,10 @@ export class UsersService {
     });
   }
 
-  find() {
-    return this.repository.find();
+  async find() {
+    const users = await this.repository.find();
+    users.forEach((user) => delete user.password);
+    return users;
   }
 
   async findOne(userId) {
@@ -31,6 +33,7 @@ export class UsersService {
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
+    delete user.password;
     return user;
   }
 
@@ -39,6 +42,7 @@ export class UsersService {
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
+    delete user.password;
     return user;
   }
 
@@ -47,6 +51,7 @@ export class UsersService {
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
+    delete user.password;
     return user;
   }
 

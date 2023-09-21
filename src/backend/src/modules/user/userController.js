@@ -24,7 +24,7 @@ export class UserController {
   async findOne(req, res, next) {
     try {
       const { id } = req.params;
-      const result = await this.service.findOne(+id);
+      const { password, ...result } = await this.service.findOne(+id);
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -44,7 +44,8 @@ export class UserController {
   async findOneByUsername(req, res, next) {
     try {
       const { username } = req.params;
-      const result = await this.service.findOneByUsername(username);
+      const { password, ...result } =
+        await this.service.findOneByUsername(username);
       res.status(200).json(result);
     } catch (error) {
       next(error);

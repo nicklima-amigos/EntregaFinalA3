@@ -1,3 +1,3 @@
 export const findUsers = `
-    SELECT * FROM users
+    SELECT id, username, email, birth_date FROM users
 `;

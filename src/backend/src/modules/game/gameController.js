@@ -5,8 +5,7 @@ export class GamesController {
 
   async create(req, res, next) {
     try {
-      const gameDto = req.body;
-      const result = await this.service.create(gameDto);
+      const result = await this.service.create(req.body);
       res.status(201).json(result);
     } catch (err) {
       next(err);
@@ -55,8 +54,7 @@ export class GamesController {
   async update(req, res, next) {
     try {
       const { id } = req.params;
-      const updateGameDto = req.body;
-      const result = await this.service.update(+id, updateGameDto);
+      const result = await this.service.update(+id, req.body);
       res.status(200).json(result);
     } catch (err) {
       next(err);

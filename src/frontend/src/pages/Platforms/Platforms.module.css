@@ -1,8 +1,12 @@
+.icon {
+  margin: 0 10px;
+  width: 50px;
+  height: 50px;
+  background-color: none;
+  cursor: pointer;
+}
 .button {
   width: fit-content;
   background-color: #c94a21;
   color: white;
-  button + button {
-    margin-left: 5px;
-  }
 }

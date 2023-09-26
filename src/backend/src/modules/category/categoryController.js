@@ -5,8 +5,7 @@ export class CategoriesController {
 
   async create(req, res, next) {
     try {
-      const categoryDto = req.body;
-      const category = await this.service.create(categoryDto);
+      const category = await this.service.create(req.body);
       res.status(201).json(category);
     } catch (error) {
       next(error);
@@ -45,7 +44,6 @@ export class CategoriesController {
   async findOne(req, res, next) {
     try {
       const { id } = req.params;
-
       const category = await this.service.findOne(Number(id));
       res.status(200).json(category);
     } catch (error) {
@@ -56,11 +54,8 @@ export class CategoriesController {
   async update(req, res, next) {
     try {
       const { id } = req.params;
-
       const { category } = req.body;
-
       const result = await this.service.update({ id: Number(id), category });
-
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -70,9 +65,7 @@ export class CategoriesController {
   async delete(req, res, next) {
     try {
       const { id } = req.params;
-
       await this.service.delete(Number(id));
-
       res.status(204).send();
     } catch (error) {
       next(error);

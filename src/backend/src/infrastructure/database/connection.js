@@ -24,12 +24,17 @@ class DatabaseConnection {
 
   async exec(queryString, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.run(queryString, params, (err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve({ id: this.lastID, changes: this.changes });
+      this.db.serialize(() => {
+        this.db.run("BEGIN TRANSACTION");
+        this.db.run(queryString, params, (err) => {
+          if (err) {
+            this.db.run("ROLLBACK");
+            reject(err);
+            return;
+          }
+          this.db.run("COMMIT");
+          resolve({ id: this.lastID, changes: this.changes });
+        });
       });
     });
   }

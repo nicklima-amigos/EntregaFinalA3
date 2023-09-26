@@ -4,7 +4,7 @@ export const validateSignIn = (body) => {
   const { email, password } = body;
   const errors = {};
   if (!email) {
-    errors.username = "username is required";
+    errors.username = "email is required";
   }
   if (!password) {
     errors.password = "password is required";

@@ -14,12 +14,13 @@ export class UsersService {
     if (existingUser) {
       throw new HttpError(409, "Bad Request! User already exists!");
     }
-    return this.repository.create({
+    await this.repository.create({
       username,
       email,
       password,
       birth_date,
     });
+    return this.repository.findOneByEmail(email);
   }
 
   find() {

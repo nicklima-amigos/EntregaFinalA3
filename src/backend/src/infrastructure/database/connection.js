@@ -13,26 +13,28 @@ export const getDatabaseConnection = () => {
 
 class DatabaseConnection {
   constructor(connString) {
-    this.db = new sqlite.Database(connString, (err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      this.createTables().then(() => this.insertFixtures());
-      console.log("Connected to the database.");
-    });
+    this.connString = connString;
+    this.createTables().then(() => this.insertFixtures());
+    console.log("Connected to the database.");
+  }
+
+  runWithDatabase(callback) {
+    const db = new sqlite.Database(this.connString);
+    try {
+      callback(db);
+    } finally {
+      db.close();
+    }
   }
 
   async exec(queryString, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.serialize(() => {
-        this.db.run("BEGIN TRANSACTION");
-        this.db.run(queryString, params, (err) => {
+      this.runWithDatabase((db) => {
+        db.run(queryString, params, (err) => {
           if (err) {
-            this.db.run("ROLLBACK");
             reject(err);
             return;
           }
-          this.db.run("COMMIT");
           resolve({ id: this.lastID, changes: this.changes });
         });
       });
@@ -41,24 +43,28 @@ class DatabaseConnection {
 
   async query(queryString, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.all(queryString, params, (err, rows) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(rows);
+      this.runWithDatabase((db) => {
+        db.all(queryString, params, (err, rows) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(rows);
+        });
       });
     });
   }
 
   async queryOne(queryString, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.get(queryString, params, (err, row) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(row);
+      this.runWithDatabase((db) => {
+        db.get(queryString, params, (err, row) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(row);
+        });
       });
     });
   }

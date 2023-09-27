@@ -14,17 +14,11 @@ export const getDatabaseConnection = () => {
 class DatabaseConnection {
   constructor(connString) {
     this.connString = connString;
-    this.createTables().then(() => this.insertFixtures());
-    console.log("Connected to the database.");
-  }
-
-  runWithDatabase(callback) {
-    const db = new sqlite.Database(this.connString);
-    try {
-      callback(db);
-    } finally {
-      db.close();
-    }
+    this.createTables()
+      .then(() => this.insertFixtures())
+      .then(() => {
+        console.log("Connected to the database.");
+      });
   }
 
   async exec(queryString, params = []) {
@@ -67,6 +61,15 @@ class DatabaseConnection {
         });
       });
     });
+  }
+
+  runWithDatabase(callback) {
+    const db = new sqlite.Database(this.connString);
+    try {
+      callback(db);
+    } finally {
+      db.close();
+    }
   }
 
   async createTables() {

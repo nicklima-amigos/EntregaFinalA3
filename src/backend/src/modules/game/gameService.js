@@ -6,7 +6,7 @@ export class GamesService {
     this.platformRepository = platformRepository;
   }
 
-  async create(createGameDto) {
+  async create({ title, genre, price, developed_by, release_date }) {
     const existingGame = await this.gameRepository.findOneByTitle(
       createGameDto.title,
     );
@@ -19,7 +19,13 @@ export class GamesService {
     if (!existingPlatform) {
       throw new HttpError(404, "Platform not found!");
     }
-    return this.gameRepository.create(createGameDto);
+    return this.gameRepository.create({
+      title,
+      genre,
+      price,
+      developed_by,
+      release_date,
+    });
   }
 
   find() {

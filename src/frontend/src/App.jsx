@@ -62,11 +62,19 @@ function App() {
 
     {
       path: "categories",
-      element: <h1>Veja categorias aqui</h1>,
+      element: (
+        <AuthGuard>
+          <h1>Veja categorias aqui</h1>
+        </AuthGuard>
+      ),
     },
     {
       path: "categories/create",
-      element: <CategoryForm />,
+      element:(
+        <AuthGuard>
+          <CategoryForm />,
+        </AuthGuard>
+      ),
     },
   ]);
 

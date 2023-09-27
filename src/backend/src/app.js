@@ -7,6 +7,7 @@ import { platformsModule } from "./modules/platform/platformModule.js";
 import { usersModule } from "./modules/user/usersModule.js";
 import cors from "cors";
 import { authModule } from "./modules/auth/authModule.js";
+
 export class App {
   constructor(db) {
     this.db = db;

@@ -5,7 +5,7 @@ export class UserController {
 
   async create(req, res, next) {
     try {
-      const result = await this.service.create(req.body);
+      const { password, ...result } = await this.service.create(req.body);
       res.status(201).json(result);
     } catch (error) {
       next(error);

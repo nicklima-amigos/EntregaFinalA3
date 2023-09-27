@@ -7,6 +7,7 @@ import CategoryForm from "./pages/CategoryForm/CategoryForm";
 import styles from "./App.module.css";
 import SignUpForm from "./pages/SignUpForm/SignUpForm";
 import AuthProvider from "./contexts/authContext";
+import AuthGuard from "./components/guards/AuthGuard";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,23 +21,43 @@ function App() {
     },
     {
       path: "platforms",
-      element: <Platforms />,
+      element: (
+        <AuthGuard>
+          <Platforms />
+        </AuthGuard>
+      ),
     },
     {
       path: "platforms/create",
-      element: <PlatformForm />,
+      element: (
+        <AuthGuard>
+          <PlatformForm />
+        </AuthGuard>
+      ),
     },
     {
       path: "games",
-      element: <h1>Veja jogos aqui</h1>,
+      element: (
+        <AuthGuard>
+          <h1>Veja jogos aqui</h1>
+        </AuthGuard>
+      ),
     },
     {
       path: "games/:id",
-      element: <h1>Veja detalhes de um jogo aqui</h1>,
+      element: (
+        <AuthGuard>
+          <h1>Veja detalhes de um jogo aqui</h1>,
+        </AuthGuard>
+      ),
     },
     {
       path: "games/create",
-      element: <GameForm />,
+      element: (
+        <AuthGuard>
+          <GameForm />,
+        </AuthGuard>
+      ),
     },
 
     {

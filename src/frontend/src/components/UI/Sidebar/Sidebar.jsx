@@ -1,18 +1,12 @@
 import styles from "./Sidebar.module.css";
+import CloseIcon from "../../../assets/close.svg";
 //import Button from "../Button/Button";
 
-export default function Sidebar({
-  isOpen,
-  onClose,
-  platforms,
-  onSelectPlatform,
-}) {
+export default function Sidebar({ onClose, platforms, onSelectPlatform }) {
   return (
     <div className={styles.sidebar} onMouseLeave={onClose}>
       <div className={styles.content}>
-        <button className={styles.closeButton} onClick={onClose}>
-          Fechar
-        </button>
+        <img onClick={onClose} className={styles.icon} src={CloseIcon} />
         {/* <Button className="close-button" onClick={onClose}>
           Fechar
   </Button>*/}

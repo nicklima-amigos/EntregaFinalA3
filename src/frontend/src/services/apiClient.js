@@ -27,15 +27,22 @@ export const apiClient = {
 };
 
 const fetchFromBaseUrl = async (endpoint, requestData, options) => {
-  if (!options.headers) options.headers = {};
-  const { headers } = options;
-  headers["Content-Type"] = "application/json";
+  const defaultHeaders = {
+    "Content-Type": "application/json",
+  };
   const body = JSON.stringify(requestData);
   const response = await fetch(`${baseURL}${endpoint}`, {
-    headers,
-    body,
     ...options,
+    body,
+    headers: {
+      ...defaultHeaders,
+      ...options.headers,
+    },
   });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Error fetching ${endpoint}: ${errorData.message}`);
+  }
   const status = response.status;
   const data = await response.json();
   return {

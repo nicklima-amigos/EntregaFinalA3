@@ -53,8 +53,7 @@ export default function Platforms() {
       <div className="d-flex flex-column align-items-start h-100 w-100">
         <div className="d-flex align-items-center justify-content-between h-40 w-100 bg-warning">
           <img
-            // onClick={handleSideBarModal}
-            onMouseEnter={handleSideBarModal}
+            onClick={handleSideBarModal}
             className={styles.icon}
             src={SidebarIcon}
           />
@@ -71,7 +70,7 @@ export default function Platforms() {
             <Button onClick={logout}>Deslogar</Button>
           </div>
         </div>
-
+        <Button>olA</Button>
         <div className="container mt-5 d-flex flex-wrap">
           {loading ? (
             <Spinner />

@@ -43,7 +43,7 @@ export default function LoginForm() {
           return;
         }
         setUser(JSON.parse(user));
-        navigate("/games");
+        navigate("/platforms");
       });
   }, [setUser, navigate]);
 

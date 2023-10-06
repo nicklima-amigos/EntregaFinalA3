@@ -14,6 +14,12 @@
   background-color: none;
   cursor: pointer;
 }
+.list {
+  display: flex;
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
 .content {
   padding: 20px;
   background-color: #ffc107;

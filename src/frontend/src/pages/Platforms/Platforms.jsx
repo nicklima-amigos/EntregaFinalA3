@@ -12,19 +12,29 @@ export default function Platforms() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState([]);
+  const [platformName, setPlatformName] = useState("");
   const [platforms, setPlatforms] = useState([]);
   const [sideBarModal, setSideBarModal] = useState(false);
   const getPlatforms = async () => {
-    const response = await apiClient.get("/platforms");
-
-    setPlatforms(response.data);
-    setLoading(false);
+    try {
+      const response = await apiClient.get("/platforms");
+      setPlatforms(response.data);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
   };
   const getGamesByPlatformId = async (platform_id) => {
-    const response = await apiClient.get(`/platforms/${platform_id}`);
-
-    setGames(response.data.games);
-    setLoading(false);
+    try {
+      const response = await apiClient.get(`/platforms/${platform_id}`);
+      setPlatformName(response.data.name);
+      setGames(response.data.games);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSideBarModal = () => {
@@ -41,27 +51,31 @@ export default function Platforms() {
     navigate("/");
   };
   return (
-    <div className={`d-flex align-items-start h-100 w-100 `}>
+    <div className={`d-flex align-items-start h-100 col-12 `}>
       {sideBarModal && (
         <Sidebar
           isOpen={sideBarModal}
           platforms={platforms}
+          navigate={navigate}
+          handleLogout={logout}
           onSelectPlatform={getGamesByPlatformId}
           onClose={handleSideBarModal}
         />
       )}
-      <div className="d-flex flex-column align-items-start h-100 w-100">
-        <div className="d-flex align-items-center justify-content-between h-40 w-100 bg-warning">
+      <div className="d-flex flex-column align-items-start h-100 col-12">
+        <div className="d-flex  align-items-center justify-content-between h-40 col-12 bg-warning">
           <img
-            // onClick={handleSideBarModal}
-            onMouseEnter={handleSideBarModal}
-            className={styles.icon}
+            onClick={handleSideBarModal}
+            className={styles.icon + " col-1"}
             src={SidebarIcon}
           />
-          <h1 className="w-100" onClick={() => navigate("/platforms")}>
+          <h1
+            className="col-10 col-md-3"
+            onClick={() => navigate("/platforms")}
+          >
             Nick Games
           </h1>
-          <div className="container d-flex  justify-content-between h-40 w-100 ">
+          <div className="container d-none d-md-flex pe-5 justify-content-evenly h-40 col-7">
             <Button onClick={() => navigate("/platforms/create")}>
               Criar Plataforma
             </Button>
@@ -71,8 +85,11 @@ export default function Platforms() {
             <Button onClick={logout}>Deslogar</Button>
           </div>
         </div>
-
-        <div className="container mt-5 d-flex flex-wrap">
+        <div className=" d-flex align-items-center col-12 px-3">
+          <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
+          <h2 className="px-3">{platformName}</h2>
+        </div>
+        <div className="container mt-5 d-flex flex-wrap text-center">
           {loading ? (
             <Spinner />
           ) : (

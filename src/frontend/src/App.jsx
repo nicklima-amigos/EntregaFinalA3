@@ -4,7 +4,6 @@ import Platforms from "./pages/Platforms/Platforms";
 import PlatformForm from "./pages/PlatformForm/PlatformForm";
 import GameForm from "./pages/GameForm/GameForm";
 import CategoryForm from "./pages/CategoryForm/CategoryForm";
-import styles from "./App.module.css";
 import SignUpForm from "./pages/SignUpForm/SignUpForm";
 import AuthProvider from "./contexts/authContext";
 import AuthGuard from "./components/guards/AuthGuard";
@@ -70,7 +69,7 @@ function App() {
     },
     {
       path: "categories/create",
-      element:(
+      element: (
         <AuthGuard>
           <CategoryForm />,
         </AuthGuard>
@@ -79,11 +78,9 @@ function App() {
   ]);
 
   return (
-    <div className={styles.mainContainer}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 

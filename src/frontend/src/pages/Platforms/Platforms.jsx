@@ -62,7 +62,7 @@ export default function Platforms() {
           onClose={handleSideBarModal}
         />
       )}
-      <div className="d-flex flex-column align-items-start h-100 col-12">
+      <div className="d-flex flex-column align-items-start col-12">
         <div className="d-flex  align-items-center justify-content-between h-40 col-12 bg-warning">
           <img
             onClick={handleSideBarModal}

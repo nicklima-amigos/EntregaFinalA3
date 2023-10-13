@@ -16,16 +16,18 @@ export default function LoginForm() {
   const { setUser } = useContext(AuthContext);
 
   const handleLogin = async () => {
-    setLoading(true);
-    const response = await apiClient.post("/auth/signin", { email, password });
-    setLoading(false);
-    if (response.status !== 200) {
+    try {
+      setLoading(true);
+      const response = await apiClient.post("/auth/signin", { email, password });
+      setLoading(false);
+      setUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      navigate("/platforms");
+    } catch (err) {
+      setLoading(false);
       setFormErrors("Credenciais inválidas. Tente novamente.");
       return;
     }
-    setUser(response.data);
-    localStorage.setItem("user", JSON.stringify(response.data));
-    navigate("/platforms");
   };
 
   useEffect(() => {

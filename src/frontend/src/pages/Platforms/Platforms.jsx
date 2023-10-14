@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardGame from "../../components/UI/CardGame/CardGame.jsx";
 import Button from "../../components/UI/Button/Button.jsx";
-import { apiClient } from "../../services/apiClient.jsx";
+import { apiClient } from "../../services/apiClient.js";
 import Spinner from "../../components/UI/Loading/Spinner.jsx";
 import Navbar from "../../components/UI/Navbar/Navbar.jsx";
+import Sidebar from "../../components/UI/Sidebar/Sidebar.jsx";
+import styles from "./Platforms.module.css";
 
 export default function Platforms() {
   const navigate = useNavigate();
@@ -13,6 +15,11 @@ export default function Platforms() {
   const [games, setGames] = useState([]);
   const [platformName, setPlatformName] = useState("");
   const [platforms, setPlatforms] = useState([]);
+  const [sideBarModal, setSideBarModal] = useState(false);
+
+  const handleSideBarModal = () => {
+    setSideBarModal((prevState) => !prevState);
+  };
   const getPlatforms = async () => {
     try {
       const response = await apiClient.get(`/platforms`);
@@ -43,7 +50,29 @@ export default function Platforms() {
   return (
     <div className={`d-flex align-items-start h-100 col-12 `}>
       <div className="d-flex flex-column align-items-start col-12">
-        <Navbar />
+        {sideBarModal && (
+          <Sidebar
+            isOpen={sideBarModal}
+            platforms={platforms}
+            navigate={navigate}
+            onSelectPlatform={getGamesByPlatformId}
+            onClose={handleSideBarModal}
+          />
+        )}
+        <Navbar>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            onClick={handleSideBarModal}
+            className={styles.icon + " col-1"}
+          >
+            <rect y="4" width="24" height="2" />
+            <rect y="11" width="24" height="2" />
+            <rect y="18" width="24" height="2" />
+          </svg>
+        </Navbar>
         <div className=" d-flex align-items-center col-12 px-3">
           <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
           <h2 className="px-3">{platformName}</h2>

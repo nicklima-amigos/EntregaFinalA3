@@ -22,7 +22,7 @@
 }
 .content {
   padding: 20px;
-  background-color: var(--secondary);
+  background-color: #bbb;
   display: flex;
   flex-direction: column;
 

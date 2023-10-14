@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import styles from "./Platforms.module.css";
-import SidebarIcon from "../../assets/sidebar.svg";
+
 import { useNavigate } from "react-router-dom";
-import CardGame from "../../components/UI/CardGame/CardGame";
-import Button from "../../components/UI/Button/Button";
-import { apiClient } from "../../services/apiClient";
-import Spinner from "../../components/UI/Loading/Spinner";
-import Sidebar from "../../components/UI/Sidebar/Sidebar";
+import CardGame from "../../components/UI/CardGame/CardGame.jsx";
+import Button from "../../components/UI/Button/Button.jsx";
+import { apiClient } from "../../services/apiClient.js";
+import Spinner from "../../components/UI/Loading/Spinner.jsx";
+import Navbar from "../../components/UI/Navbar/Navbar.jsx";
+import Sidebar from "../../components/UI/Sidebar/Sidebar.jsx";
+import styles from "./Platforms.module.css";
 
 export default function Platforms() {
   const navigate = useNavigate();
@@ -15,9 +16,13 @@ export default function Platforms() {
   const [platformName, setPlatformName] = useState("");
   const [platforms, setPlatforms] = useState([]);
   const [sideBarModal, setSideBarModal] = useState(false);
+
+  const handleSideBarModal = () => {
+    setSideBarModal((prevState) => !prevState);
+  };
   const getPlatforms = async () => {
     try {
-      const response = await apiClient.get("/platforms");
+      const response = await apiClient.get(`/platforms`);
       setPlatforms(response.data);
     } catch (error) {
       console.log("error", error);
@@ -37,54 +42,37 @@ export default function Platforms() {
     }
   };
 
-  const handleSideBarModal = () => {
-    setSideBarModal((prevState) => !prevState);
-  };
-
   useEffect(() => {
     getPlatforms();
     getGamesByPlatformId(1);
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
-  };
   return (
     <div className={`d-flex align-items-start h-100 col-12 `}>
-      {sideBarModal && (
-        <Sidebar
-          isOpen={sideBarModal}
-          platforms={platforms}
-          navigate={navigate}
-          handleLogout={logout}
-          onSelectPlatform={getGamesByPlatformId}
-          onClose={handleSideBarModal}
-        />
-      )}
       <div className="d-flex flex-column align-items-start col-12">
-        <div className="d-flex  align-items-center justify-content-between h-40 col-12 bg-warning">
-          <img
+        {sideBarModal && (
+          <Sidebar
+            isOpen={sideBarModal}
+            platforms={platforms}
+            navigate={navigate}
+            onSelectPlatform={getGamesByPlatformId}
+            onClose={handleSideBarModal}
+          />
+        )}
+        <Navbar>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
             onClick={handleSideBarModal}
             className={styles.icon + " col-1"}
-            src={SidebarIcon}
-          />
-          <h1
-            className="col-10 col-md-3"
-            onClick={() => navigate("/platforms")}
           >
-            Nick Games
-          </h1>
-          <div className="container d-none d-md-flex pe-5 justify-content-evenly h-40 col-7">
-            <Button onClick={() => navigate("/platforms/create")}>
-              Criar Plataforma
-            </Button>
-            <Button onClick={() => navigate("/categories/create")}>
-              Criar Categoria
-            </Button>
-            <Button onClick={logout}>Deslogar</Button>
-          </div>
-        </div>
+            <rect y="4" width="24" height="2" />
+            <rect y="11" width="24" height="2" />
+            <rect y="18" width="24" height="2" />
+          </svg>
+        </Navbar>
         <div className=" d-flex align-items-center col-12 px-3">
           <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
           <h2 className="px-3">{platformName}</h2>

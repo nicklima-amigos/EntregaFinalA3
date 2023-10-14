@@ -1,0 +1,21 @@
+:root {
+  --primary: #ff5733;
+  --secondary: #1e90ff;
+  --light-grey: #e5e5e5;
+  --icons: #4caf50;
+  --grey: #ccc;
+  --spotlight: #ffc300;
+  --background: #eee;
+  --nav-bar: #ccc;
+  --nav-links: #cccccc;
+  --text: #000;
+  background-color: var(--background);
+}
+
+body {
+  color: var(--text);
+}
+
+#root {
+  background-color: var(--background);
+}

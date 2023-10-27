@@ -30,26 +30,22 @@ export class PlatformsRepository {
       return null;
     }
 
-    const platform = {
+    return {
       id: results[0].id,
       name: results[0].name,
-      games: [],
+      games: results
+        .filter((row) => row.game_id)
+        .map((row) => {
+          return {
+            id: row.game_id,
+            title: row.title,
+            genre: row.genre,
+            price: row.price,
+            developed_by: row.developed_by,
+            release_date: row.release_date,
+          };
+        }),
     };
-
-    for (const row of results) {
-      if (row.game_id) {
-        platform.games.push({
-          id: row.game_id,
-          title: row.title,
-          genre: row.genre,
-          price: row.price,
-          developed_by: row.developed_by,
-          release_date: row.release_date,
-        });
-      }
-    }
-
-    return platform;
   }
 
   findOneByName(name) {

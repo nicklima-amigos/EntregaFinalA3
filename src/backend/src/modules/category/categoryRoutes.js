@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { validateUrlParam } from "../../middleware/validation.js";
 export const categoriesRoutes = (controller) => {
   const router = Router();
   router
@@ -8,15 +9,25 @@ export const categoriesRoutes = (controller) => {
 
   router
     .route("/:id")
-    .get((req, res, next) => controller.findOne(req, res, next))
-    .put((req, res, next) => controller.update(req, res, next))
-    .delete((req, res, next) => controller.delete(req, res, next));
+    .get(validateUrlParam("id"), (req, res, next) =>
+      controller.findOne(req, res, next),
+    )
+    .put(validateUrlParam("id"), (req, res, next) =>
+      controller.update(req, res, next),
+    )
+    .delete(validateUrlParam("id"), (req, res, next) =>
+      controller.delete(req, res, next),
+    );
 
   router
     .route("/user/:userId")
-    .get((req, res, next) => controller.findCategoriesByUserId(req, res, next));
+    .get(validateUrlParam("userId"), (req, res, next) =>
+      controller.findCategoriesByUserId(req, res, next),
+    );
   router
     .route("/game/:gameId")
-    .get((req, res, next) => controller.findCategoriesByGameId(req, res, next));
+    .get(validateUrlParam("gameId"), (req, res, next) =>
+      controller.findCategoriesByGameId(req, res, next),
+    );
   return router;
 };

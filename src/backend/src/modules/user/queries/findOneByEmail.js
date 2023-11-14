@@ -1,3 +1,3 @@
 export const findOneByEmailQuery = `
-    SELECT * FROM users WHERE email = ?;
+    SELECT id, username, email, password, birth_date FROM users WHERE email = ?;
 `;

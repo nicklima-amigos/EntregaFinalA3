@@ -3,13 +3,14 @@ import styles from "./Button.module.css";
 export default function Button({
   type = "button",
   onClick,
+  className = "",
   loading = false,
   children,
 }) {
   return (
     <button
       type={type}
-      className={"btn mt-2 mb-2 " + styles.button}
+      className={"btn mt-2 mb-2 " + className + " " + styles.button}
       onClick={onClick}
       disabled={loading}
     >

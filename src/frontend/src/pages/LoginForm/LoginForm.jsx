@@ -1,30 +1,62 @@
-import React, { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormField from "../../components/UI/FormField/FormField";
 import Button from "../../components/UI/Button/Button";
 import MainLogo from "../../components/icons/MainLogo";
 import styles from "./LoginForm.module.css";
+import { apiClient } from "../../services/apiClient";
+import { AuthContext } from "../../contexts/authContext";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [formErrors, setFormErrors] = useState("");
+  const { setUser } = useContext(AuthContext);
 
-  const handleLogin = () => {
-    setLoading(true);
-    setTimeout(() => {
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await apiClient.post("/auth/signin", { email, password });
       setLoading(false);
-      console.log(`Login com email: ${email} e senha: ${password}`);
+      setUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/platforms");
-    }, 2000);
+    } catch (err) {
+      setLoading(false);
+      setFormErrors("Credenciais inválidas. Tente novamente.");
+      return;
+    }
   };
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      return;
+    }
+    const { token } = JSON.parse(user);
+    apiClient
+      .get("/auth/authorize", {
+        headers: { Authorization: token },
+      })
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        }
+        setUser(JSON.parse(user));
+        navigate("/platforms");
+      });
+  }, [setUser, navigate]);
+
   const handleSignUp = () => {
     navigate("signup");
   };
+
   return (
     <div className="container mt-5 mx-auto d-flex flex-column align-items-center justify-content-center h-100 w-100 ">
       <MainLogo />
+      {formErrors && <p className="text-danger">{formErrors}</p>}
       <form className="col-4 mx-auto d-flex align-content-center flex-wrap flex-column">
         <FormField
           type="email"

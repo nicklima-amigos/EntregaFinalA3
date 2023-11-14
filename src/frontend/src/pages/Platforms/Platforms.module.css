@@ -1,8 +1,6 @@
+
 .button {
   width: fit-content;
-  background-color: #c94a21;
+  background-color: var(--primary);
   color: white;
-  button + button {
-    margin-left: 5px;
-  }
 }

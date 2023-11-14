@@ -6,6 +6,7 @@ export default function FormField({
   onChange,
   placeholder = "",
   label,
+  fieldError,
 }) {
   return (
     <div className={"mt-2 mb-2 d-flex flex-column " + styles.formField}>
@@ -17,6 +18,7 @@ export default function FormField({
         value={value}
         onChange={onChange}
       />
+      {fieldError && <p className="text-danger">{fieldError}</p>}
     </div>
   );
 }

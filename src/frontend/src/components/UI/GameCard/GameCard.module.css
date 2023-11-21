@@ -1,1 +1,8 @@
-
+.card {
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  border-radius: 20px;
+  transition: transform 1s;
+  box-shadow: 0 3px 10px var(--secondary);
+}

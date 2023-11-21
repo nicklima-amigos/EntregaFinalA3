@@ -7,5 +7,6 @@
 }
 
 .navBar {
-  background-color: var(--nav-bar);
+  background-color: var(--primary);
+  color: var(--secondary);
 }

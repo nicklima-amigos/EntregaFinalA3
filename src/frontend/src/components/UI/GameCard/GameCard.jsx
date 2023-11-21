@@ -1,4 +1,4 @@
-export default function CardGame({ game }) {
+export default function GameCard({ game }) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12 mb-4 px-2" key={game.id}>
       <div

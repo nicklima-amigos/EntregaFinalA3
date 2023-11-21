@@ -1,12 +1,15 @@
+import styles from "./GameCard.module.css";
+
 export default function GameCard({ game }) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12 mb-4 px-2" key={game.id}>
       <div
-      /* style={{
+        /* style={{
           backgroundImage: `url('https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}*/
+        className={styles.card}
       >
         <div className="card-body">
           <h5 className="card-title">{game.title}</h5>

@@ -2,7 +2,7 @@
   position: fixed;
   width: fit-content;
   height: 100%;
-  background-color: var(--light-grey);
+  background-color: var(--primary);
   transition: left 0.3s ease-in-out;
   z-index: 1000;
 }
@@ -22,7 +22,7 @@
 }
 .content {
   padding: 20px;
-  background-color: #bbb;
+  background-color: var(--primary);
   display: flex;
   flex-direction: column;
 
@@ -30,7 +30,7 @@
 }
 
 .close-button {
-  background-color: var(--grey);
+  background-color: var(--primary);
   border: none;
   padding: 10px 20px;
   margin-bottom: 20px;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import CardGame from "../../components/UI/CardGame/CardGame.jsx";
+import GameCard from "../../components/UI/GameCard/GameCard.jsx";
 import Button from "../../components/UI/Button/Button.jsx";
 import { apiClient } from "../../services/apiClient.js";
 import Spinner from "../../components/UI/Loading/Spinner.jsx";
@@ -20,6 +20,7 @@ export default function Platforms() {
   const handleSideBarModal = () => {
     setSideBarModal((prevState) => !prevState);
   };
+
   const getPlatforms = async () => {
     try {
       const response = await apiClient.get(`/platforms`);
@@ -30,6 +31,7 @@ export default function Platforms() {
       setLoading(false);
     }
   };
+
   const getGamesByPlatformId = async (platform_id) => {
     try {
       const response = await apiClient.get(`/platforms/${platform_id}`);
@@ -81,7 +83,7 @@ export default function Platforms() {
           {loading ? (
             <Spinner />
           ) : (
-            games.map((game) => <CardGame key={game.id} game={game} />)
+            games.map((game) => <GameCard key={game.id} game={game} />)
           )}
         </div>
       </div>

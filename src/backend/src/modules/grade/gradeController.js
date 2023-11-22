@@ -6,7 +6,7 @@ export class GradesController {
   async find(req, res, next) {
     try {
       const grades = await this.service.find();
-      res.json(grades);
+      return res.json(grades);
     } catch (error) {
       next(error);
     }
@@ -17,7 +17,7 @@ export class GradesController {
       const { id } = req.params;
 
       const grade = await this.service.findOne(+id);
-      res.json(grade);
+      return res.json(grade);
     } catch (error) {
       next(error);
     }
@@ -36,7 +36,7 @@ export class GradesController {
   async create(req, res, next) {
     try {
       const grade = await this.service.create(req.body);
-      res.json(grade);
+      return res.json(grade);
     } catch (error) {
       next(error);
     }

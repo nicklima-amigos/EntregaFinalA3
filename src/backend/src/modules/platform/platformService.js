@@ -6,7 +6,13 @@ export class PlatformsService {
   }
 
   async create({ name }) {
-    await this.repository.findOneByName(name);
+    const existingPlatform = await this.repository.findOneByName(name);
+    if (existingPlatform) {
+      throw new HttpError(
+        409,
+        "Bad Request! A platform with this name already exists!",
+      );
+    }
     return this.repository.create({
       name,
     });

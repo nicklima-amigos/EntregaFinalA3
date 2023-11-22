@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     element: <SignUpForm />,
   },
   {
-    path: "platforms",
+    path: "platforms/:platformId",
     element: (
       <AuthGuard>
         <Platforms />

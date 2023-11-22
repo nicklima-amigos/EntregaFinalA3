@@ -15,12 +15,6 @@ export default function GameForm() {
 
   const handleCreate = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      console.log(
-        `game criado: Title: ${title} genre: ${genre} price: ${price} developed_by: ${developedBy} release_date: ${releaseDate}`
-      );
-    }, 2000);
   };
 
   const goBack = () => {
@@ -53,7 +47,6 @@ export default function GameForm() {
             type="number"
             label="Preço"
             name="price"
-            pattern="^\d+(\.\d{2})?$"
             placeholder="Preço do jogo"
             value={price}
             onChange={(e) => setPrice(e.target.value)}

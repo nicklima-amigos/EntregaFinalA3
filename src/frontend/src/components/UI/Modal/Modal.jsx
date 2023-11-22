@@ -1,4 +1,4 @@
-export default function Modal({ id, title, children }) {
+export default function Modal({ id, title, handleSubmit, loading, children }) {
   return (
     <div
       className="modal"
@@ -31,7 +31,12 @@ export default function Modal({ id, title, children }) {
             >
               Fechar
             </button>
-            <button type="button" className="btn">
+            <button
+              type="button"
+              className="btn"
+              loading={loading}
+              onClick={handleSubmit}
+            >
               Salvar
             </button>
           </div>

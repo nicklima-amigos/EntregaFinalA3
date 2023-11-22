@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiClient } from "../../../services/apiClient";
 import Modal from "../Modal/Modal";
 
 export default function GradeForm({ game, cleanTitle }) {
@@ -41,7 +43,12 @@ export default function GradeForm({ game, cleanTitle }) {
   };
 
   return (
-    <Modal id={cleanTitle} title={`Avaliando ${game.title}`}>
+    <Modal
+      id={cleanTitle}
+      title={`Avaliando ${game.title}`}
+      handleSubmit={handleUpdate}
+      loading={loading}
+    >
       <label htmlFor="grade">Nota: </label>
       <input
         type="number"

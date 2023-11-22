@@ -13,3 +13,12 @@ body {
 #root {
   background-color: var(--background);
 }
+
+.modal-backdrop {
+  width: 0;
+  height: 0;
+}
+
+.modal-content {
+  background-color: var(--background);
+}

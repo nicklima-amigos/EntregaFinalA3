@@ -1,24 +1,59 @@
 import styles from "./GameCard.module.css";
+import GradeForm from "../GradeForm/GradeForm";
+import { useState } from "react";
 
 export default function GameCard({ game }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const cleanTitle = game.title.split(" ").join("").split(":").join("");
+
   return (
-    <div className="col-lg-4 col-md-6 col-sm-12 mb-4 px-2" key={game.id}>
-      <div
-        /* style={{
-          backgroundImage: `url('https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png')`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}*/
-        className={styles.card}
-      >
-        <div className="card-body">
-          <h5 className="card-title">{game.title}</h5>
-          <p className="card-text">Genre: {game.genre}</p>
-          <p className="card-text">Price: {game.price}</p>
-          <p className="card-text">Developed by: {game.developed_by}</p>
-          <p className="card-text">Release Date: {game.release_date}</p>
+    <div className={styles.singleGame} key={game.id}>
+      <div className={styles.card}>
+        <div className={styles.cardFront}>
+          <div className={styles.imageContainer}>
+            {game.image && <img src="" alt="" />}
+          </div>
+          <h3 className="card-title">{game.title}</h3>
+        </div>
+        <div className={styles.cardBack}>
+          {game.grade ? <p>Nota: {game.grade}</p> : <p>Não avaliado</p>}
+          <p>
+            <span>Gênero:</span> {game.genre}
+          </p>
+          <p>
+            <span>Preço:</span> {game.price}
+          </p>
+          <p>
+            <span>Desenvolvido por:</span> {game.developed_by}
+          </p>
+          <p>
+            <span>Data de lançamento:</span> {game.release_date}
+          </p>
+          <div>
+            <p>
+              <span>Categorias:</span>
+              {/* {game.categories?.map((category) => (
+                <></>
+              ))} */}
+            </p>
+          </div>
+          <div className="flex flex-wrap mt-auto">
+            <button
+              className="btn mx-2"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target={`#${cleanTitle}`}
+              onClick={() => {
+                setIsEditing(!isEditing);
+              }}
+            >
+              Avaliar
+            </button>
+            <button className="btn mx-2">Adicionar Categoria</button>
+          </div>
         </div>
       </div>
+      <GradeForm game={game} cleanTitle={cleanTitle} />
     </div>
   );
 }

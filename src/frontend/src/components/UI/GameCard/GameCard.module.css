@@ -1,3 +1,18 @@
+.gamesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.singleGame {
+  width: 30%;
+  height: 500px;
+  perspective: 800px;
+  margin-bottom: 5rem;
+  border-radius: 20px;
+}
+
 .card {
   height: 100%;
   width: 100%;
@@ -6,3 +21,112 @@
   transition: transform 1s;
   box-shadow: 0 3px 10px var(--secondary);
 }
+
+.singleGame:hover .card {
+  transform: rotateY(180deg);
+}
+
+.cardFlip {
+  transform: rotateY(180deg);
+}
+
+.cardFront,
+.cardBack {
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.cardBack > div {
+  width: 400px;
+  text-align: center;
+}
+
+.cardBack p {
+  text-align: center;
+}
+
+.cardFront {
+  width: 100%;
+  padding: 20px;
+  justify-content: center;
+  z-index: 1;
+  color: var(--orange-secondary);
+}
+
+.imageContainer {
+  width: 300px;
+  height: auto;
+  margin: 10px auto;
+  display: flex;
+}
+
+.cardBack {
+  width: 100%;
+  color: var(--orange-secondary);
+  background-color: var(--background);
+  transform: rotateY(180deg);
+  z-index: 2;
+}
+
+@media screen and (max-width: 900px) {
+  .singleGame {
+    width: 100%;
+  }
+}
+
+.singleGame img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.cardBack button {
+  background-color: var(--secondary);
+  color: black;
+  margin-top: 20px;
+}
+
+.grade {
+  margin-bottom: auto;
+}
+
+.cardBack span {
+  font-weight: bold;
+  display: block;
+}
+
+/* .cardBack .pill {
+  color: black;
+  padding: 5px 10px;
+  border-radius: 16px;
+  margin: 1px;
+} */
+
+/* .pill.playing {
+  background-color: rgb(55, 255, 55);
+  box-shadow: rgb(55, 255, 55) 0 0 10px;
+} */
+/* 
+.pill.notWorth {
+  background-color: rgb(255, 55, 55);
+  box-shadow: rgb(255, 55, 55) 0 0 10px;
+}
+
+.pill.completed {
+  background-color: rgb(55, 125, 255);
+  box-shadow: rgb(55, 125, 255) 0 0 10px;
+}
+.pill.adventure {
+  background-color: rgb(255, 175, 55);
+  box-shadow: rgb(255, 175, 55) 0 0 10px;
+}
+.pill.recommends {
+  background-color: rgb(255, 252, 55);
+  box-shadow: rgb(255, 252, 55) 0 0 10px;
+} */

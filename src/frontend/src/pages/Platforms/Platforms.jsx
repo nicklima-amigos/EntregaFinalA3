@@ -44,9 +44,27 @@ export default function Platforms() {
     }
   };
 
+  const getGamesGrades = async (userId) => {
+    try {
+      const response = await apiClient.get(`/grades/user/${userId}`);
+      setGames((prev) =>
+        prev.map((game) => ({
+          ...game,
+          grade: response.data.find((grade) => grade.game_id === game.id).grade,
+        }))
+      );
+    } catch (error) {
+      console.error("error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
     getPlatforms();
     getGamesByPlatformId(1);
+    getGamesGrades(user.id);
   }, []);
 
   return (
@@ -79,7 +97,7 @@ export default function Platforms() {
           <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
           <h2 className="px-3">{platformName}</h2>
         </div>
-        <div className="container mt-5 d-flex flex-wrap text-center">
+        <div className="container mt-5 d-flex flex-wrap text-center justify-content-around">
           {loading ? (
             <Spinner />
           ) : (

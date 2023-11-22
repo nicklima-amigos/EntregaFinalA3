@@ -33,6 +33,19 @@ export class GradesController {
     }
   }
 
+  async findGradeByUserAndGame(req, res, next) {
+    try {
+      const { userId, gameId } = req.params;
+      const grades = await this.service.findGradeByUserAndGame(
+        +userId,
+        +gameId,
+      );
+      return res.json(grades);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async create(req, res, next) {
     try {
       const grade = await this.service.create(req.body);

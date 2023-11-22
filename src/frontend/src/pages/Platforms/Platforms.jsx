@@ -33,39 +33,21 @@ export default function Platforms() {
     }
   };
 
-  const getPlatformGames = async () => {
-    try {
-      const response = await apiClient.get(`/platforms/${platformId}`);
-      setPlatformName(response.data.name);
-      setGames(response.data.games);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getGamesGrades = async (userId) => {
-    try {
-      const response = await apiClient.get(`/grades/user/${userId}`);
-      setGames((prev) =>
-        prev.map((game) => ({
-          ...game,
-          grade: response.data.find((grade) => grade.game_id === game.id).grade,
-        }))
-      );
-    } catch (error) {
-      console.error("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const getPlatformGames = async () => {
+      try {
+        const response = await apiClient.get(`/platforms/${platformId}`);
+        setPlatformName(response.data.name);
+        setGames(response.data.games);
+      } catch (error) {
+        console.log("error", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getPlatforms();
-    getPlatformGames(platformId);
-    getGamesGrades(user.id);
+    getPlatformGames();
   }, [platformId]);
 
   return (

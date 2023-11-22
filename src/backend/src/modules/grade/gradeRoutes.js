@@ -33,5 +33,12 @@ export const gradesRoutes = (controller) => {
     .get(validateUrlParam("userId"), (req, res, next) =>
       controller.findGradesByUser(req, res, next),
     );
+
+  router.get(
+    "/user/:userId/game/:gameId",
+    validateUrlParam("userId"),
+    validateUrlParam("gameId"),
+    (req, res, next) => controller.findGradeByUserAndGame(req, res, next),
+  );
   return router;
 };

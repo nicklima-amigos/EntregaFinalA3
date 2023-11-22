@@ -1,10 +1,27 @@
 import styles from "./GameCard.module.css";
 import GradeForm from "../GradeForm/GradeForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { apiClient } from "../../../services/apiClient";
+import useUser from "../../../hooks/useUser";
 
 export default function GameCard({ game }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [grade, setGrade] = useState();
   const cleanTitle = game.title.split(" ").join("").split(":").join("");
+  const user = useUser();
+
+  useEffect(() => {
+    const fetchGrade = async () => {
+      if (!user) {
+        return;
+      }
+      const { data } = await apiClient.get(
+        `/grades/user/${user.id}/game/${game.id}`
+      );
+      setGrade(data.grade);
+    };
+    fetchGrade();
+  }, [isEditing, game.id, user]);
 
   return (
     <div className={styles.singleGame} key={game.id}>
@@ -16,7 +33,7 @@ export default function GameCard({ game }) {
           <h3 className="card-title">{game.title}</h3>
         </div>
         <div className={styles.cardBack}>
-          {game.grade ? <p>Nota: {game.grade}</p> : <p>Não avaliado</p>}
+          {grade ? <p>Nota: {grade}</p> : <p>Não avaliado</p>}
           <p>
             <span>Gênero:</span> {game.genre}
           </p>
@@ -44,7 +61,7 @@ export default function GameCard({ game }) {
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}`}
               onClick={() => {
-                setIsEditing(!isEditing);
+                setIsEditing(true);
               }}
             >
               Avaliar
@@ -53,7 +70,11 @@ export default function GameCard({ game }) {
           </div>
         </div>
       </div>
-      <GradeForm game={game} cleanTitle={cleanTitle} />
+      <GradeForm
+        game={game}
+        cleanTitle={cleanTitle}
+        setIsEditing={setIsEditing}
+      />
     </div>
   );
 }

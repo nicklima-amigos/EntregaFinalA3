@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "../../../services/apiClient";
 import Modal from "../Modal/Modal";
+import useUser from "../../../hooks/useUser";
 
-export default function GradeForm({ game, cleanTitle }) {
+export default function GradeForm({ game, cleanTitle, setIsEditing }) {
   const [grade, setGrade] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useUser();
   const [platformId, setPlatformId] = useState(null);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function GradeForm({ game, cleanTitle }) {
       setError(true);
       console.error(error);
     } finally {
+      setIsEditing(false);
       setLoading(false);
     }
   };

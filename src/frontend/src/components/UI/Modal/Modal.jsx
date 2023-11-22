@@ -13,12 +13,6 @@ export default function Modal({ id, title, handleSubmit, loading, children }) {
             <h1 className="modal-title fs-5" id={id}>
               {title}
             </h1>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div className="modal-body d-flex justify-content-around">
             {children}
@@ -33,7 +27,7 @@ export default function Modal({ id, title, handleSubmit, loading, children }) {
             </button>
             <button
               type="button"
-              className="btn"
+              className="btn btn-primary"
               loading={loading}
               onClick={handleSubmit}
             >

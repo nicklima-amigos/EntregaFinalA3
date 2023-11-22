@@ -19,6 +19,10 @@ export class GradesService {
     return this.gradesRepository.findGradesByUser(userId);
   }
 
+  findGradeByUserAndGame(userId, gameId) {
+    return this.gradesRepository.findGradeByUserAndGame(userId, gameId);
+  }
+
   async create({ user_id, game_id, grade }) {
     const user = await this.usersRepository.findOne(user_id);
     if (!user) {

@@ -45,27 +45,9 @@ export default function Platforms() {
     }
   };
 
-  const getGamesGrades = async (userId) => {
-    try {
-      const response = await apiClient.get(`/grades/user/${userId}`);
-      setGames((prev) =>
-        prev.map((game) => ({
-          ...game,
-          grade: response.data.find((grade) => grade.game_id === game.id).grade,
-        }))
-      );
-    } catch (error) {
-      console.error("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
     getPlatforms();
     getPlatformGames(platformId);
-    getGamesGrades(user.id);
   }, [platformId]);
 
   return (

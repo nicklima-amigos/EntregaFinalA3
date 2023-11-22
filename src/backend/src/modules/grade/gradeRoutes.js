@@ -9,6 +9,9 @@ export const gradesRoutes = (controller) => {
   router
     .route("/")
     .get((req, res, next) => controller.find(req, res, next))
+    .put(validationMiddleware(validateCreateGrade), (req, res, next) =>
+      controller.upsert(req, res, next),
+    )
     .post(validationMiddleware(validateCreateGrade), (req, res, next) =>
       controller.create(req, res, next),
     );

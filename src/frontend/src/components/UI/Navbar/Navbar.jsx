@@ -19,7 +19,7 @@ export default function Navbar({ children }) {
         }
       >
         {children}
-        <h1 className="col-10 col-md-3" onClick={() => navigate("/platforms")}>
+        <h1 className="col-10 col-md-3" onClick={() => navigate("/")}>
           Nick Games
         </h1>
         <div className="container d-none d-md-flex pe-5 justify-content-evenly h-40 col-7">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import { apiClient } from "../../../services/apiClient";
@@ -8,6 +8,12 @@ export default function GradeForm({ game, cleanTitle }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+  const [platformId, setPlatformId] = useState(null);
+
+  useEffect(() => {
+    const idFromURL = window.location.pathname.split("/").pop();
+    setPlatformId(idFromURL);
+  }, []);
 
   const handleGradeChange = (e) => {
     const value = e.target.value;
@@ -22,13 +28,18 @@ export default function GradeForm({ game, cleanTitle }) {
     setGrade(value);
   };
 
-  const handleCreate = async () => {
+  const handleUpdate = async () => {
     setLoading(true);
-    await apiClient.put(`/grades/${user.id}`, {
-      grade,
-    });
-    setLoading(false);
-    navigate("/platforms");
+    try {
+      await apiClient.put(`/grades/${user.id}`, {
+        grade,
+      });
+      setLoading(false);
+      navigate(`/platforms/${platformId}`);
+    } catch (error) {
+      setLoading(false);
+      console.error("Erro ao atualizar a rota: ", error);
+    }
   };
 
   return (
@@ -71,7 +82,7 @@ export default function GradeForm({ game, cleanTitle }) {
             >
               Fechar
             </button>
-            <Button onClick={handleCreate} loading={loading}>
+            <Button onClick={handleUpdate} loading={loading}>
               Salvar
             </Button>
           </div>

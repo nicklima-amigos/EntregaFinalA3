@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../Button/Button";
 import { apiClient } from "../../../services/apiClient";
+import Modal from "../Modal/Modal";
 
 export default function GradeForm({ game, cleanTitle }) {
   const [grade, setGrade] = useState(0);
@@ -43,51 +43,21 @@ export default function GradeForm({ game, cleanTitle }) {
   };
 
   return (
-    <div
-      className="modal !z-n1"
+    <Modal
       id={cleanTitle}
-      tabIndex="-1"
-      aria-labelledby={cleanTitle}
-      aria-hidden="true"
+      title={`Avaliando ${game.title}`}
+      handleSubmit={handleUpdate}
+      loading={loading}
     >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id={cleanTitle}>
-              Avaliar {game.title}
-            </h1>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body d-flex justify-content-around">
-            <label htmlFor="grade">Nota: </label>
-            <input
-              type="number"
-              max={10}
-              min={0}
-              value={grade}
-              id="grade"
-              onChange={handleGradeChange}
-            />
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Fechar
-            </button>
-            <Button onClick={handleUpdate} loading={loading}>
-              Salvar
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+      <label htmlFor="grade">Nota: </label>
+      <input
+        type="number"
+        max={10}
+        min={0}
+        value={grade}
+        id="grade"
+        onChange={handleGradeChange}
+      />
+    </Modal>
   );
 }

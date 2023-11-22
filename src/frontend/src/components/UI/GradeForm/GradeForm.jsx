@@ -24,10 +24,8 @@ export default function GradeForm({ game, cleanTitle }) {
 
   const handleCreate = async () => {
     setLoading(true);
-    await apiClient.put("/grades", {
+    await apiClient.put(`/grades/${user.id}`, {
       grade,
-      user_Id: user.id,
-      game_Id: game.id,
     });
     setLoading(false);
     navigate("/platforms");

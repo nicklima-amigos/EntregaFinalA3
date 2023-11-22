@@ -63,7 +63,7 @@ export default function GradeForm({ game, cleanTitle }) {
         id="grade"
         onChange={handleGradeChange}
       />
-      {error && <p className="text-danger">Erro ao atualiar a nota</p>}
+      {error && <p className="text-danger">Erro ao atualizar a nota</p>}
     </Modal>
   );
 }

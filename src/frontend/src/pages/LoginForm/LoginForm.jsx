@@ -18,11 +18,14 @@ export default function LoginForm() {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.post("/auth/signin", { email, password });
+      const response = await apiClient.post("/auth/signin", {
+        email,
+        password,
+      });
       setLoading(false);
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
-      navigate("/platforms");
+      navigate("/platforms/1");
     } catch (err) {
       setLoading(false);
       setFormErrors("Credenciais inválidas. Tente novamente.");
@@ -45,7 +48,7 @@ export default function LoginForm() {
           return;
         }
         setUser(JSON.parse(user));
-        navigate("/platforms");
+        navigate("/platforms/1");
       });
   }, [setUser, navigate]);
 

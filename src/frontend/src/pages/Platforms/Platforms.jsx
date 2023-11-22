@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import GameCard from "../../components/UI/GameCard/GameCard.jsx";
 import Button from "../../components/UI/Button/Button.jsx";
 import { apiClient } from "../../services/apiClient.js";
@@ -11,6 +11,7 @@ import styles from "./Platforms.module.css";
 
 export default function Platforms() {
   const navigate = useNavigate();
+  const { platformId } = useParams();
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState([]);
   const [platformName, setPlatformName] = useState("");
@@ -32,9 +33,9 @@ export default function Platforms() {
     }
   };
 
-  const getGamesByPlatformId = async (platform_id) => {
+  const getPlatformGames = async () => {
     try {
-      const response = await apiClient.get(`/platforms/${platform_id}`);
+      const response = await apiClient.get(`/platforms/${platformId}`);
       setPlatformName(response.data.name);
       setGames(response.data.games);
     } catch (error) {
@@ -63,9 +64,9 @@ export default function Platforms() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     getPlatforms();
-    getGamesByPlatformId(1);
+    getPlatformGames(platformId);
     getGamesGrades(user.id);
-  }, []);
+  }, [platformId]);
 
   return (
     <div className={`d-flex align-items-start h-100 col-12 `}>
@@ -75,7 +76,9 @@ export default function Platforms() {
             isOpen={sideBarModal}
             platforms={platforms}
             navigate={navigate}
-            onSelectPlatform={getGamesByPlatformId}
+            onSelectPlatform={(platformId) =>
+              navigate(`/platforms/${platformId}`)
+            }
             onClose={handleSideBarModal}
           />
         )}

@@ -36,6 +36,7 @@ export const init = [
         user_id INTEGER NOT NULL,
         game_id INTEGER NOT NULL,
         grade DOUBLE NOT NULL,
+        UNIQUE(user_id, game_id),
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
     );

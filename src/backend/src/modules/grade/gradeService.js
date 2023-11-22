@@ -19,16 +19,28 @@ export class GradesService {
     return this.gradesRepository.findGradesByUser(userId);
   }
 
-  async create({ userId, gameId, grade }) {
-    const user = await this.usersRepository.findOne(userId);
+  async create({ user_id, game_id, grade }) {
+    const user = await this.usersRepository.findOne(user_id);
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
-    const game = await this.gamesRepository.findOne(gameId);
+    const game = await this.gamesRepository.findOne(game_id);
     if (!game) {
       throw new HttpError(404, "Game not found!");
     }
-    return this.gradesRepository.create({ userId, gameId, grade });
+    return this.gradesRepository.create({ user_id, game_id, grade });
+  }
+
+  async upsert({ user_id, game_id, grade }) {
+    const user = await this.usersRepository.findOne(user_id);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
+    const game = await this.gamesRepository.findOne(game_id);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return this.gradesRepository.upsert({ user_id, game_id, grade });
   }
 
   update(id, { grade }) {

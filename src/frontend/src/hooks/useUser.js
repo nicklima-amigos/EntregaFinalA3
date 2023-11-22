@@ -12,6 +12,6 @@ export default function useUser() {
       return;
     }
     navigate("/");
-  }, []);
+  }, [navigate]);
   return user;
 }

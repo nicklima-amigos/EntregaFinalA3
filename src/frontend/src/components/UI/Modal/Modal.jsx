@@ -1,3 +1,5 @@
+import Button from "../Button/Button";
+
 export default function Modal({ id, title, handleSubmit, loading, children }) {
   return (
     <div
@@ -18,21 +20,12 @@ export default function Modal({ id, title, handleSubmit, loading, children }) {
             {children}
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <Button type="button" data-bs-dismiss="modal">
               Fechar
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              loading={loading}
-              onClick={handleSubmit}
-            >
+            </Button>
+            <Button type="button" loading={loading} onClick={handleSubmit}>
               Salvar
-            </button>
+            </Button>
           </div>
         </div>
       </div>

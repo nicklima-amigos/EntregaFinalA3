@@ -33,21 +33,21 @@ export default function Platforms() {
     }
   };
 
-  const getPlatformGames = async () => {
-    try {
-      const response = await apiClient.get(`/platforms/${platformId}`);
-      setPlatformName(response.data.name);
-      setGames(response.data.games);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const getPlatformGames = async () => {
+      try {
+        const response = await apiClient.get(`/platforms/${platformId}`);
+        setPlatformName(response.data.name);
+        setGames(response.data.games);
+      } catch (error) {
+        console.log("error", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getPlatforms();
-    getPlatformGames(platformId);
+    getPlatformGames();
   }, [platformId]);
 
   return (

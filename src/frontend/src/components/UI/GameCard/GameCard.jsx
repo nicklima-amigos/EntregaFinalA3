@@ -33,7 +33,15 @@ export default function GameCard({ game }) {
           <h3 className="card-title">{game.title}</h3>
         </div>
         <div className={styles.cardBack}>
-          {grade ? <p>Nota: {grade}</p> : <p>Não avaliado</p>}
+          {grade ? (
+            <p>
+              <span>Nota:</span> {grade}
+            </p>
+          ) : (
+            <p>
+              <span>Nota:</span> Não avaliado
+            </p>
+          )}
           <p>
             <span>Gênero:</span> {game.genre}
           </p>

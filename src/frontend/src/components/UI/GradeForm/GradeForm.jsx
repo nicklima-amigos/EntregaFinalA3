@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button";
+import { apiClient } from "../../../services/apiClient";
 
 export default function GradeForm({ game, cleanTitle }) {
   const [grade, setGrade] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleGradeChange = (e) => {
     const value = e.target.value;
@@ -14,6 +20,17 @@ export default function GradeForm({ game, cleanTitle }) {
       return;
     }
     setGrade(value);
+  };
+
+  const handleCreate = async () => {
+    setLoading(true);
+    await apiClient.put("/grades", {
+      grade,
+      user_Id: user.id,
+      game_Id: game.id,
+    });
+    setLoading(false);
+    navigate("/platforms");
   };
 
   return (
@@ -56,9 +73,9 @@ export default function GradeForm({ game, cleanTitle }) {
             >
               Fechar
             </button>
-            <button type="button" className="btn">
+            <Button onClick={handleCreate} loading={loading}>
               Salvar
-            </button>
+            </Button>
           </div>
         </div>
       </div>

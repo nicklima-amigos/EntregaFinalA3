@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 export default function GradeForm({ game, cleanTitle }) {
   const [grade, setGrade] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [platformId, setPlatformId] = useState(null);
@@ -30,15 +31,19 @@ export default function GradeForm({ game, cleanTitle }) {
 
   const handleUpdate = async () => {
     setLoading(true);
+    setError(false);
     try {
-      await apiClient.put(`/grades/${user.id}`, {
+      await apiClient.put(`/grades`, {
+        user_id: user.id,
+        game_id: game.id,
         grade,
       });
-      setLoading(false);
       navigate(`/platforms/${platformId}`);
     } catch (error) {
+      setError(true);
+      console.error(error);
+    } finally {
       setLoading(false);
-      console.error("Erro ao atualizar a rota: ", error);
     }
   };
 
@@ -58,6 +63,7 @@ export default function GradeForm({ game, cleanTitle }) {
         id="grade"
         onChange={handleGradeChange}
       />
+      {error && <p className="text-danger">Erro ao atualiar a nota</p>}
     </Modal>
   );
 }

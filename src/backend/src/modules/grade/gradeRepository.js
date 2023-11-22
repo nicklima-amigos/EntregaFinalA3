@@ -26,8 +26,8 @@ export class GradesRepository {
     return this.db.query(findGradesByUserIdQuery, [userId]);
   }
 
-  async update(id, { grade }) {
-    return this.db.exec(updateGradeQuery, [grade, id]);
+  async update(id, { userId, gameId, grade }) {
+    return this.db.exec(updateGradeQuery, [userId, gameId, grade, id]);
   }
 
   delete(id) {

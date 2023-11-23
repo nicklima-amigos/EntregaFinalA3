@@ -14,7 +14,7 @@ export default function PlatformForm() {
     setLoading(true);
     try {
       const response = await apiClient.post("/platforms", { name });
-      navigate(`/platforms/${response.id}`);
+      navigate(`/platforms/${response.data.id}`);
     } catch {
       console.error("error");
     } finally {

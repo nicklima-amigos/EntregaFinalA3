@@ -56,15 +56,6 @@ export const router = createBrowserRouter([
       </AuthGuard>
     ),
   },
-
-  {
-    path: "categories",
-    element: (
-      <AuthGuard>
-        <h1>Veja categorias aqui</h1>
-      </AuthGuard>
-    ),
-  },
   {
     path: "categories/create",
     element: (

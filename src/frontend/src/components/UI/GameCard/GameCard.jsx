@@ -3,12 +3,15 @@ import GradeForm from "../GradeForm/GradeForm";
 import { useEffect, useState } from "react";
 import { apiClient } from "../../../services/apiClient";
 import useUser from "../../../hooks/useUser";
+import CategoryForm from "../../../pages/CategoryForm/CategoryForm";
+import CategoryPill from "../CategoryPill/CategoryPill";
 
 export default function GameCard({ game }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [categories, setCategories] = useState(game.categories);
   const [grade, setGrade] = useState();
-  const cleanTitle = game.title.split(" ").join("").split(":").join("");
   const user = useUser();
+  const cleanTitle = game.title.split(" ").join("").split(":").join("");
 
   useEffect(() => {
     const fetchGrade = async () => {
@@ -20,8 +23,18 @@ export default function GameCard({ game }) {
       );
       setGrade(data.grade);
     };
+    const fetchCategories = async () => {
+      if (!user || !game) {
+        return;
+      }
+      const { data } = await apiClient.get(
+        `/categories/game/${game.id}/user/${user.id}`
+      );
+      setCategories(data);
+    };
     fetchGrade();
-  }, [isEditing, game.id, user]);
+    fetchCategories();
+  }, [isEditing, game, user]);
 
   return (
     <div className={styles.singleGame} key={game.id}>
@@ -55,12 +68,14 @@ export default function GameCard({ game }) {
             <span>Data de lançamento:</span> {game.release_date}
           </p>
           <div>
-            <p>
+            <div>
               <span>Categorias:</span>
-              {/* {game.categories?.map((category) => (
-                <></>
-              ))} */}
-            </p>
+              {categories?.map((category) => (
+                <CategoryPill key={category.id}>
+                  {category.category}
+                </CategoryPill>
+              ))}
+            </div>
           </div>
           <div className="flex flex-wrap mt-auto">
             <button
@@ -74,10 +89,21 @@ export default function GameCard({ game }) {
             >
               Avaliar
             </button>
-            <button className="btn mx-2">Adicionar Categoria</button>
+            <button
+              className="btn mx-2"
+              data-bs-toggle="modal"
+              data-bs-target={`#${cleanTitle}category`}
+            >
+              Adicionar Categoria
+            </button>
           </div>
         </div>
       </div>
+      <CategoryForm
+        game={game}
+        setCategories={setCategories}
+        cleanTitle={cleanTitle}
+      />
       <GradeForm
         game={game}
         cleanTitle={cleanTitle}

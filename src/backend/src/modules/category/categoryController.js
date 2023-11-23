@@ -21,6 +21,19 @@ export class CategoriesController {
     }
   }
 
+  async findCategoriesByUserAndGame(req, res, next) {
+    try {
+      const { userId, gameId } = req.params;
+      const category = await this.service.findCategoriesByUserAndGame({
+        userId,
+        gameId,
+      });
+      res.status(200).json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async findCategoriesByGameId(req, res, next) {
     try {
       const { gameId } = req.params;

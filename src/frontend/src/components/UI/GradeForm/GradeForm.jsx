@@ -44,8 +44,8 @@ export default function GradeForm({ game, cleanTitle, setIsEditing }) {
       setError(true);
       console.error(error);
     } finally {
-      setIsEditing(false);
       setLoading(false);
+      setIsEditing(false);
     }
   };
 

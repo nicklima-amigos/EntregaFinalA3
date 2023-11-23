@@ -6,18 +6,18 @@ export class CategoriesService {
     this.gamesRepository = gamesRepository;
   }
 
-  async create({ userId, gameId, category }) {
-    const user = await this.usersRepository.findOne(userId);
+  async create({ user_id, game_id, category }) {
+    const user = await this.usersRepository.findOne(user_id);
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
-    const game = await this.gamesRepository.findOne(gameId);
+    const game = await this.gamesRepository.findOne(game_id);
     if (!game) {
       throw new HttpError(404, "Game not found!");
     }
     return this.categoriesRepository.create({
-      userId,
-      gameId,
+      user_id,
+      game_id,
       category,
     });
   }
@@ -34,27 +34,35 @@ export class CategoriesService {
     return category;
   }
 
-  async findCategoriesByGameId({ gameId }) {
+  async findCategoriesByUserAndGame({ userId, gameId }) {
+    const user = await this.usersRepository.findOne(userId);
+    if (!user) {
+      throw new HttpError(404, "User not found!");
+    }
     const game = await this.gamesRepository.findOne(gameId);
     if (!game) {
       throw new HttpError(404, "Game not found!");
     }
-    const categories = await this.categoriesRepository.findCategoriesByGameId({
+    return this.categoriesRepository.findCategoriesByUserAndGame({
+      userId,
       gameId,
     });
-    return categories;
   }
 
-  async findCategoriesByUserId({ userId }) {
-    const user = await this.usersRepository.findOne(userId);
+  async findCategoriesByGameId(gameId) {
+    const game = await this.gamesRepository.findOne(gameId);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return this.categoriesRepository.findCategoriesByGameId(gameId);
+  }
 
+  async findCategoriesByUserId(userId) {
+    const user = await this.usersRepository.findOne(userId);
     if (!user) {
       throw new HttpError(404, "User not found!");
     }
-    const categories = await this.categoriesRepository.findCategoriesByUserId({
-      userId,
-    });
-    return categories;
+    return this.categoriesRepository.findCategoriesByUserId(userId);
   }
 
   async update({ id, category }) {
@@ -62,12 +70,11 @@ export class CategoriesService {
     if (!foundCategory) {
       throw new HttpError(404, "Category not found!");
     }
-    return await this.categoriesRepository.update({ id, category });
+    return this.categoriesRepository.update({ id, category });
   }
 
   async delete(id) {
     await this.findOne(id);
-
     return this.categoriesRepository.delete(id);
   }
 }

@@ -38,7 +38,7 @@ export default function Platforms() {
       try {
         const response = await apiClient.get(`/platforms/${platformId}`);
         setPlatformName(response.data.name);
-        setGames(response.data.games);
+        setGames(response.data.games.sort((a, b) => b.id - a.id));
       } catch (error) {
         console.log("error", error);
       } finally {

@@ -68,4 +68,16 @@ export class GamesService {
     }
     return this.gameRepository.associate({ gameId, platformId });
   }
+
+  async dissociatePlatform({ gameId, platformId }) {
+    const existingGame = await this.gameRepository.findOne(gameId);
+    if (!existingGame) {
+      throw new HttpError(404, "Game not found!");
+    }
+    const existingPlatform = await this.platformRepository.findOne(platformId);
+    if (!existingPlatform) {
+      throw new HttpError(404, "Platform not found!");
+    }
+    return this.gameRepository.dissociate({ gameId, platformId });
+  }
 }

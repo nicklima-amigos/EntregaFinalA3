@@ -7,6 +7,7 @@ import Spinner from "../../components/UI/Loading/Spinner.jsx";
 import Navbar from "../../components/UI/Navbar/Navbar.jsx";
 import Sidebar from "../../components/UI/Sidebar/Sidebar.jsx";
 import styles from "./Platforms.module.css";
+import { useCallback } from "react";
 
 export default function Platforms() {
   const navigate = useNavigate();
@@ -32,22 +33,22 @@ export default function Platforms() {
     }
   };
 
-  useEffect(() => {
-    const getPlatformGames = async () => {
-      try {
-        const response = await apiClient.get(`/platforms/${platformId}`);
-        setPlatformName(response.data.name);
-        setGames(response.data.games.sort((a, b) => b.id - a.id));
-      } catch (error) {
-        console.log("error", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getPlatformGames = useCallback(async () => {
+    try {
+      const response = await apiClient.get(`/platforms/${platformId}`);
+      setPlatformName(response.data.name);
+      setGames(response.data.games.sort((a, b) => b.id - a.id));
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [platformId]);
 
+  useEffect(() => {
     getPlatforms();
     getPlatformGames();
-  }, [platformId]);
+  }, [getPlatformGames]);
 
   return (
     <div className={`d-flex align-items-start h-100 col-12 `}>
@@ -89,7 +90,13 @@ export default function Platforms() {
           {loading ? (
             <Spinner />
           ) : (
-            games.map((game) => <GameCard key={game.id} game={game} />)
+            games.map((game) => (
+              <GameCard
+                key={game.id}
+                game={game}
+                getPlatformGames={getPlatformGames}
+              />
+            ))
           )}
         </div>
       </div>

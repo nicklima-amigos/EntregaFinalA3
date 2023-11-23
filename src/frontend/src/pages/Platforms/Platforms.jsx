@@ -3,6 +3,7 @@ import { apiClient } from "../../services/apiClient";
 import styles from "../../components/shared/styles.module.css";
 import Navbar from "../../components/UI/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/UI/Loading/Spinner";
 
 export default function Platforms() {
   const [platforms, setPlatforms] = useState([]);
@@ -34,7 +35,7 @@ export default function Platforms() {
   }, []);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <Spinner />;
   }
 
   return (

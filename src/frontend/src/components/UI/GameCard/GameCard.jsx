@@ -13,6 +13,17 @@ export default function GameCard({ game }) {
   const user = useUser();
   const cleanTitle = game.title.split(" ").join("").split(":").join("");
 
+  const fetchCategories = async () => {
+    if (!user || !game) {
+      return;
+    }
+    console.log("updating categories...");
+    const { data } = await apiClient.get(
+      `/categories/game/${game.id}/user/${user.id}`
+    );
+    setCategories(data);
+  };
+
   useEffect(() => {
     const fetchGrade = async () => {
       if (!user) {
@@ -22,15 +33,6 @@ export default function GameCard({ game }) {
         `/grades/user/${user.id}/game/${game.id}`
       );
       setGrade(data.grade);
-    };
-    const fetchCategories = async () => {
-      if (!user || !game) {
-        return;
-      }
-      const { data } = await apiClient.get(
-        `/categories/game/${game.id}/user/${user.id}`
-      );
-      setCategories(data);
     };
     fetchGrade();
     fetchCategories();
@@ -68,12 +70,14 @@ export default function GameCard({ game }) {
             <span>Data de lançamento:</span> {game.release_date}
           </p>
           <div>
-            <div>
-              <span>Categorias:</span>
+            <span>Categorias:</span>
+            <div className={styles.categoriesContainer}>
               {categories?.map((category) => (
-                <CategoryPill key={category.id}>
-                  {category.category}
-                </CategoryPill>
+                <CategoryPill
+                  key={category.id}
+                  category={category}
+                  fetchCategories={fetchCategories}
+                />
               ))}
             </div>
           </div>

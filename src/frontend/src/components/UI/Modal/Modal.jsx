@@ -1,6 +1,6 @@
 import Button from "../Button/Button";
 
-export default function Modal({ id, title, handleSubmit, loading, children }) {
+export default function Modal({ id, title, handleSubmit, loading = false, children }) {
   return (
     <div
       className="modal"

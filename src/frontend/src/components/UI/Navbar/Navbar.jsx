@@ -26,9 +26,6 @@ export default function Navbar({ children }) {
           <Button onClick={() => navigate("/platforms/create")}>
             Criar Plataforma
           </Button>
-          <Button onClick={() => navigate("/categories/create")}>
-            Criar Categoria
-          </Button>
           <Button onClick={logout}>Deslogar</Button>
         </div>
       </div>

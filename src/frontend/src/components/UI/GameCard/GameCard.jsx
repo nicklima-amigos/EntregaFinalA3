@@ -1,6 +1,6 @@
 import styles from "./GameCard.module.css";
 import GradeForm from "../GradeForm/GradeForm";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { apiClient } from "../../../services/apiClient";
 import useUser from "../../../hooks/useUser";
 import CategoryForm from "../../../pages/CategoryForm/CategoryForm";
@@ -13,7 +13,7 @@ export default function GameCard({ game }) {
   const user = useUser();
   const cleanTitle = game.title.split(" ").join("").split(":").join("");
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     if (!user || !game) {
       return;
     }
@@ -22,7 +22,7 @@ export default function GameCard({ game }) {
       `/categories/game/${game.id}/user/${user.id}`
     );
     setCategories(data);
-  };
+  }, [game, user]);
 
   useEffect(() => {
     const fetchGrade = async () => {
@@ -36,7 +36,7 @@ export default function GameCard({ game }) {
     };
     fetchGrade();
     fetchCategories();
-  }, [isEditing, game, user]);
+  }, [isEditing, game, user, fetchCategories]);
 
   return (
     <div className={styles.singleGame} key={game.id}>

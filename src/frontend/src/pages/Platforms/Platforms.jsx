@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
-import CardGame from "../../components/UI/CardGame/CardGame.jsx";
+import { useNavigate, useParams } from "react-router-dom";
+import GameCard from "../../components/UI/GameCard/GameCard.jsx";
 import Button from "../../components/UI/Button/Button.jsx";
 import { apiClient } from "../../services/apiClient.js";
 import Spinner from "../../components/UI/Loading/Spinner.jsx";
@@ -11,6 +11,7 @@ import styles from "./Platforms.module.css";
 
 export default function Platforms() {
   const navigate = useNavigate();
+  const { platformId } = useParams();
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState([]);
   const [platformName, setPlatformName] = useState("");
@@ -20,6 +21,7 @@ export default function Platforms() {
   const handleSideBarModal = () => {
     setSideBarModal((prevState) => !prevState);
   };
+
   const getPlatforms = async () => {
     try {
       const response = await apiClient.get(`/platforms`);
@@ -30,22 +32,23 @@ export default function Platforms() {
       setLoading(false);
     }
   };
-  const getGamesByPlatformId = async (platform_id) => {
-    try {
-      const response = await apiClient.get(`/platforms/${platform_id}`);
-      setPlatformName(response.data.name);
-      setGames(response.data.games);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
+    const getPlatformGames = async () => {
+      try {
+        const response = await apiClient.get(`/platforms/${platformId}`);
+        setPlatformName(response.data.name);
+        setGames(response.data.games.sort((a, b) => b.id - a.id));
+      } catch (error) {
+        console.log("error", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getPlatforms();
-    getGamesByPlatformId(1);
-  }, []);
+    getPlatformGames();
+  }, [platformId]);
 
   return (
     <div className={`d-flex align-items-start h-100 col-12 `}>
@@ -55,7 +58,9 @@ export default function Platforms() {
             isOpen={sideBarModal}
             platforms={platforms}
             navigate={navigate}
-            onSelectPlatform={getGamesByPlatformId}
+            onSelectPlatform={(platformId) =>
+              navigate(`/platforms/${platformId}`)
+            }
             onClose={handleSideBarModal}
           />
         )}
@@ -74,14 +79,18 @@ export default function Platforms() {
           </svg>
         </Navbar>
         <div className=" d-flex align-items-center col-12 px-3">
-          <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
+          <Button
+            onClick={() => navigate(`/games/create/platform/${platformId}`)}
+          >
+            Criar Jogo
+          </Button>
           <h2 className="px-3">{platformName}</h2>
         </div>
-        <div className="container mt-5 d-flex flex-wrap text-center">
+        <div className="container mt-5 d-flex flex-wrap text-center justify-content-around">
           {loading ? (
             <Spinner />
           ) : (
-            games.map((game) => <CardGame key={game.id} game={game} />)
+            games.map((game) => <GameCard key={game.id} game={game} />)
           )}
         </div>
       </div>

@@ -9,6 +9,9 @@ export const gradesRoutes = (controller) => {
   router
     .route("/")
     .get((req, res, next) => controller.find(req, res, next))
+    .put(validationMiddleware(validateCreateGrade), (req, res, next) =>
+      controller.upsert(req, res, next),
+    )
     .post(validationMiddleware(validateCreateGrade), (req, res, next) =>
       controller.create(req, res, next),
     );
@@ -30,5 +33,12 @@ export const gradesRoutes = (controller) => {
     .get(validateUrlParam("userId"), (req, res, next) =>
       controller.findGradesByUser(req, res, next),
     );
+
+  router.get(
+    "/user/:userId/game/:gameId",
+    validateUrlParam("userId"),
+    validateUrlParam("gameId"),
+    (req, res, next) => controller.findGradeByUserAndGame(req, res, next),
+  );
   return router;
 };

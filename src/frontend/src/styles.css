@@ -1,0 +1,24 @@
+:root {
+  --primary: #bd6500;
+  --secondary: #ffd700;
+  --light-grey: #cacaca;
+  --background: #555555;
+  background-color: var(--background);
+}
+
+body {
+  color: var(--secondary);
+}
+
+#root {
+  background-color: var(--background);
+}
+
+.modal-backdrop {
+  width: 0;
+  height: 0;
+}
+
+.modal-content {
+  background-color: var(--background);
+}

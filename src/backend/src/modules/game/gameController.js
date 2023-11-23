@@ -6,7 +6,7 @@ export class GamesController {
   async create(req, res, next) {
     try {
       const result = await this.service.create(req.body);
-      res.status(201).json(result);
+      return res.status(201).json(result);
     } catch (err) {
       next(err);
     }
@@ -15,7 +15,7 @@ export class GamesController {
   async find(req, res, next) {
     try {
       const result = await this.service.find();
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       next(err);
     }
@@ -25,7 +25,7 @@ export class GamesController {
     try {
       const { platformId } = req.params;
       const result = await this.service.findByPlatform(+platformId);
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       next(err);
     }
@@ -35,7 +35,7 @@ export class GamesController {
     try {
       const { id } = req.params;
       const result = await this.service.findOne(+id);
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       next(err);
     }
@@ -45,7 +45,7 @@ export class GamesController {
     try {
       const { id } = req.params;
       const result = await this.service.delete(+id);
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       next(err);
     }
@@ -55,7 +55,22 @@ export class GamesController {
     try {
       const { id } = req.params;
       const result = await this.service.update(+id, req.body);
-      res.status(200).json(result);
+      return res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async associatePlatform(req, res, next) {
+    console.log("associatePlatform");
+    console.log(req.params);
+    try {
+      const { gameId, platformId } = req.params;
+      const result = await this.service.associatePlatform({
+        gameId: +gameId,
+        platformId: +platformId,
+      });
+      return res.status(200).json(result);
     } catch (err) {
       next(err);
     }

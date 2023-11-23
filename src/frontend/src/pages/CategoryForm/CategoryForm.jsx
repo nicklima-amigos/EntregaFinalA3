@@ -1,45 +1,40 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import FormField from "../../components/UI/FormField/FormField";
-import Button from "../../components/UI/Button/Button";
-import MainLogo from "../../components/icons/MainLogo";
+import Modal from "../../components/UI/Modal/Modal";
+import { apiClient } from "../../services/apiClient";
+import useUser from "../../hooks/useUser";
 
-export default function CategoryForm() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+export default function CategoryForm({ game, cleanTitle, setCategories }) {
   const [category, setCategory] = useState("");
+  const user = useUser();
 
-  const handleCreate = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      console.log(`categoria criada: Category: ${category}`);
-    }, 2000);
-  };
-
-  const goBack = () => {
-    navigate(-1);
+  const handleSubmit = async () => {
+    await apiClient.post(`/categories`, {
+      user_id: user.id,
+      game_id: game.id,
+      category,
+    });
+    const { data } = await apiClient.get(
+      `/categories/game/${game.id}/user/${user.id}`
+    );
+    console.log({ data });
+    setCategories(data);
   };
 
   return (
-    <div className="container mt-5 d-flex flex-column align-items-start h-100 w-100 ">
-      <Button onClick={goBack}>Voltar</Button>
-      <div className="container mt-5 mx-auto d-flex flex-column align-items-center justify-content-center h-100 w-100 ">
-        <MainLogo />
-        <form className="col-4 mx-auto d-flex align-content-center flex-wrap flex-column">
-          <FormField
-            type="text"
-            label="Categoria"
-            name="category"
-            placeholder="categoria"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-          <Button onClick={handleCreate} loading={loading}>
-            Criar
-          </Button>
-        </form>
-      </div>
-    </div>
+    <Modal
+      id={cleanTitle + "category"}
+      title={`Categoria: ${game.title}`}
+      handleSubmit={handleSubmit}
+    >
+      <FormField
+        type="text"
+        label="Categoria"
+        name="category"
+        placeholder="categoria"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      />
+    </Modal>
   );
 }

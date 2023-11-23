@@ -5,14 +5,19 @@ import { findCategoriesByGameIdQuery } from "./queries/findCategoriesByGameId.js
 import { findCategoriesByUserIdQuery } from "./queries/findCategoriesByUserId.js";
 import { findCategoriesQuery } from "./queries/findCategories.js";
 import { updateCategoryQuery } from "./queries/updateCategory.js";
+import { findCategoriesByUserAndGameQuery } from "./queries/findCategoriesByUserAndGame.js";
 
 export class CategoriesRepository {
   constructor(db) {
     this.db = db;
   }
 
-  async create({ userId, gameId, category }) {
-    return await this.db.exec(createCategoryQuery, [userId, gameId, category]);
+  async create({ user_id, game_id, category }) {
+    return await this.db.exec(createCategoryQuery, [
+      user_id,
+      game_id,
+      category,
+    ]);
   }
 
   find() {
@@ -23,23 +28,23 @@ export class CategoriesRepository {
     return this.db.queryOne(findOneCategoryQuery, [id]);
   }
 
-  async findCategoriesByGameId({ gameId }) {
-    const result = await this.db.query(findCategoriesByGameIdQuery, [gameId]);
-    return result;
+  findCategoriesByUserAndGame({ userId, gameId }) {
+    return this.db.query(findCategoriesByUserAndGameQuery, [userId, gameId]);
   }
 
-  async findCategoriesByUserId({ userId }) {
-    const result = await this.db.query(findCategoriesByUserIdQuery, [userId]);
-    return result;
+  findCategoriesByGameId(gameId) {
+    return this.db.query(findCategoriesByGameIdQuery, [gameId]);
   }
 
-  async update({ id, category }) {
-    const result = await this.db.exec(updateCategoryQuery, [category, id]);
-    return result;
+  findCategoriesByUserId(userId) {
+    return this.db.query(findCategoriesByUserIdQuery, [userId]);
+  }
+
+  update({ id, category }) {
+    return this.db.exec(updateCategoryQuery, [category, id]);
   }
 
   delete(id) {
-    const result = this.db.query(deleteCategoryQuery, [id]);
-    return result;
+    return this.db.query(deleteCategoryQuery, [id]);
   }
 }

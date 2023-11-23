@@ -18,6 +18,7 @@ export class AuthService {
     }
     return {
       token: "authorized",
+      id: user.id,
       username: user.username,
       email: user.email,
       birthDate: user.birthDate,

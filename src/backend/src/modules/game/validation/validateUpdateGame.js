@@ -1,3 +1,5 @@
+import { ValidationError } from "../../../exceptions/validationError.js";
+
 export const validateUpdateGame = (body) => {
   const { title, genre, price, developed_by, release_date } = body;
   const errors = {};

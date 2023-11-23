@@ -12,9 +12,14 @@ export default function PlatformForm() {
 
   const handleCreate = async () => {
     setLoading(true);
-    await apiClient.post("/platforms", { name });
-    setLoading(false);
-    navigate("/platforms");
+    try {
+      const response = await apiClient.post("/platforms", { name });
+      navigate(`/platforms/${response.data.id}`);
+    } catch {
+      console.error("error");
+    } finally {
+      setLoading(false);
+    }
   };
   const goBack = () => {
     navigate(-1);

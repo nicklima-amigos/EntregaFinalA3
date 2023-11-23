@@ -29,5 +29,14 @@ export const categoriesRoutes = (controller) => {
     .get(validateUrlParam("gameId"), (req, res, next) =>
       controller.findCategoriesByGameId(req, res, next),
     );
+
+  router
+    .route("/game/:gameId/user/:userId")
+    .get(
+      validateUrlParam("gameId"),
+      validateUrlParam("userId"),
+      (req, res, next) =>
+        controller.findCategoriesByUserAndGame(req, res, next),
+    );
   return router;
 };

@@ -17,7 +17,7 @@ export const validateUrlParam = (paramName) => {
   return (req, res, next) => {
     if (isNaN(req.params[paramName])) {
       res.status(400).json({
-        error: "id url param must be a number",
+        error: `"${paramName}" url param must be a number`,
       });
       return;
     }

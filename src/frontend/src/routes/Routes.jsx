@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     element: <SignUpForm />,
   },
   {
-    path: "platforms",
+    path: "platforms/:platformId",
     element: (
       <AuthGuard>
         <Platforms />
@@ -49,19 +49,10 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "games/create",
+    path: "games/create/platform/:platformId",
     element: (
       <AuthGuard>
         <GameForm />,
-      </AuthGuard>
-    ),
-  },
-
-  {
-    path: "categories",
-    element: (
-      <AuthGuard>
-        <h1>Veja categorias aqui</h1>
       </AuthGuard>
     ),
   },

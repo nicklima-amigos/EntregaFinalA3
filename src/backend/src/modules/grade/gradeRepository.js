@@ -4,14 +4,16 @@ import { findGradesQuery } from "./queries/findGrades.js";
 import { findGradesByUserIdQuery } from "./queries/findGradesByUserId.js";
 import { findOneGradeQuery } from "./queries/findOneGrade.js";
 import { updateGradeQuery } from "./queries/updateGrade.js";
+import { upsertGradeQuery } from "./queries/upsertGrade.js";
+import { findGradeByUserAndGameQuery } from "./queries/findGradeByUserAndGame.js";
 
 export class GradesRepository {
   constructor(db) {
     this.db = db;
   }
 
-  create({ userId, gameId, grade }) {
-    return this.db.exec(createGradeQuery, [userId, gameId, grade]);
+  create({ user_id, game_id, grade }) {
+    return this.db.exec(createGradeQuery, [user_id, game_id, grade]);
   }
 
   find() {
@@ -26,7 +28,15 @@ export class GradesRepository {
     return this.db.query(findGradesByUserIdQuery, [userId]);
   }
 
-  async update(id, { grade }) {
+  findGradeByUserAndGame(userId, gameId) {
+    return this.db.queryOne(findGradeByUserAndGameQuery, [userId, gameId]);
+  }
+
+  upsert({ user_id, game_id, grade }) {
+    return this.db.exec(upsertGradeQuery, [user_id, game_id, grade, grade]);
+  }
+
+  update(id, { grade }) {
     return this.db.exec(updateGradeQuery, [grade, id]);
   }
 

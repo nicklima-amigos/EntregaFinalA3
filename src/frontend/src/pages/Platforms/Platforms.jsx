@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
 import GameCard from "../../components/UI/GameCard/GameCard.jsx";
 import Button from "../../components/UI/Button/Button.jsx";
@@ -27,7 +26,7 @@ export default function Platforms() {
       const response = await apiClient.get(`/platforms`);
       setPlatforms(response.data);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
     } finally {
       setLoading(false);
     }

@@ -5,6 +5,7 @@ import { apiClient } from "../../../services/apiClient";
 import useUser from "../../../hooks/useUser";
 import CategoryForm from "../../../pages/CategoryForm/CategoryForm";
 import CategoryPill from "../CategoryPill/CategoryPill";
+import TrashIcon from "../../icons/Trash";
 
 export default function GameCard({ game }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -42,9 +43,10 @@ export default function GameCard({ game }) {
     <div className={styles.singleGame} key={game.id}>
       <div className={styles.card}>
         <div className={styles.cardFront}>
-          <div className={styles.imageContainer}>
-            {game.image && <img src="" alt="" />}
-          </div>
+          <button className="btn btn-danger ms-auto">
+            <TrashIcon />{" "}
+          </button>
+          <div className={styles.imageContainer}>{<img src="" alt="" />}</div>
           <h3 className="card-title">{game.title}</h3>
         </div>
         <div className={styles.cardBack}>

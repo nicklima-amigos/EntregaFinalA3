@@ -34,7 +34,7 @@ export class GamesRepository {
     return this.db.exec(createGamePlatformQuery, [gameId, platformId]);
   }
 
-  disassociate({ gameId, platformId }) {
+  dissociate({ gameId, platformId }) {
     return this.db.exec(deleteGamePlatformQuery, [gameId, platformId]);
   }
 

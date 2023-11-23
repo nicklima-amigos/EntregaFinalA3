@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
 import GameCard from "../../components/UI/GameCard/GameCard.jsx";
 import Button from "../../components/UI/Button/Button.jsx";
@@ -8,6 +7,7 @@ import Spinner from "../../components/UI/Loading/Spinner.jsx";
 import Navbar from "../../components/UI/Navbar/Navbar.jsx";
 import Sidebar from "../../components/UI/Sidebar/Sidebar.jsx";
 import styles from "./Platforms.module.css";
+import { useCallback } from "react";
 
 export default function Platforms() {
   const navigate = useNavigate();
@@ -27,28 +27,28 @@ export default function Platforms() {
       const response = await apiClient.get(`/platforms`);
       setPlatforms(response.data);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    const getPlatformGames = async () => {
-      try {
-        const response = await apiClient.get(`/platforms/${platformId}`);
-        setPlatformName(response.data.name);
-        setGames(response.data.games.sort((a, b) => b.id - a.id));
-      } catch (error) {
-        console.log("error", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getPlatformGames = useCallback(async () => {
+    try {
+      const response = await apiClient.get(`/platforms/${platformId}`);
+      setPlatformName(response.data.name);
+      setGames(response.data.games.sort((a, b) => b.id - a.id));
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [platformId]);
 
+  useEffect(() => {
     getPlatforms();
     getPlatformGames();
-  }, [platformId]);
+  }, [getPlatformGames]);
 
   return (
     <div className={`d-flex align-items-start h-100 col-12 `}>
@@ -90,7 +90,13 @@ export default function Platforms() {
           {loading ? (
             <Spinner />
           ) : (
-            games.map((game) => <GameCard key={game.id} game={game} />)
+            games.map((game) => (
+              <GameCard
+                key={game.id}
+                game={game}
+                getPlatformGames={getPlatformGames}
+              />
+            ))
           )}
         </div>
       </div>

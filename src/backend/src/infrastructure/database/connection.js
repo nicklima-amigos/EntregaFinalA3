@@ -24,7 +24,7 @@ class DatabaseConnection {
   async exec(queryString, params = []) {
     return new Promise((resolve, reject) => {
       this.runWithDatabase((db) => {
-        db.run(queryString, params, (err) => {
+        db.run(queryString, params, function (err) {
           if (err) {
             reject(err);
             return;

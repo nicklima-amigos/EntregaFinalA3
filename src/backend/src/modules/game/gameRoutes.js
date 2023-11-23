@@ -32,5 +32,9 @@ export const gamesRoutes = (controller) => {
     .get(validateUrlParam("platformId"), (req, res, next) =>
       controller.findByPlatform(req, res, next),
     );
+
+  router
+    .route("/:gameId/platform/:platformId")
+    .post((req, res, next) => controller.associatePlatform(req, res, next));
   return router;
 };

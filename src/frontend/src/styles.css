@@ -22,3 +22,11 @@ body {
 .modal-content {
   background-color: var(--background);
 }
+
+.primary-btn {
+  background-color: var(--secondary);
+}
+
+.pointer:hover {
+  cursor: pointer;
+}

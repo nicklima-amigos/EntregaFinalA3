@@ -1,11 +1,12 @@
 .sidebar {
   position: fixed;
+  top: 0.5rem;
   width: fit-content;
-  height: 100%;
   background-color: var(--primary);
   transition: left 0.3s ease-in-out;
   z-index: 1000;
 }
+
 .icon {
   margin: 0 10px;
   width: 50px;
@@ -14,19 +15,19 @@
   background-color: none;
   cursor: pointer;
 }
+
 .list {
   display: flex;
   @media (min-width: 769px) {
     display: none;
   }
 }
+
 .content {
   padding: 20px;
   background-color: var(--primary);
   display: flex;
   flex-direction: column;
-
-  height: 100%;
 }
 
 .close-button {

@@ -1,11 +1,6 @@
 import styles from "./Sidebar.module.css";
 
-export default function Sidebar({
-  onClose,
-  platforms,
-  onSelectPlatform,
-  navigate,
-}) {
+export default function Sidebar({ onClose, navigate }) {
   return (
     <div className={styles.sidebar} onMouseLeave={onClose}>
       <div className={styles.content}>
@@ -22,20 +17,12 @@ export default function Sidebar({
         </svg>
         <div>
           <ul className={styles.list}>
-            <li onClick={() => navigate("/platforms/create")}>Criar Jogos</li>
-            <li onClick={() => navigate("/categories/create")}>
-              Criar Categoria
+            <li onClick={() => navigate("/platforms/create")}>
+              Criar Plataforma
             </li>
+            <li onClick={() => navigate("/platforms/create")}>Deslogar</li>
           </ul>
         </div>
-        <h2 className="text-center">Plataformas Cadastradas</h2>
-        <ul>
-          {platforms.map((platform) => (
-            <li key={platform.id} onClick={() => onSelectPlatform(platform.id)}>
-              {platform.name}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

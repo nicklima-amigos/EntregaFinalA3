@@ -25,7 +25,7 @@ export default function LoginForm() {
       setLoading(false);
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
-      navigate("/platforms/1");
+      navigate("/platforms");
     } catch (err) {
       setLoading(false);
       setFormErrors("Credenciais inválidas. Tente novamente.");
@@ -48,7 +48,7 @@ export default function LoginForm() {
           return;
         }
         setUser(JSON.parse(user));
-        navigate("/platforms/1");
+        navigate("/platforms");
       });
   }, [setUser, navigate]);
 

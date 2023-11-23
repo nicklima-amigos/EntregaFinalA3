@@ -4,7 +4,7 @@ import { apiClient } from "../../../services/apiClient";
 import Modal from "../Modal/Modal";
 import useUser from "../../../hooks/useUser";
 
-export default function GradeForm({ game, cleanTitle }) {
+export default function GradeForm({ game, cleanTitle, setIsEditing }) {
   const [grade, setGrade] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -45,6 +45,7 @@ export default function GradeForm({ game, cleanTitle }) {
       console.error(error);
     } finally {
       setLoading(false);
+      setIsEditing(false);
     }
   };
 

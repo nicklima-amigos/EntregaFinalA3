@@ -68,14 +68,14 @@ export default function GameCard({ game }) {
             <span>Data de lançamento:</span> {game.release_date}
           </p>
           <div>
-            <p>
+            <div>
               <span>Categorias:</span>
               {categories?.map((category) => (
                 <CategoryPill key={category.id}>
                   {category.category}
                 </CategoryPill>
               ))}
-            </p>
+            </div>
           </div>
           <div className="flex flex-wrap mt-auto">
             <button
@@ -104,7 +104,11 @@ export default function GameCard({ game }) {
         setCategories={setCategories}
         cleanTitle={cleanTitle}
       />
-      <GradeForm game={game} cleanTitle={cleanTitle} />
+      <GradeForm
+        game={game}
+        cleanTitle={cleanTitle}
+        setIsEditing={setIsEditing}
+      />
     </div>
   );
 }

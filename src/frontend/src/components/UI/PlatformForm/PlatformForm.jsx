@@ -1,26 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormField from "../../components/UI/FormField/FormField";
-import Button from "../../components/UI/Button/Button";
-import MainLogo from "../../components/icons/MainLogo";
-import { apiClient } from "../../services/apiClient";
+import MainLogo from "../../icons/MainLogo";
+import Button from "../Button/Button";
+import FormField from "../FormField/FormField";
 
-export default function PlatformForm() {
+export default function PlatformForm({ handleSubmit, loading, platform }) {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
-  const handleCreate = async () => {
-    setLoading(true);
-    try {
-      const response = await apiClient.post("/platforms", { name });
-      navigate(`/platforms/${response.data.id}`);
-    } catch {
-      console.error("error");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    setName(platform?.name);
+  }, [platform]);
+
   const goBack = () => {
     navigate(-1);
   };
@@ -39,8 +30,8 @@ export default function PlatformForm() {
             onChange={(e) => setName(e.target.value)}
           />
 
-          <Button onClick={handleCreate} loading={loading}>
-            Criar
+          <Button onClick={() => handleSubmit({ name })} loading={loading}>
+            Salvar
           </Button>
         </form>
       </div>

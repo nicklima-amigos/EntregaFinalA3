@@ -3,14 +3,14 @@ import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 export default function AuthGuard({ children }) {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !loading) {
       navigate("/");
       return;
     }
-  }, [navigate, user]);
+  }, [navigate, user, loading]);
   return <>{children}</>;
 }

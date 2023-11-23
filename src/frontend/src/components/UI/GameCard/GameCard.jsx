@@ -43,10 +43,9 @@ export default function GameCard({ game }) {
     <div className={styles.singleGame} key={game.id}>
       <div className={styles.card}>
         <div className={styles.cardFront}>
-          <button className="btn btn-danger ms-auto">
-            <TrashIcon />{" "}
-          </button>
-          <div className={styles.imageContainer}>{<img src="" alt="" />}</div>
+          <div className={styles.imageContainer}>
+            {game.image && <img src="" alt="" />}
+          </div>
           <h3 className="card-title">{game.title}</h3>
         </div>
         <div className={styles.cardBack}>
@@ -85,7 +84,7 @@ export default function GameCard({ game }) {
           </div>
           <div className="flex flex-wrap mt-auto">
             <button
-              className="btn mx-2"
+              className={styles.editBtn + " btn mx-2"}
               type="button"
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}`}
@@ -96,11 +95,14 @@ export default function GameCard({ game }) {
               Avaliar
             </button>
             <button
-              className="btn mx-2"
+              className={styles.editBtn + " btn mx-2"}
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}category`}
             >
               Adicionar Categoria
+            </button>
+            <button className={styles.deleteBtn + " btn btn-danger ms-auto"}>
+              <TrashIcon />{" "}
             </button>
           </div>
         </div>

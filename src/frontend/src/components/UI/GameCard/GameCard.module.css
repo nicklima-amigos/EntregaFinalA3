@@ -87,9 +87,12 @@
 }
 
 .cardBack button {
+  margin-top: 20px;
+}
+
+.cardBack .editBtn {
   background-color: var(--secondary);
   color: black;
-  margin-top: 20px;
 }
 
 .grade {

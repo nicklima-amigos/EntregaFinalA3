@@ -1,3 +1,5 @@
+import { ValidationError } from "../../../exceptions/validationError.js";
+
 export const validateCreateGrade = (body) => {
   const { grade, user_id, game_id } = body;
   const errors = {};

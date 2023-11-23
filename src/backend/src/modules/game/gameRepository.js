@@ -12,26 +12,14 @@ export class GamesRepository {
     this.db = db;
   }
 
-  async create({
-    title,
-    genre,
-    price,
-    developed_by,
-    release_date,
-    platform_id,
-  }) {
-    const createGameResult = await this.db.exec(createGameQuery, [
+  async create({ title, genre, price, developed_by, release_date }) {
+    return await this.db.exec(createGameQuery, [
       title,
       genre,
       price,
       developed_by,
       release_date,
     ]);
-    await this.associate({
-      game_id: createGameResult.id,
-      platform_id,
-    });
-    return createGameResult;
   }
 
   find() {
@@ -42,12 +30,12 @@ export class GamesRepository {
     return this.db.query(findGamesByPlatformIdQuery, [platformId]);
   }
 
-  associate({ game_id, platform_id }) {
-    return this.db.exec(createGamePlatformQuery, [game_id, platform_id]);
+  associate({ gameId, platformId }) {
+    return this.db.exec(createGamePlatformQuery, [gameId, platformId]);
   }
 
-  disassociate({ game_id, platform_id }) {
-    return this.db.exec(deleteGamePlatformQuery, [game_id, platform_id]);
+  disassociate({ gameId, platformId }) {
+    return this.db.exec(deleteGamePlatformQuery, [gameId, platformId]);
   }
 
   findOne(id) {

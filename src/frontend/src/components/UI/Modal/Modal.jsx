@@ -20,9 +20,13 @@ export default function Modal({ id, title, handleSubmit, loading, children }) {
             {children}
           </div>
           <div className="modal-footer">
-            <Button type="button" data-bs-dismiss="modal">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
               Fechar
-            </Button>
+            </button>
             <Button type="button" loading={loading} onClick={handleSubmit}>
               Salvar
             </Button>

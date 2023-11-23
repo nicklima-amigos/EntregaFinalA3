@@ -1,3 +1,5 @@
+import { ValidationError } from "../../../exceptions/validationError.js";
+
 export const validateCreatePlatform = (body) => {
   const { name } = body;
   const errors = {};

@@ -79,7 +79,11 @@ export default function Platforms() {
           </svg>
         </Navbar>
         <div className=" d-flex align-items-center col-12 px-3">
-          <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
+          <Button
+            onClick={() => navigate(`/games/create/platform/${platformId}`)}
+          >
+            Criar Jogo
+          </Button>
           <h2 className="px-3">{platformName}</h2>
         </div>
         <div className="container mt-5 d-flex flex-wrap text-center justify-content-around">

@@ -7,17 +7,9 @@ export class GamesService {
   }
 
   async create({ title, genre, price, developed_by, release_date }) {
-    const existingGame = await this.gameRepository.findOneByTitle(
-      title,
-    );
+    const existingGame = await this.gameRepository.findOneByTitle(title);
     if (existingGame) {
       throw new HttpError(409, "Bad Request! Game already exists!");
-    }
-    const existingPlatform = await this.platformRepository.findOne(
-      platform_id,
-    );
-    if (!existingPlatform) {
-      throw new HttpError(404, "Platform not found!");
     }
     return this.gameRepository.create({
       title,
@@ -63,5 +55,17 @@ export class GamesService {
       throw new HttpError(404, "A game with this title already exists!");
     }
     return this.gameRepository.update(id, title);
+  }
+
+  async associatePlatform({ gameId, platformId }) {
+    const existingGame = await this.gameRepository.findOne(gameId);
+    if (!existingGame) {
+      throw new HttpError(404, "Game not found!");
+    }
+    const existingPlatform = await this.platformRepository.findOne(platformId);
+    if (!existingPlatform) {
+      throw new HttpError(404, "Platform not found!");
+    }
+    return this.gameRepository.associate({ gameId, platformId });
   }
 }

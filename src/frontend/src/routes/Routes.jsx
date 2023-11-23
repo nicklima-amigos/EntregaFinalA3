@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "games/create",
+    path: "games/create/platform/:platformId",
     element: (
       <AuthGuard>
         <GameForm />,

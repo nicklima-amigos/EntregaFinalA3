@@ -1,5 +1,7 @@
+import { ValidationError } from "../../../exceptions/validationError.js";
+
 export const validateCreateGame = (body) => {
-  const { title, genre, price, developed_by, release_date, platform_id } = body;
+  const { title, genre, price, developed_by, release_date } = body;
   const errors = {};
   if (!title) {
     errors.title = "Title is required";
@@ -23,9 +25,6 @@ export const validateCreateGame = (body) => {
     errors.release_date = "Release date is required";
   } else if (release_date > new Date()) {
     errors.release_date = "Release date must be in the past";
-  }
-  if (!platform_id) {
-    errors.platform_id = "Platform id is required";
   }
   if (Object.keys(errors).length > 0) {
     throw new ValidationError("invalid request body", errors);

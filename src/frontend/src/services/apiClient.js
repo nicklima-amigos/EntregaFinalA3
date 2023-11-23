@@ -44,6 +44,9 @@ const fetchFromBaseUrl = async (endpoint, requestData, options) => {
     throw new Error(`Error fetching ${endpoint}: ${errorData.message}`);
   }
   const status = response.status;
+  if (status === 204) {
+    return { status };
+  }
   const data = await response.json();
   return {
     status,

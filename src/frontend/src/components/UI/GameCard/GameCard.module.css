@@ -101,32 +101,7 @@
   display: block;
 }
 
-/* .cardBack .pill {
-  color: black;
-  padding: 5px 10px;
-  border-radius: 16px;
-  margin: 1px;
-} */
-
-/* .pill.playing {
-  background-color: rgb(55, 255, 55);
-  box-shadow: rgb(55, 255, 55) 0 0 10px;
-} */
-/* 
-.pill.notWorth {
-  background-color: rgb(255, 55, 55);
-  box-shadow: rgb(255, 55, 55) 0 0 10px;
+.categoriesContainer {
+  display: flex;
+  justify-content: center;
 }
-
-.pill.completed {
-  background-color: rgb(55, 125, 255);
-  box-shadow: rgb(55, 125, 255) 0 0 10px;
-}
-.pill.adventure {
-  background-color: rgb(255, 175, 55);
-  box-shadow: rgb(255, 175, 55) 0 0 10px;
-}
-.pill.recommends {
-  background-color: rgb(255, 252, 55);
-  box-shadow: rgb(255, 252, 55) 0 0 10px;
-} */

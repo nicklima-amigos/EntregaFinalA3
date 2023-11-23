@@ -1,6 +1,6 @@
 import styles from "./GameCard.module.css";
 import GradeForm from "../GradeForm/GradeForm";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { apiClient } from "../../../services/apiClient";
 import useUser from "../../../hooks/useUser";
 import CategoryForm from "../../../pages/CategoryForm/CategoryForm";
@@ -13,6 +13,17 @@ export default function GameCard({ game }) {
   const user = useUser();
   const cleanTitle = game.title.split(" ").join("").split(":").join("");
 
+  const fetchCategories = useCallback(async () => {
+    if (!user || !game) {
+      return;
+    }
+    console.log("updating categories...");
+    const { data } = await apiClient.get(
+      `/categories/game/${game.id}/user/${user.id}`
+    );
+    setCategories(data);
+  }, [game, user]);
+
   useEffect(() => {
     const fetchGrade = async () => {
       if (!user) {
@@ -23,18 +34,9 @@ export default function GameCard({ game }) {
       );
       setGrade(data.grade);
     };
-    const fetchCategories = async () => {
-      if (!user || !game) {
-        return;
-      }
-      const { data } = await apiClient.get(
-        `/categories/game/${game.id}/user/${user.id}`
-      );
-      setCategories(data);
-    };
     fetchGrade();
     fetchCategories();
-  }, [isEditing, game, user]);
+  }, [isEditing, game, user, fetchCategories]);
 
   return (
     <div className={styles.singleGame} key={game.id}>
@@ -68,12 +70,14 @@ export default function GameCard({ game }) {
             <span>Data de lançamento:</span> {game.release_date}
           </p>
           <div>
-            <div>
-              <span>Categorias:</span>
+            <span>Categorias:</span>
+            <div className={styles.categoriesContainer}>
               {categories?.map((category) => (
-                <CategoryPill key={category.id}>
-                  {category.category}
-                </CategoryPill>
+                <CategoryPill
+                  key={category.id}
+                  category={category}
+                  fetchCategories={fetchCategories}
+                />
               ))}
             </div>
           </div>

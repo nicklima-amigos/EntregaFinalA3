@@ -49,7 +49,10 @@ export default function Platforms() {
         </div>
         {platforms.map(({ name, id }) => {
           return (
-            <div className={styles.tableRow + " row mb-2"} key={id}>
+            <div
+              className={styles.tableRow + " row mb-2 border-bottom"}
+              key={id}
+            >
               <div
                 className="col pointer"
                 onClick={() => navigate(`/platforms/${id}`)}

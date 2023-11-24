@@ -10,6 +10,7 @@ import UpdatePlatform from "../pages/UpdatePlatform/UpdatePlatform";
 import Games from "../pages/Games/Games";
 import CreateGame from "../pages/CreateGame/CreateGame";
 import UpdateGame from "../pages/UpdateGame/UpdateGame";
+import AddGame from "../pages/AddGame/AddGame";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ export const router = createBrowserRouter([
     element: (
       <AuthGuard>
         <Platform />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "platforms/:platformId/add-games",
+    element: (
+      <AuthGuard>
+        <AddGame />
       </AuthGuard>
     ),
   },

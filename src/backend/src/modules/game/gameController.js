@@ -31,6 +31,16 @@ export class GamesController {
     }
   }
 
+  async findGamePlatforms(req, res, next) {
+    try {
+      const { gameId } = req.params;
+      const result = await this.service.findGamePlatforms(+gameId);
+      return res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async findOne(req, res, next) {
     try {
       const { id } = req.params;

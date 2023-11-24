@@ -7,18 +7,21 @@ import { findGamesByPlatformIdQuery } from "./queries/findGamesByPlatformId.js";
 import { findOneGameQuery } from "./queries/findOneGame.js";
 import { findOneGameByTitleQuery } from "./queries/findOneGameByTitle.js";
 import { updateGameQuery } from "./queries/updateGame.js";
+import { findGamePlatformsQuery } from "./queries/findGamePlatforms.js";
+
 export class GamesRepository {
   constructor(db) {
     this.db = db;
   }
 
-  async create({ title, genre, price, developed_by, release_date }) {
+  async create({ title, genre, price, developed_by, release_date, image }) {
     return await this.db.exec(createGameQuery, [
       title,
       genre,
       price,
       developed_by,
       release_date,
+      image,
     ]);
   }
 
@@ -28,6 +31,10 @@ export class GamesRepository {
 
   findByPlatform(platformId) {
     return this.db.query(findGamesByPlatformIdQuery, [platformId]);
+  }
+
+  findGamePlatforms(gameId) {
+    return this.db.query(findGamePlatformsQuery, [gameId]);
   }
 
   associate({ gameId, platformId }) {

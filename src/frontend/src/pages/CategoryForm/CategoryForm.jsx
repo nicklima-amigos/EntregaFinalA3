@@ -17,7 +17,6 @@ export default function CategoryForm({ game, cleanTitle, setCategories }) {
     const { data } = await apiClient.get(
       `/categories/game/${game.id}/user/${user.id}`
     );
-    console.log({ data });
     setCategories(data);
   };
 

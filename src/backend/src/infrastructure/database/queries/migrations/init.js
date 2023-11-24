@@ -5,6 +5,7 @@ export const init = [
         title VARCHAR(255) NOT NULL,
         genre VARCHAR(255) NOT NULL,
         price DOUBLE NOT NULL,
+        image VARCHAR(255) NOT NULL DEFAULT '',
         developed_by VARCHAR(255) NOT NULL,
         release_date DATE NOT NULL
     );`,

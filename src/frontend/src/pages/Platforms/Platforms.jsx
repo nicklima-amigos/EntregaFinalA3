@@ -5,6 +5,7 @@ import Navbar from "../../components/UI/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/UI/Loading/Spinner";
 import usePlatforms from "../../hooks/usePlatforms";
+import Button from "../../components/UI/Button/Button";
 
 export default function Platforms() {
   const { platforms, loading, getPlatforms } = usePlatforms();
@@ -31,6 +32,10 @@ export default function Platforms() {
     <>
       <Navbar />
       <div className="container">
+        <Button className="mt-4" onClick={() => navigate(-1)}>
+          Voltar
+        </Button>
+        <h2 className="mb-4 text-center">Plataformas</h2>
         <div className={styles.tableHeader + " row mb-2"}>
           <div className="col">Nome</div>
           <div className="col"></div>

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Navbar from "../../components/UI/Navbar/Navbar";
-import { apiClient } from "../../services/apiClient";
-import styles from "../../components/shared/styles.module.css";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Loading/Spinner";
+import Navbar from "../../components/UI/Navbar/Navbar";
+import styles from "../../components/shared/styles.module.css";
+import { apiClient } from "../../services/apiClient";
 
 export default function Games() {
   const [games, setGames] = useState();
@@ -42,6 +43,10 @@ export default function Games() {
     <>
       <Navbar />
       <div className="container">
+        <Button className="mt-4" onClick={() => navigate(-1)}>
+          Voltar
+        </Button>
+        <h2 className="mb-4 text-center">Jogos</h2>
         <div className={styles.tableHeader + " row mb-2"}>
           <div className="col">Título</div>
           <div className="col"></div>
@@ -49,7 +54,10 @@ export default function Games() {
         </div>
         {games.map(({ title, id }) => {
           return (
-            <div className={styles.tableRow + " row mb-2 border-bottom"} key={id}>
+            <div
+              className={styles.tableRow + " row mb-2 border-bottom"}
+              key={id}
+            >
               <div className="col">{title}</div>
               <div className="col">
                 <button

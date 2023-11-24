@@ -1,4 +1,3 @@
 export const deleteGamePlatformQuery = `
-DELETE FROM  games_platforms WHERE game_id = ?, platform_id = ?;
-
+  DELETE FROM  games_platforms WHERE game_id = ? AND platform_id = ?;
 `;

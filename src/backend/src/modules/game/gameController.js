@@ -31,6 +31,16 @@ export class GamesController {
     }
   }
 
+  async findGamePlatforms(req, res, next) {
+    try {
+      const { gameId } = req.params;
+      const result = await this.service.findGamePlatforms(+gameId);
+      return res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async findOne(req, res, next) {
     try {
       const { id } = req.params;
@@ -62,11 +72,22 @@ export class GamesController {
   }
 
   async associatePlatform(req, res, next) {
-    console.log("associatePlatform");
-    console.log(req.params);
     try {
       const { gameId, platformId } = req.params;
       const result = await this.service.associatePlatform({
+        gameId: +gameId,
+        platformId: +platformId,
+      });
+      return res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async dissociatePlatform(req, res, next) {
+    try {
+      const { gameId, platformId } = req.params;
+      const result = await this.service.dissociatePlatform({
         gameId: +gameId,
         platformId: +platformId,
       });

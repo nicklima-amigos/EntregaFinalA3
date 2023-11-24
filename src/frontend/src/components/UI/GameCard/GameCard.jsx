@@ -1,17 +1,38 @@
 import styles from "./GameCard.module.css";
 import GradeForm from "../GradeForm/GradeForm";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { apiClient } from "../../../services/apiClient";
 import useUser from "../../../hooks/useUser";
 import CategoryForm from "../../../pages/CategoryForm/CategoryForm";
 import CategoryPill from "../CategoryPill/CategoryPill";
+import TrashIcon from "../../icons/Trash";
+import { useParams } from "react-router-dom";
 
-export default function GameCard({ game }) {
+export default function GameCard({ game, getPlatformGames }) {
   const [isEditing, setIsEditing] = useState(false);
   const [categories, setCategories] = useState(game.categories);
   const [grade, setGrade] = useState();
   const user = useUser();
+  const { platformId } = useParams();
   const cleanTitle = game.title.split(" ").join("").split(":").join("");
+
+  const fetchCategories = useCallback(async () => {
+    if (!user || !game) {
+      return;
+    }
+    const { data } = await apiClient.get(
+      `/categories/game/${game.id}/user/${user.id}`
+    );
+    setCategories(data);
+  }, [game, user]);
+
+  const handleDeleteGame = async () => {
+    if (!user || !game) {
+      return;
+    }
+    await apiClient.delete(`/games/${game.id}/platform/${platformId}`);
+    getPlatformGames();
+  };
 
   useEffect(() => {
     const fetchGrade = async () => {
@@ -21,27 +42,19 @@ export default function GameCard({ game }) {
       const { data } = await apiClient.get(
         `/grades/user/${user.id}/game/${game.id}`
       );
-      setGrade(data.grade);
+      setGrade(data?.grade);
     };
-    const fetchCategories = async () => {
-      if (!user || !game) {
-        return;
-      }
-      const { data } = await apiClient.get(
-        `/categories/game/${game.id}/user/${user.id}`
-      );
-      setCategories(data);
-    };
+
     fetchGrade();
     fetchCategories();
-  }, [isEditing, game, user]);
+  }, [isEditing, game, user, fetchCategories]);
 
   return (
     <div className={styles.singleGame} key={game.id}>
       <div className={styles.card}>
         <div className={styles.cardFront}>
           <div className={styles.imageContainer}>
-            {game.image && <img src="" alt="" />}
+            {game.image && <img src={game.image} alt="" />}
           </div>
           <h3 className="card-title">{game.title}</h3>
         </div>
@@ -68,18 +81,20 @@ export default function GameCard({ game }) {
             <span>Data de lançamento:</span> {game.release_date}
           </p>
           <div>
-            <div>
-              <span>Categorias:</span>
+            <span>Categorias:</span>
+            <div className={styles.categoriesContainer}>
               {categories?.map((category) => (
-                <CategoryPill key={category.id}>
-                  {category.category}
-                </CategoryPill>
+                <CategoryPill
+                  key={category.id}
+                  category={category}
+                  fetchCategories={fetchCategories}
+                />
               ))}
             </div>
           </div>
           <div className="flex flex-wrap mt-auto">
             <button
-              className="btn mx-2"
+              className={styles.editBtn + " btn mx-2"}
               type="button"
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}`}
@@ -90,11 +105,17 @@ export default function GameCard({ game }) {
               Avaliar
             </button>
             <button
-              className="btn mx-2"
+              className={styles.editBtn + " btn mx-2"}
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}category`}
             >
               Adicionar Categoria
+            </button>
+            <button
+              className={styles.deleteBtn + " btn btn-danger ms-auto"}
+              onClick={handleDeleteGame}
+            >
+              <TrashIcon />{" "}
             </button>
           </div>
         </div>

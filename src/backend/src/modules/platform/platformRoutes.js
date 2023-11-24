@@ -14,6 +14,7 @@ export const platformsRoutes = (controller) => {
       controller.create(req, res, next),
     )
     .get((req, res, next) => controller.find(req, res, next));
+
   router
     .route("/:id")
     .get(validateUrlParam("id"), (req, res, next) =>

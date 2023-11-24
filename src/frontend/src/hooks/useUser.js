@@ -7,11 +7,11 @@ export default function useUser() {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    if (user) {
-      setUser(JSON.parse(user));
+    if (!user) {
+      navigate("/");
       return;
     }
-    navigate("/");
+    setUser(JSON.parse(user));
   }, [navigate]);
   return user;
 }

@@ -4,24 +4,27 @@ const baseURL = import.meta.env.VITE_API_URL
 
 export const apiClient = {
   get: (endpoint, options = {}) => {
-    return fetchFromBaseUrl(endpoint, undefined, options);
+    return fetchFromBaseUrl(endpoint, undefined, {
+      ...options,
+      method: "GET",
+    });
   },
   post: (endpoint, requestData, options = {}) => {
     return fetchFromBaseUrl(endpoint, requestData, {
-      method: "POST",
       ...options,
+      method: "POST",
     });
   },
   put: (endpoint, requestData, options = {}) => {
     return fetchFromBaseUrl(endpoint, requestData, {
-      method: "PUT",
       ...options,
+      method: "PUT",
     });
   },
   delete: (endpoint, options = {}) => {
     return fetchFromBaseUrl(endpoint, undefined, {
-      method: "DELETE",
       ...options,
+      method: "DELETE",
     });
   },
 };
@@ -44,9 +47,14 @@ const fetchFromBaseUrl = async (endpoint, requestData, options) => {
     throw new Error(`Error fetching ${endpoint}: ${errorData.message}`);
   }
   const status = response.status;
-  const data = await response.json();
-  return {
-    status,
-    data,
-  };
+
+  try {
+    const data = await response.json();
+    return {
+      status,
+      data,
+    };
+  } catch {
+    return { status };
+  }
 };

@@ -43,6 +43,7 @@ export class PlatformsRepository {
             price: row.price,
             developed_by: row.developed_by,
             release_date: row.release_date,
+            image: row.image,
           };
         }),
     };

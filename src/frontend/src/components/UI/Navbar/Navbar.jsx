@@ -48,6 +48,8 @@ export default function Navbar() {
           <Button onClick={() => navigate("/platforms/create")}>
             Criar Plataforma
           </Button>
+          <Button onClick={() => navigate("/games")}>Jogos</Button>
+          <Button onClick={() => navigate("/games/create")}>Criar Jogo</Button>
           <Button onClick={logout}>Deslogar</Button>
         </div>
       </div>

@@ -2,12 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import AuthGuard from "../components/guards/AuthGuard";
 import CategoryForm from "../pages/CategoryForm/CategoryForm";
 import CreatePlatform from "../pages/CreatePlatform/CreatePlatform";
-import GameForm from "../pages/GameForm/GameForm";
 import LoginForm from "../pages/LoginForm/LoginForm";
 import Platform from "../pages/Platform/Platform";
 import Platforms from "../pages/Platforms/Platforms";
 import SignUpForm from "../pages/SignUpForm/SignUpForm";
 import UpdatePlatform from "../pages/UpdatePlatform/UpdatePlatform";
+import Games from "../pages/Games/Games";
+import CreateGame from "../pages/CreateGame/CreateGame";
+import UpdateGame from "../pages/UpdateGame/UpdateGame";
 
 export const router = createBrowserRouter([
   {
@@ -54,23 +56,23 @@ export const router = createBrowserRouter([
     path: "games",
     element: (
       <AuthGuard>
-        <h1>Veja jogos aqui</h1>
+        <Games />
       </AuthGuard>
     ),
   },
   {
-    path: "games/:id",
+    path: "games/create",
     element: (
       <AuthGuard>
-        <h1>Veja detalhes de um jogo aqui</h1>,
+        <CreateGame />
       </AuthGuard>
     ),
   },
   {
-    path: "games/create/platform/:platformId",
+    path: "games/:gameId/edit",
     element: (
       <AuthGuard>
-        <GameForm />,
+        <UpdateGame />,
       </AuthGuard>
     ),
   },

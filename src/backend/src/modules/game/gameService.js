@@ -50,7 +50,7 @@ export class GamesService {
   }
 
   async update(id, title) {
-    const game = await this.findOneByTitle(title);
+    const game = await this.findOne(id);
     if (game.title === title) {
       throw new HttpError(404, "A game with this title already exists!");
     }

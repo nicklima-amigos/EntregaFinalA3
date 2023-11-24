@@ -1,51 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormField from "../../components/UI/FormField/FormField";
-import Button from "../../components/UI/Button/Button";
-import MainLogo from "../../components/icons/MainLogo";
-import { useParams } from "react-router-dom";
-import { apiClient } from "../../services/apiClient";
+import FormField from "../FormField/FormField";
+import Button from "../Button/Button";
+import MainLogo from "../../icons/MainLogo";
 
-export default function GameForm() {
+export default function GameForm({ handleSubmit, loading, error, game }) {
   const navigate = useNavigate();
-  const { platformId } = useParams();
-  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [price, setPrice] = useState(0);
   const [developedBy, setDevelopedBy] = useState("");
   const [releaseDate, setReleaseDate] = useState();
-  const [error, setError] = useState(false);
 
-  const handleCreate = async () => {
-    setError(false);
-    setLoading(true);
-    const game = {
-      title,
-      genre,
-      price,
-      developed_by: developedBy,
-      release_date: releaseDate,
-    };
-    try {
-      const createGameResponse = await apiClient.post("/games", game);
-      const newGameId = createGameResponse.data.id;
-      await apiClient.post(`/games/${newGameId}/platform/${platformId}`);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (game) {
+      setTitle(game.title);
+      setGenre(game.genre);
+      setPrice(game.price);
+      setDevelopedBy(game.developed_by);
+      setReleaseDate(game.release_date);
     }
-  };
+  }, [game]);
 
   const goBack = () => {
     navigate(-1);
   };
 
   return (
-    <div className="container mt-5 d-flex flex-column align-items-start h-100 w-100 ">
+    <div className="container mt-5 d-flex flex-column align-items-start">
       <Button onClick={goBack}>Voltar</Button>
-      <div className="container mt-5 mx-auto d-flex flex-column align-items-center justify-content-center h-100 w-100 ">
+      <div className="mx-auto d-flex flex-column align-items-center justify-content-center">
         <MainLogo />
         <form className="col-4 mx-auto d-flex align-content-center flex-wrap flex-column">
           <FormField
@@ -88,8 +72,19 @@ export default function GameForm() {
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
           />
-          <Button onClick={handleCreate} loading={loading}>
-            Criar
+          <Button
+            onClick={() =>
+              handleSubmit({
+                title,
+                genre,
+                price,
+                developed_by: developedBy,
+                release_date: releaseDate,
+              })
+            }
+            loading={loading}
+          >
+            Salvar
           </Button>
           {error && <p>algo deu errado</p>}
         </form>

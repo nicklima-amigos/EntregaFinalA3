@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormField from "../FormField/FormField";
-import Button from "../Button/Button";
 import MainLogo from "../../icons/MainLogo";
+import Button from "../Button/Button";
+import FormField from "../FormField/FormField";
 
-export default function GameForm({ handleSubmit, loading, error, game }) {
+export default function GameForm({
+  handleSubmit,
+  loading,
+  error,
+  game,
+  gamePlatforms,
+}) {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [price, setPrice] = useState(0);
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
   const [developedBy, setDevelopedBy] = useState("");
   const [releaseDate, setReleaseDate] = useState();
 
@@ -20,7 +27,12 @@ export default function GameForm({ handleSubmit, loading, error, game }) {
       setDevelopedBy(game.developed_by);
       setReleaseDate(game.release_date);
     }
-  }, [game]);
+    if (gamePlatforms?.length > 0) {
+      setSelectedPlatforms(gamePlatforms.map((p) => p.id));
+    }
+
+    console.log({ gamePlatforms });
+  }, [game, gamePlatforms]);
 
   const goBack = () => {
     navigate(-1);
@@ -31,7 +43,7 @@ export default function GameForm({ handleSubmit, loading, error, game }) {
       <Button onClick={goBack}>Voltar</Button>
       <div className="mx-auto d-flex flex-column align-items-center justify-content-center">
         <MainLogo />
-        <form className="col-4 mx-auto d-flex align-content-center flex-wrap flex-column">
+        <form className="mx-auto d-flex align-content-center flex-wrap flex-column">
           <FormField
             type="text"
             label="Título"
@@ -72,15 +84,19 @@ export default function GameForm({ handleSubmit, loading, error, game }) {
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
           />
+          <label htmlFor="">Plataforma</label>
           <Button
             onClick={() =>
-              handleSubmit({
-                title,
-                genre,
-                price,
-                developed_by: developedBy,
-                release_date: releaseDate,
-              })
+              handleSubmit(
+                {
+                  title,
+                  genre,
+                  price,
+                  developed_by: developedBy,
+                  release_date: releaseDate,
+                },
+                selectedPlatforms
+              )
             }
             loading={loading}
           >

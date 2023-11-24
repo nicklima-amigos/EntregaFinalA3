@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { apiClient } from "../../services/apiClient";
 import styles from "../../components/shared/styles.module.css";
 import Navbar from "../../components/UI/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/UI/Loading/Spinner";
+import usePlatforms from "../../hooks/usePlatforms";
 
 export default function Platforms() {
-  const [platforms, setPlatforms] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { platforms, loading, getPlatforms } = usePlatforms();
   const navigate = useNavigate();
-
-  const getPlatforms = async () => {
-    try {
-      const response = await apiClient.get(`/platforms`);
-      setPlatforms(response.data);
-    } catch (error) {
-      console.error("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleDeletePlatform = async (id) => {
     try {
@@ -32,7 +21,7 @@ export default function Platforms() {
 
   useEffect(() => {
     getPlatforms();
-  }, []);
+  }, [getPlatforms]);
 
   if (loading) {
     return <Spinner />;

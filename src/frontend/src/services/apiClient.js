@@ -47,12 +47,14 @@ const fetchFromBaseUrl = async (endpoint, requestData, options) => {
     throw new Error(`Error fetching ${endpoint}: ${errorData.message}`);
   }
   const status = response.status;
-  if (status === 204) {
+
+  try {
+    const data = await response.json();
+    return {
+      status,
+      data,
+    };
+  } catch {
     return { status };
   }
-  const data = await response.json();
-  return {
-    status,
-    data,
-  };
 };

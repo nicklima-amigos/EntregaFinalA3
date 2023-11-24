@@ -42,8 +42,9 @@ export default function GameCard({ game, getPlatformGames }) {
       const { data } = await apiClient.get(
         `/grades/user/${user.id}/game/${game.id}`
       );
-      setGrade(data.grade);
+      setGrade(data?.grade);
     };
+
     fetchGrade();
     fetchCategories();
   }, [isEditing, game, user, fetchCategories]);
@@ -53,7 +54,7 @@ export default function GameCard({ game, getPlatformGames }) {
       <div className={styles.card}>
         <div className={styles.cardFront}>
           <div className={styles.imageContainer}>
-            {game.image && <img src="" alt="" />}
+            {game.image && <img src={game.image} alt="" />}
           </div>
           <h3 className="card-title">{game.title}</h3>
         </div>

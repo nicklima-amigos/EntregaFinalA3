@@ -35,12 +35,12 @@ export default function Platform() {
         <Navbar />
         <div className=" d-flex align-items-center col-12 px-3">
           <Button
-            onClick={() => navigate(`/games/create/platform/${platformId}`)}
+            onClick={() => navigate(`/platforms/${platformId}/add-games`)}
           >
-            Criar Jogo
+            Adicionar Jogo
           </Button>
-          <h2 className="px-3">{platformName}</h2>
         </div>
+        <h2 className="px-3 mt-5">{platformName}</h2>
         <div className="container mt-5 d-flex flex-wrap text-center justify-content-around">
           {loading ? (
             <Spinner />

@@ -37,5 +37,9 @@ export const gamesRoutes = (controller) => {
     .route("/:gameId/platform/:platformId")
     .post((req, res, next) => controller.associatePlatform(req, res, next))
     .delete((req, res, next) => controller.dissociatePlatform(req, res, next));
+
+  router.route("/:gameId/platforms").get((req, res, next) => {
+    controller.findGamePlatforms(req, res, next);
+  });
   return router;
 };

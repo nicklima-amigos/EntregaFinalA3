@@ -1,9 +1,10 @@
 import { HttpError } from "../../exceptions/httpError.js";
 
 export class GamesService {
-  constructor(gameRepository, platformRepository) {
+  constructor(gameRepository, platformRepository, imageCrawlerService) {
     this.gameRepository = gameRepository;
     this.platformRepository = platformRepository;
+    this.imageCrawlerService = imageCrawlerService;
   }
 
   async create({ title, genre, price, developed_by, release_date }) {
@@ -11,12 +12,14 @@ export class GamesService {
     if (existingGame) {
       throw new HttpError(409, "Bad Request! Game already exists!");
     }
+    const imageUrl = await this.imageCrawlerService.run(title);
     return this.gameRepository.create({
       title,
       genre,
       price,
       developed_by,
       release_date,
+      image: imageUrl,
     });
   }
 
@@ -34,6 +37,14 @@ export class GamesService {
       throw new HttpError(404, "Game not found!");
     }
     return game;
+  }
+
+  async findGamePlatforms(gameId) {
+    const game = await this.gameRepository.findOne(gameId);
+    if (!game) {
+      throw new HttpError(404, "Game not found!");
+    }
+    return this.gameRepository.findGamePlatforms(gameId);
   }
 
   async findOneByTitle(title) {

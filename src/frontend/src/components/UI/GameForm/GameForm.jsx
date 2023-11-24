@@ -34,13 +34,11 @@ export default function GameForm({
     console.log({ gamePlatforms });
   }, [game, gamePlatforms]);
 
-  const goBack = () => {
-    navigate(-1);
-  };
+
 
   return (
     <div className="container mt-5 d-flex flex-column align-items-start">
-      <Button onClick={goBack}>Voltar</Button>
+      <Button onClick={() => navigate(-1)}>Voltar</Button>
       <div className="mx-auto d-flex flex-column align-items-center justify-content-center">
         <MainLogo />
         <form className="mx-auto d-flex align-content-center flex-wrap flex-column">
@@ -84,7 +82,6 @@ export default function GameForm({
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
           />
-          <label htmlFor="">Plataforma</label>
           <Button
             onClick={() =>
               handleSubmit(

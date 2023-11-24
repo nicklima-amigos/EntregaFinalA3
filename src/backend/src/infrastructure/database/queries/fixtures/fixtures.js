@@ -16,17 +16,17 @@ export const fixtures = [
       (12, "Other");
   `,
   `
-      INSERT INTO games (id, title, genre, price, developed_by, release_date) VALUES
-      (1,"The Witcher 3: Wild Hunt", "RPG", 59.99, "CD Projekt RED", "2015-05-19"),
-      (2,"The Elder Scrolls V: Skyrim", "RPG", 39.99, "Bethesda Game Studios", "2011-11-11"),
-      (3,"Grand Theft Auto V", "Action", 29.99, "Rockstar North", "2013-09-17"),
-      (4,"The Witcher 2: Assassins of Kings", "RPG", 19.99, "CD Projekt RED", "2011-05-17"),
-      (5,"The Witcher", "RPG", 9.99, "CD Projekt RED", "2007-10-26"),
-      (6,"The Elder Scrolls IV: Oblivion", "RPG", 14.99, "Bethesda Game Studios", "2006-03-20"),
-      (7,"The Elder Scrolls III: Morrowind", "RPG", 14.99, "Bethesda Game Studios", "2002-05-01"),
-      (8,"Grand Theft Auto: San Andreas", "Action", 14.99, "Rockstar North", "2004-10-26"),
-      (9,"Grand Theft Auto: Vice City", "Action", 9.99, "Rockstar North", "2002-10-27"),
-      (10,"Grand Theft Auto III", "Action", 9.99, "Rockstar North", "2001-10-22");
+      INSERT INTO games (id, title, genre, price, developed_by, release_date, image) VALUES
+      (1,"The Witcher 3: Wild Hunt", "RPG", 59.99, "CD Projekt RED", "2015-05-19", "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"),
+      (2,"The Elder Scrolls V: Skyrim", "RPG", 39.99, "Bethesda Game Studios", "2011-11-11", "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg"),
+      (3,"Grand Theft Auto V", "Action", 29.99, "Rockstar North", "2013-09-17", "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"),
+      (4,"The Witcher 2: Assassins of Kings", "RPG", 19.99, "CD Projekt RED", "2011-05-17", "https://media.rawg.io/media/games/bba/bba9dff323894856be2b2638f2b8aed0.jpg"),
+      (5,"The Witcher", "RPG", 9.99, "CD Projekt RED", "2007-10-26", "https://media.rawg.io/media/screenshots/2f7/2f70e8bf43b0d6223823aa644b0a2854.jpg"),
+      (6,"The Elder Scrolls IV: Oblivion", "RPG", 14.99, "Bethesda Game Studios", "2006-03-20","https://media.rawg.io/media/games/615/61503312a95d451198d80d9bae275f79.jpg"),
+      (7,"The Elder Scrolls III: Morrowind", "RPG", 14.99, "Bethesda Game Studios", "2002-05-01","https://media.rawg.io/media/games/ccf/ccf26f6e3d553a04f0033a8107a521b8.jpg"),
+      (8,"Grand Theft Auto: San Andreas", "Action", 14.99, "Rockstar North", "2004-10-26","https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg"),
+      (9,"Grand Theft Auto: Vice City", "Action", 9.99, "Rockstar North", "2002-10-27", "https://media.rawg.io/media/games/13a/13a528ac9cf48bbb6be5d35fe029336d.jpg"),
+      (10,"Grand Theft Auto III", "Action", 9.99, "Rockstar North", "2001-10-22", "https://media.rawg.io/media/games/5fa/5fae5fec3c943179e09da67a4427d68f.jpg");
   `,
   `
       INSERT INTO games_platforms (id, game_id, platform_id) VALUES

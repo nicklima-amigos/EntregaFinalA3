@@ -40,7 +40,7 @@ export default function Platform() {
             Adicionar Jogo
           </Button>
         </div>
-        <h2 className="px-3 mt-5">{platformName}</h2>
+        <h2 className="px-3 mt-5 mx-auto">{platformName}</h2>
         <div className="container mt-5 d-flex flex-wrap text-center justify-content-around">
           {loading ? (
             <Spinner />

@@ -27,7 +27,8 @@ export default function GameCard({ game, getPlatformGames }) {
     setCategories(data);
   }, [game, user]);
 
-  const handleDeleteGame = async () => {
+  const handleDeleteGame = async (e) => {
+    e.stopPropagation();
     if (!user || !game) {
       return;
     }
@@ -105,7 +106,8 @@ export default function GameCard({ game, getPlatformGames }) {
               type="button"
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}`}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setIsEditing(true);
               }}
             >
@@ -115,6 +117,7 @@ export default function GameCard({ game, getPlatformGames }) {
               className={styles.editBtn + " btn mx-2"}
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}category`}
+              onClick={(e) => e.stopPropagation()}
             >
               Adicionar Categoria
             </button>

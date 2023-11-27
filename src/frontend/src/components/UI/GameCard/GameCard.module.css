@@ -22,7 +22,7 @@
   box-shadow: 0 3px 10px var(--secondary);
 }
 
-.singleGame:hover .card {
+.singleGame.flipped .card {
   transform: rotateY(180deg);
 }
 

@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 export default function GameCard({ game, getPlatformGames }) {
   const [isEditing, setIsEditing] = useState(false);
   const [categories, setCategories] = useState(game.categories);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [grade, setGrade] = useState();
   const user = useUser();
   const { platformId } = useParams();
@@ -50,7 +51,13 @@ export default function GameCard({ game, getPlatformGames }) {
   }, [isEditing, game, user, fetchCategories]);
 
   return (
-    <div className={styles.singleGame} key={game.id}>
+    <div
+      className={`${styles.singleGame} ${isFlipped ? styles.flipped : ""}`}
+      key={game.id}
+      onClick={() => {
+        setIsFlipped(!isFlipped);
+      }}
+    >
       <div className={styles.card}>
         <div className={styles.cardFront}>
           <div className={styles.imageContainer}>

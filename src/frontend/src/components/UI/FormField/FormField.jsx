@@ -17,6 +17,7 @@ export default function FormField({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onClick={(e) => e.stopPropagation()}
       />
       {fieldError && <p className="text-danger">{fieldError}</p>}
     </div>

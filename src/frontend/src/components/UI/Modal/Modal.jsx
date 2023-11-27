@@ -14,6 +14,7 @@ export default function Modal({
       tabIndex="-1"
       aria-labelledby={id}
       aria-hidden="true"
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="modal-dialog">
         <div className="modal-content">

@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 export default function GameCard({ game, getPlatformGames }) {
   const [isEditing, setIsEditing] = useState(false);
   const [categories, setCategories] = useState(game.categories);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [grade, setGrade] = useState();
   const user = useUser();
   const { platformId } = useParams();
@@ -26,7 +27,8 @@ export default function GameCard({ game, getPlatformGames }) {
     setCategories(data);
   }, [game, user]);
 
-  const handleDeleteGame = async () => {
+  const handleDeleteGame = async (e) => {
+    e.stopPropagation();
     if (!user || !game) {
       return;
     }
@@ -50,7 +52,13 @@ export default function GameCard({ game, getPlatformGames }) {
   }, [isEditing, game, user, fetchCategories]);
 
   return (
-    <div className={styles.singleGame} key={game.id}>
+    <div
+      className={`${styles.singleGame} ${isFlipped ? styles.flipped : ""}`}
+      key={game.id}
+      onClick={() => {
+        setIsFlipped(!isFlipped);
+      }}
+    >
       <div className={styles.card}>
         <div className={styles.cardFront}>
           <div className={styles.imageContainer}>
@@ -98,7 +106,8 @@ export default function GameCard({ game, getPlatformGames }) {
               type="button"
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}`}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setIsEditing(true);
               }}
             >
@@ -108,6 +117,7 @@ export default function GameCard({ game, getPlatformGames }) {
               className={styles.editBtn + " btn mx-2"}
               data-bs-toggle="modal"
               data-bs-target={`#${cleanTitle}category`}
+              onClick={(e) => e.stopPropagation()}
             >
               Adicionar Categoria
             </button>

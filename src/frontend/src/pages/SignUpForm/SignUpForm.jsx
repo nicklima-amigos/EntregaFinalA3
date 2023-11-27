@@ -4,6 +4,7 @@ import FormField from "../../components/UI/FormField/FormField";
 import Button from "../../components/UI/Button/Button";
 import MainLogo from "../../components/icons/MainLogo";
 import { apiClient } from "../../services/apiClient";
+import { toast } from "react-toastify";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -79,9 +80,11 @@ export default function SignUpForm() {
     });
     setLoading(false);
     if (status === 201) {
+      toast.success("Usuário criado com sucesso!");
       navigate("/");
       return;
     }
+    toast.error("Erro ao criar usuário. Tente novamente.");
     console.log("bad status:", { status });
     setFormError("Erro ao criar usuário. Tente novamente.");
     return;

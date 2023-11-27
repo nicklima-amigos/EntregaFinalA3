@@ -1,16 +1,13 @@
 import { Router } from "express";
-import {
-  validateUrlParam,
-  validationMiddleware,
-} from "../../middleware/validation.js";
-import { validateCreateGame } from "./validation/validateCreateGame.js";
-import { validateUpdateGame } from "./validation/validateUpdateGame.js";
+import { validateUrlParam } from "../../middleware/validation.js";
+import { validateCreateGameMiddleware } from "./validation/validateCreateGame.js";
+import { validateUpdateGameMiddleware } from "./validation/validateUpdateGame.js";
 
 export const gamesRoutes = (controller) => {
   const router = Router();
   router
     .route("/")
-    .post(validationMiddleware(validateCreateGame), (req, res, next) =>
+    .post(validateCreateGameMiddleware, (req, res, next) =>
       controller.create(req, res, next),
     )
     .get((req, res, next) => controller.find(req, res, next));
@@ -22,7 +19,7 @@ export const gamesRoutes = (controller) => {
     )
     .put(
       validateUrlParam("id"),
-      validationMiddleware(validateUpdateGame),
+      validateUpdateGameMiddleware,
       (req, res, next) => controller.update(req, res, next),
     )
     .delete((req, res, next) => controller.delete(req, res, next));

@@ -1,6 +1,7 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
+import { validationMiddleware } from "../../../middleware/validation.js";
 
-export const validateUpdateGrade = (body) => {
+const validateUpdateGrade = (body) => {
   const { grade } = body;
   const errors = {};
   if (!grade) {
@@ -12,3 +13,6 @@ export const validateUpdateGrade = (body) => {
     throw new ValidationError("invalid request body", errors);
   }
 };
+
+export const validateUpdateGradeMiddleware =
+  validationMiddleware(validateUpdateGrade);

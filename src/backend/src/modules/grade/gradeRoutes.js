@@ -1,18 +1,17 @@
 import { Router } from "express";
-import { validationMiddleware } from "../../middleware/validation.js";
-import { validateCreateGrade } from "./validation/validateCreateGrade.js";
-import { validateUpdateGrade } from "./validation/validateUpdateGrade.js";
 import { validateUrlParam } from "../../middleware/validation.js";
+import { validateCreateGradeMiddleware } from "./validation/validateCreateGrade.js";
+import { validateUpdateGradeMiddleware } from "./validation/validateUpdateGrade.js";
 
 export const gradesRoutes = (controller) => {
   const router = Router();
   router
     .route("/")
     .get((req, res, next) => controller.find(req, res, next))
-    .put(validationMiddleware(validateCreateGrade), (req, res, next) =>
+    .put(validateCreateGradeMiddleware, (req, res, next) =>
       controller.upsert(req, res, next),
     )
-    .post(validationMiddleware(validateCreateGrade), (req, res, next) =>
+    .post(validateCreateGradeMiddleware, (req, res, next) =>
       controller.create(req, res, next),
     );
 
@@ -23,7 +22,7 @@ export const gradesRoutes = (controller) => {
     )
     .put(
       validateUrlParam("id"),
-      validationMiddleware(validateUpdateGrade),
+      validateUpdateGradeMiddleware,
       (req, res, next) => controller.update(req, res, next),
     )
     .delete((req, res, next) => controller.delete(req, res, next));

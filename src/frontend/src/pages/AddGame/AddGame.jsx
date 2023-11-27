@@ -20,6 +20,7 @@ export default function AddGame() {
   };
 
   useEffect(() => {
+    if (!games || !platform) return;
     const remainingGames = games.filter(
       (game) =>
         !platform.games.some((platformGame) => platformGame.id === game.id)

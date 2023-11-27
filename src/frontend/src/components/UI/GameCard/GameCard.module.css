@@ -7,7 +7,7 @@
 
 .singleGame {
   width: 30%;
-  height: 500px;
+  height: 600px;
   perspective: 800px;
   margin-bottom: 5rem;
   border-radius: 20px;
@@ -106,5 +106,9 @@
 
 .categoriesContainer {
   display: flex;
+  max-width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  max-height: 100px;
   justify-content: center;
 }

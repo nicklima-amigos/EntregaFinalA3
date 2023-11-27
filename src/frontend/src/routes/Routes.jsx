@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AuthGuard from "../components/guards/AuthGuard";
-import CategoryForm from "../pages/CategoryForm/CategoryForm";
+import CategoryForm from "../components/UI/CategoryForm/CategoryForm";
 import CreatePlatform from "../pages/CreatePlatform/CreatePlatform";
 import LoginForm from "../pages/LoginForm/LoginForm";
 import Platform from "../pages/Platform/Platform";

@@ -1,16 +1,13 @@
 import { Router } from "express";
-import {
-  validateUrlParam,
-  validationMiddleware,
-} from "../../middleware/validation.js";
-import { validateCreatePlatform } from "./validation/validateCreatePlatform.js";
-import { validateUpdatePlatform } from "./validation/validateUpdatePlatform.js";
+import { validateUrlParam } from "../../middleware/validation.js";
+import { validateCreatePlatformMiddleware } from "./validation/validateCreatePlatform.js";
+import { validateUpdatePlatoformMiddleware } from "./validation/validateUpdatePlatform.js";
 
 export const platformsRoutes = (controller) => {
   const router = Router();
   router
     .route("/")
-    .post(validationMiddleware(validateCreatePlatform), (req, res, next) =>
+    .post(validateCreatePlatformMiddleware, (req, res, next) =>
       controller.create(req, res, next),
     )
     .get((req, res, next) => controller.find(req, res, next));
@@ -22,7 +19,7 @@ export const platformsRoutes = (controller) => {
     )
     .put(
       validateUrlParam("id"),
-      validationMiddleware(validateUpdatePlatform),
+      validateUpdatePlatoformMiddleware,
       (req, res, next) => controller.update(req, res, next),
     )
     .delete(validateUrlParam("id"), (req, res, next) =>

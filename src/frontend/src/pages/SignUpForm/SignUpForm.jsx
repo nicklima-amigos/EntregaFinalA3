@@ -43,7 +43,7 @@ export default function SignUpForm() {
       setFormError("Favor inserir um Email válido");
       return false;
     }
-    const existChecks = await Promise.all([
+    const existChecks = await Promise.allSettled([
       apiClient.get(`/users/username/${username}`).then((res) => {
         if (res.status === 200) {
           setUsernameError("Username já cadastrado");

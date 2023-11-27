@@ -1,6 +1,7 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
+import { validationMiddleware } from "../../../middleware/validation.js";
 
-export const validateCreateGame = (body) => {
+const validateCreateGame = (body) => {
   const { title, genre, price, developed_by, release_date } = body;
   const errors = {};
   if (!title) {
@@ -30,3 +31,6 @@ export const validateCreateGame = (body) => {
     throw new ValidationError("invalid request body", errors);
   }
 };
+
+export const validateCreateGameMiddleware =
+  validationMiddleware(validateCreateGame);

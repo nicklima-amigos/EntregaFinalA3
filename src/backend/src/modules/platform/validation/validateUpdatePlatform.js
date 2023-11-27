@@ -1,6 +1,7 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
+import { validationMiddleware } from "../../../middleware/validation.js";
 
-export const validateUpdatePlatform = (body, params) => {
+const validateUpdatePlatform = (body, params) => {
   const { name } = body;
   const errors = {};
   if (!name) {
@@ -12,3 +13,7 @@ export const validateUpdatePlatform = (body, params) => {
     throw new ValidationError("invalid request body", errors);
   }
 };
+
+export const validateUpdatePlatoformMiddleware = validationMiddleware(
+  validateUpdatePlatform,
+);

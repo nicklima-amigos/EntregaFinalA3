@@ -1,6 +1,7 @@
 import { ValidationError } from "../../../exceptions/validationError.js";
+import { validationMiddleware } from "../../../middleware/validation.js";
 
-export const validateUpdateUser = (body) => {
+const validateUpdateUser = (body) => {
   const { password } = body;
   const errors = {};
   if (!password) {
@@ -12,3 +13,6 @@ export const validateUpdateUser = (body) => {
     throw new ValidationError("invalid request body", errors);
   }
 };
+
+export const validateUpdateUserMiddleware =
+  validationMiddleware(validateUpdateUser);

@@ -13,11 +13,11 @@ export default function CreateGame() {
     setLoading(true);
     try {
       await apiClient.post("/games", game);
+      navigate("/games");
     } catch (error) {
       setError(true);
     } finally {
       setLoading(false);
-      navigate("/games");
     }
   };
 

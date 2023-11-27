@@ -1,8 +1,8 @@
 import { useState } from "react";
-import FormField from "../../components/UI/FormField/FormField";
-import Modal from "../../components/UI/Modal/Modal";
-import { apiClient } from "../../services/apiClient";
-import useUser from "../../hooks/useUser";
+import FormField from "../FormField/FormField";
+import Modal from "../Modal/Modal";
+import { apiClient } from "../../../services/apiClient";
+import useUser from "../../../hooks/useUser";
 
 export default function CategoryForm({ game, cleanTitle, setCategories }) {
   const [category, setCategory] = useState("");
@@ -18,6 +18,7 @@ export default function CategoryForm({ game, cleanTitle, setCategories }) {
       `/categories/game/${game.id}/user/${user.id}`
     );
     setCategories(data);
+    setCategory("");
   };
 
   return (

@@ -8,7 +8,15 @@ export default function CategoryPill({ category, fetchCategories }) {
   };
   return (
     <div className={styles.categoryPill}>
-      {category.category} <div onClick={handleDeleteCategory}>x</div>
+      {category.category}{" "}
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          return handleDeleteCategory();
+        }}
+      >
+        x
+      </div>
     </div>
   );
 }

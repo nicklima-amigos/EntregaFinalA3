@@ -3,7 +3,7 @@ import GradeForm from "../GradeForm/GradeForm";
 import { useEffect, useState, useCallback } from "react";
 import { apiClient } from "../../../services/apiClient";
 import useUser from "../../../hooks/useUser";
-import CategoryForm from "../../../pages/CategoryForm/CategoryForm";
+import CategoryForm from "../CategoryForm/CategoryForm";
 import CategoryPill from "../CategoryPill/CategoryPill";
 import TrashIcon from "../../icons/Trash";
 import { useParams } from "react-router-dom";

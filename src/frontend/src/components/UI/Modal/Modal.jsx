@@ -31,18 +31,10 @@ export default function Modal({
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
-              onClick={(e) => e.stopPropagation()}
             >
               Fechar
             </button>
-            <Button
-              type="button"
-              loading={loading}
-              onClick={(e) => {
-                e.stopPropagation();
-                return handleSubmit();
-              }}
-            >
+            <Button type="button" loading={loading} onClick={handleSubmit}>
               Salvar
             </Button>
           </div>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { apiClient } from "../../../services/apiClient";
 import Modal from "../Modal/Modal";
 import useUser from "../../../hooks/useUser";
+import { toast } from "react-toastify";
 
 export default function GradeForm({ game, cleanTitle, setIsEditing }) {
   const [grade, setGrade] = useState(0);
@@ -40,8 +41,10 @@ export default function GradeForm({ game, cleanTitle, setIsEditing }) {
         grade,
       });
       navigate(`/platforms/${platformId}`);
+      toast.success("Nota atualizada com sucesso!");
     } catch (error) {
       setError(true);
+      toast.error("Erro ao atualizar nota!");
       console.error(error);
     } finally {
       setLoading(false);

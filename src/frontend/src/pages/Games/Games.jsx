@@ -5,6 +5,7 @@ import Spinner from "../../components/UI/Loading/Spinner";
 import Navbar from "../../components/UI/Navbar/Navbar";
 import styles from "../../components/shared/styles.module.css";
 import { apiClient } from "../../services/apiClient";
+import { toast } from "react-toastify";
 
 export default function Games() {
   const [games, setGames] = useState();
@@ -26,8 +27,10 @@ export default function Games() {
     try {
       await apiClient.delete(`/games/${id}`);
       getGames();
+      toast.success("Jogo excluído com sucesso!");
     } catch (error) {
       console.error("error", error);
+      toast.error("Erro ao excluir jogo!");
     }
   };
 

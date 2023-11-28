@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/UI/Loading/Spinner";
 import usePlatforms from "../../hooks/usePlatforms";
 import Button from "../../components/UI/Button/Button";
+import { toast } from "react-toastify";
 
 export default function Platforms() {
   const { platforms, loading, getPlatforms } = usePlatforms();
@@ -15,8 +16,10 @@ export default function Platforms() {
     try {
       await apiClient.delete(`/platforms/${id}`);
       getPlatforms();
+      toast.success("Plataforma excluída com sucesso!");
     } catch (error) {
       console.error("error", error);
+      toast.error("Erro ao excluir plataforma!");
     }
   };
 

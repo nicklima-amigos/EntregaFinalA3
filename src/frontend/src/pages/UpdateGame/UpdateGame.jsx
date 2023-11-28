@@ -2,6 +2,7 @@ import GameForm from "../../components/UI/GameForm/GameForm";
 import { apiClient } from "../../services/apiClient";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function UpdateGame() {
   const navigate = useNavigate();
@@ -15,8 +16,10 @@ export default function UpdateGame() {
     setLoading(true);
     try {
       await apiClient.put(`/games/${gameId}`, game);
+      toast.success("Jogo atualizado com sucesso!");
     } catch (error) {
       setError(true);
+      toast.error("Erro ao atualizar jogo!");
     } finally {
       setLoading(false);
       navigate("/games");

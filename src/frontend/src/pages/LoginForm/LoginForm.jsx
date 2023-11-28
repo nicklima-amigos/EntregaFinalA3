@@ -6,6 +6,7 @@ import MainLogo from "../../components/icons/MainLogo";
 import styles from "./LoginForm.module.css";
 import { apiClient } from "../../services/apiClient";
 import { AuthContext } from "../../contexts/authContext";
+import { toast } from "react-toastify";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState("");
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
@@ -26,9 +27,11 @@ export default function LoginForm() {
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/platforms");
+      toast.success(`Bem vindo, ${user.username}!`);
     } catch (err) {
       setLoading(false);
       setFormErrors("Credenciais inválidas. Tente novamente.");
+      toast.error("Erro ao realizar login.");
       return;
     }
   };

@@ -7,6 +7,7 @@ import CategoryForm from "../CategoryForm/CategoryForm";
 import CategoryPill from "../CategoryPill/CategoryPill";
 import TrashIcon from "../../icons/Trash";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function GameCard({ game, getPlatformGames }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -32,8 +33,13 @@ export default function GameCard({ game, getPlatformGames }) {
     if (!user || !game) {
       return;
     }
-    await apiClient.delete(`/games/${game.id}/platform/${platformId}`);
-    getPlatformGames();
+    try {
+      await apiClient.delete(`/games/${game.id}/platform/${platformId}`);
+      getPlatformGames();
+      toast.success(`Jogo removido da plataforma com sucesso!`);
+    } catch {
+      toast.error("Erro ao deletar jogo!");
+    }
   };
 
   useEffect(() => {

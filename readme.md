@@ -27,8 +27,14 @@ npm install
 npm run start-all
 ```
 
-<h4>4. Acessar a plataforma no seu navegador localmente</h4>
+<h4>4. Acessar o front-end no seu navegador localmente</h4>
 
 ```bash
 http://localhost:5173
+```
+
+<h4>5. Acessar a API localmente</h4>
+
+```bash
+http://localhost:3000
 ```

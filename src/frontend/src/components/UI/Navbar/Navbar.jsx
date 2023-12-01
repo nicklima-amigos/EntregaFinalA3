@@ -15,7 +15,7 @@ export default function Navbar() {
 
   const logout = () => {
     localStorage.removeItem("user");
-    toast.warn("Deslogado com sucesso!");
+    toast.success("Deslogado com sucesso!");
     navigate("/");
   };
 

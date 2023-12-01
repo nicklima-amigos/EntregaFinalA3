@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function Navbar() {
 
   const logout = () => {
     localStorage.removeItem("user");
+    toast.warn("Deslogado com sucesso!");
     navigate("/");
   };
 

@@ -14,7 +14,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState("");
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
@@ -27,7 +27,7 @@ export default function LoginForm() {
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/platforms");
-      toast.success(`Bem vindo, ${user.username}!`);
+      toast.success(`Bem vindo, ${response.data.username}!`);
     } catch (err) {
       setLoading(false);
       setFormErrors("Credenciais inválidas. Tente novamente.");

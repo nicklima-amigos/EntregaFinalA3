@@ -16,6 +16,7 @@ export default function UpdatePlatform() {
       await apiClient.put(`/platforms/${platformId}`, {
         name,
       });
+      toast.success("Plataforma atualizada com sucesso!");
       navigate(`/platforms/${platformId}`);
     } catch {
       console.error("error");
@@ -29,7 +30,6 @@ export default function UpdatePlatform() {
       try {
         const response = await apiClient.get(`/platforms/${platformId}`);
         setPlatform(response.data);
-        toast.success("Plataforma atualizada com sucesso!");
       } catch (error) {
         console.log("error", error);
         toast.error("Erro ao atualizar plataforma!");

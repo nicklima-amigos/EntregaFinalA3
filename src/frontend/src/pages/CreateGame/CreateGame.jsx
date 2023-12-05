@@ -18,7 +18,7 @@ export default function CreateGame() {
       toast.success("Jogo criado com sucesso!");
     } catch (error) {
       setError(true);
-      toast.error("Erro ao criar jogo!");
+      toast.error("Erro ao criar o jogo!");
     } finally {
       setLoading(false);
     }

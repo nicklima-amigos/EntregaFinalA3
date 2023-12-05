@@ -103,9 +103,9 @@ export default function SignUpForm() {
           {formError && <p className="text-danger">{formError}</p>}
           <FormField
             type="text"
-            label="Username"
+            label="Nome de usuário"
             name="username"
-            placeholder="Digite seu username"
+            placeholder="Digite seu nome de usuário"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             fieldError={usernameError}

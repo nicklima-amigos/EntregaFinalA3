@@ -19,7 +19,7 @@ export default function UpdateGame() {
       toast.success("Jogo atualizado com sucesso!");
     } catch (error) {
       setError(true);
-      toast.error("Erro ao atualizar jogo!");
+      toast.error("Erro ao atualizar o jogo!");
     } finally {
       setLoading(false);
       navigate("/games");

@@ -84,7 +84,7 @@ export default function LoginForm() {
             Login
           </Button>
           <p onClick={handleSignUp} className={styles.p}>
-            crie sua conta Nick Games
+            Crie sua conta Nick Games
           </p>
         </div>
       </form>

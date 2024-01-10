@@ -4,12 +4,12 @@ import { gamesRoutes } from "./gameRoutes.js";
 import { GamesService } from "./gameService.js";
 import { ImageCrawlerService } from "./imageCrawlerService.js";
 
-export const startGamesModule = (db, platformsRepository) => {
+export const startGamesModule = (db, platformsModule) => {
   const repository = new GamesRepository(db);
   const imageCrawlerService = new ImageCrawlerService();
   const service = new GamesService(
     repository,
-    platformsRepository,
+    platformsModule.repository,
     imageCrawlerService,
   );
   const controller = new GamesController(service);

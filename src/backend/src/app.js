@@ -21,14 +21,10 @@ export class App {
   injectDependencies() {
     const platforms = startPlatformsModule(this.db);
     const users = startUsersModule(this.db);
-    const games = startGamesModule(this.db, platforms.repository);
-    const categories = startCategoriesModule(
-      this.db,
-      users.repository,
-      games.repository,
-    );
-    const grades = startGradesModule(this.db, games.repository);
-    const auth = startAuthModule(users.service);
+    const games = startGamesModule(this.db, platforms);
+    const categories = startCategoriesModule(this.db, users, games);
+    const grades = startGradesModule(this.db, users, games);
+    const auth = startAuthModule(users);
     return {
       platforms,
       users,

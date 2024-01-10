@@ -3,12 +3,12 @@ import { GradesRepository } from "./gradeRepository.js";
 import { gradesRoutes } from "./gradeRoutes.js";
 import { GradesService } from "./gradeService.js";
 
-export const startGradesModule = (db, usersRepository, gamesRepository) => {
+export const startGradesModule = (db, usersModule, gamesModule) => {
   const repository = new GradesRepository(db);
   const service = new GradesService(
     repository,
-    usersRepository,
-    gamesRepository,
+    usersModule.repository,
+    gamesModule.repository,
   );
   const controller = new GradesController(service);
   const routes = gradesRoutes(controller);

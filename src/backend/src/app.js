@@ -19,44 +19,37 @@ export class App {
   }
 
   injectDependencies() {
-    const platformsModule = startPlatformsModule(this.db);
-    const usersModule = startUsersModule(this.db);
-    const gamesModule = startGamesModule(this.db, platformsModule.repository);
-    const categoriesModule = startCategoriesModule(
+    const platforms = startPlatformsModule(this.db);
+    const users = startUsersModule(this.db);
+    const games = startGamesModule(this.db, platforms.repository);
+    const categories = startCategoriesModule(
       this.db,
-      usersModule.repository,
-      gamesModule.repository,
+      users.repository,
+      games.repository,
     );
-    const gradesModule = startGradesModule(this.db, gamesModule.repository);
-    const authModule = startAuthModule(usersModule.service);
+    const grades = startGradesModule(this.db, games.repository);
+    const auth = startAuthModule(users.service);
     return {
-      platformsModule,
-      usersModule,
-      gamesModule,
-      categoriesModule,
-      gradesModule,
-      authModule,
+      platforms,
+      users,
+      games,
+      categories,
+      grades,
+      auth,
     };
   }
 
   routes() {
     const router = Router();
-    const {
-      platformsModule,
-      usersModule,
-      gamesModule,
-      categoriesModule,
-      gradesModule,
-      authModule,
-    } = this.injectDependencies();
+    const modules = this.injectDependencies();
 
     router
-      .use("/games", gamesModule.routes)
-      .use("/platforms", platformsModule.routes)
-      .use("/users", usersModule.routes)
-      .use("/categories", categoriesModule.routes)
-      .use("/grades", gradesModule.routes)
-      .use("/auth", authModule.routes)
+      .use("/games", modules.games.routes)
+      .use("/platforms", modules.platforms.routes)
+      .use("/users", modules.users.routes)
+      .use("/categories", modules.categories.routes)
+      .use("/grades", modules.grades.routes)
+      .use("/auth", modules.auth.routes)
       .get("/", (req, res) => {
         res.status(200).send({ status: "Ok" });
       })

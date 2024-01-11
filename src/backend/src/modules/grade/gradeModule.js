@@ -1,19 +1,21 @@
-import { GamesRepository } from "../game/gameRepository.js";
-import { UsersRepository } from "../user/userRepository.js";
 import { GradesController } from "./gradeController.js";
 import { GradesRepository } from "./gradeRepository.js";
 import { gradesRoutes } from "./gradeRoutes.js";
 import { GradesService } from "./gradeService.js";
 
-export const gradesModule = (db) => {
-  const gradesRepository = new GradesRepository(db);
-  const usersRepository = new UsersRepository(db);
-  const gamesRepository = new GamesRepository(db);
+export const startGradesModule = (db, usersModule, gamesModule) => {
+  const repository = new GradesRepository(db);
   const service = new GradesService(
-    gradesRepository,
-    usersRepository,
-    gamesRepository,
+    repository,
+    usersModule.repository,
+    gamesModule.repository,
   );
   const controller = new GradesController(service);
-  return gradesRoutes(controller);
+  const routes = gradesRoutes(controller);
+  return {
+    repository,
+    service,
+    controller,
+    routes,
+  };
 };

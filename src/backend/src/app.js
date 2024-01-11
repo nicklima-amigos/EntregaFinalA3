@@ -1,12 +1,12 @@
 import express, { Router } from "express";
 import { errorHandlingMiddleware } from "./middleware/errorHandling.js";
-import { gamesModule } from "./modules/game/gameModule.js";
-import { gradesModule } from "./modules/grade/gradeModule.js";
-import { categoriesModule } from "./modules/category/categoryModule.js";
-import { platformsModule } from "./modules/platform/platformModule.js";
-import { usersModule } from "./modules/user/usersModule.js";
+import { startGamesModule } from "./modules/game/gameModule.js";
+import { startGradesModule } from "./modules/grade/gradeModule.js";
+import { startCategoriesModule } from "./modules/category/categoryModule.js";
+import { startPlatformsModule } from "./modules/platform/platformModule.js";
+import { startUsersModule } from "./modules/user/usersModule.js";
 import cors from "cors";
-import { authModule } from "./modules/auth/authModule.js";
+import { startAuthModule } from "./modules/auth/authModule.js";
 
 export class App {
   constructor(db) {
@@ -18,20 +18,39 @@ export class App {
     this.app.use(express.json()).use(cors());
   }
 
+  injectDependencies() {
+    const platforms = startPlatformsModule(this.db);
+    const users = startUsersModule(this.db);
+    const games = startGamesModule(this.db, platforms);
+    const categories = startCategoriesModule(this.db, users, games);
+    const grades = startGradesModule(this.db, users, games);
+    const auth = startAuthModule(users);
+    return {
+      platforms,
+      users,
+      games,
+      categories,
+      grades,
+      auth,
+    };
+  }
+
   routes() {
     const router = Router();
+    const modules = this.injectDependencies();
 
     router
-      .use("/games", gamesModule(this.db))
-      .use("/platforms", platformsModule(this.db))
-      .use("/users", usersModule(this.db))
-      .use("/categories", categoriesModule(this.db))
-      .use("/grades", gradesModule(this.db))
-      .use("/auth", authModule(this.db))
+      .use("/games", modules.games.routes)
+      .use("/platforms", modules.platforms.routes)
+      .use("/users", modules.users.routes)
+      .use("/categories", modules.categories.routes)
+      .use("/grades", modules.grades.routes)
+      .use("/auth", modules.auth.routes)
       .get("/", (req, res) => {
         res.status(200).send({ status: "Ok" });
       })
       .use(errorHandlingMiddleware);
+
     this.app.use(router);
   }
 
